@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", var(--font-sans);
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #d9e6ff;
+  --color-brand-200: #bcd4ff;
+  --color-brand-300: #8eb8ff;
+  --color-brand-400: #5a92ff;
+  --color-brand-500: #3b6ff5;
+  --color-brand-600: #2550ea;
+  --color-brand-700: #1d3fd6;
+  --color-brand-800: #1e35ad;
+  --color-brand-900: #1f3289;
+  --color-accent-400: #34d399;
+  --color-accent-500: #10b981;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-800 antialiased dark:bg-slate-950 dark:text-slate-100;
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    @apply bg-brand-500/30 text-brand-900 dark:text-white;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-brand-600 via-brand-500 to-accent-500 bg-clip-text text-transparent;
+  }
+
+  .hero-glow {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgb(59 111 245 / 0.25), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 0%, rgb(16 185 129 / 0.12), transparent),
+      radial-gradient(ellipse 50% 30% at 0% 50%, rgb(139 92 246 / 0.08), transparent);
+  }
+
+  .card-surface {
+    @apply rounded-2xl border border-slate-200/80 bg-white/80 shadow-sm backdrop-blur-sm dark:border-slate-800 dark:bg-slate-900/60;
+  }
+
+  .section-pad {
+    @apply px-4 py-16 sm:px-6 lg:px-8 lg:py-24;
+  }
+
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .mesh-gradient {
+    background:
+      radial-gradient(at 20% 30%, rgb(59 111 245 / 0.18) 0px, transparent 50%),
+      radial-gradient(at 80% 20%, rgb(139 92 246 / 0.12) 0px, transparent 50%),
+      radial-gradient(at 50% 80%, rgb(16 185 129 / 0.1) 0px, transparent 50%);
+  }
+
+  .mesh-gradient-dark {
+    background:
+      radial-gradient(at 20% 30%, rgb(59 111 245 / 0.22) 0px, transparent 50%),
+      radial-gradient(at 80% 20%, rgb(139 92 246 / 0.15) 0px, transparent 50%),
+      radial-gradient(at 50% 80%, rgb(16 185 129 / 0.08) 0px, transparent 50%);
+  }
+
+  .feature-card {
+    @apply transition duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-lg motion-safe:hover:shadow-brand-500/10 dark:motion-safe:hover:shadow-brand-500/5;
+  }
+
+  .stat-card {
+    @apply transition duration-300 motion-safe:hover:scale-[1.02] motion-safe:hover:border-brand-300/50 dark:motion-safe:hover:border-brand-600/40;
+  }
+
+  .brain-card {
+    @apply transition duration-300 motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-md;
+  }
+
+  .article-card {
+    @apply transition duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-lg;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-2xl bg-brand-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-brand-600/30 transition motion-safe:hover:bg-brand-700 motion-safe:hover:shadow-xl motion-safe:hover:shadow-brand-600/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500;
+  }
+
+  .quiz-progress-fill {
+    @apply bg-gradient-to-r from-emerald-500 via-brand-500 to-rose-500 transition-all duration-500 ease-out;
+  }
+
+  .quiz-card-enter {
+    animation: quiz-card-in 0.35s ease-out both;
+  }
+
+  .score-ring-animate {
+    transition: stroke-dashoffset 1.2s cubic-bezier(0.4, 0, 0.2, 1) 0.2s;
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.6s ease-out both;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.5s ease-out both;
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 3s ease-in-out infinite;
+  }
+}
+
+@keyframes quiz-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}

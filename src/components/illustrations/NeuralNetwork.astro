@@ -1,0 +1,33 @@
+---
+interface Props {
+  class?: string;
+  id?: string;
+}
+const { class: className = '', id = 'neural' } = Astro.props;
+const gradId = `${id}-grad`;
+---
+
+<svg
+  class:list={['w-full', className]}
+  viewBox="0 0 480 320"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-hidden="true"
+>
+  <defs>
+    <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b6ff5" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+  </defs>
+  <circle cx="240" cy="160" r="120" fill={`url(#${gradId})`} opacity="0.08" />
+  {[
+    [80, 80], [400, 60], [420, 240], [60, 260], [240, 40], [240, 280],
+  ].map(([cx, cy]) => (
+    <circle cx={cx} cy={cy} r="12" fill="#3b6ff5" opacity="0.4" class="motion-safe:animate-pulse-soft" />
+  ))}
+  <circle cx="240" cy="160" r="20" fill={`url(#${gradId})`} />
+  <path d="M80 80 L240 160 M400 60 L240 160 M420 240 L240 160 M60 260 L240 160 M240 40 L240 160 M240 280 L240 160" stroke="#8b5cf6" stroke-width="1.5" opacity="0.35" />
+  <path d="M120 120 Q200 100 280 130 T400 180" stroke="#3b6ff5" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="6 4" />
+</svg>

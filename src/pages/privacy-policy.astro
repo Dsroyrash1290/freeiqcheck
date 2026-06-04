@@ -1,0 +1,55 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { site } from '../config/site';
+import { webPageJsonLd } from '../lib/seo';
+
+const title = 'Privacy Policy — FreeIQCheck';
+const description = `Privacy policy for ${site.domain}. How we handle data when you use our free online iq test and website.`;
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  path="/privacy-policy"
+  heading="Privacy Policy"
+  subheading={`Last updated: June 4, 2026 · ${site.domain}`}
+  jsonLd={[webPageJsonLd(title, description, '/privacy-policy')]}
+>
+  <p>
+    FreeIQCheck (&quot;we,&quot; &quot;us&quot;) operates {site.url}. This policy explains what information we collect when you use our
+    website and free iq test.
+  </p>
+  <h2>Information we collect</h2>
+  <p>
+    The quiz runs primarily in your browser. Answer selections may be stored temporarily in session storage on your device to display
+    results. We do not require an account to take the test.
+  </p>
+  <p>
+    Like most websites, our hosting may log standard technical data (IP address, browser type, pages visited, timestamps) for security
+    and performance.
+  </p>
+  <h2>How we use information</h2>
+  <ul>
+    <li>Operate and improve the website and quiz experience</li>
+    <li>Protect against abuse and technical issues</li>
+    <li>Respond to contact requests you send us</li>
+  </ul>
+  <h2>Cookies and storage</h2>
+  <p>
+    We use local storage for theme preference (light/dark mode) and session storage for quiz results between the test and results pages.
+    You can clear these in your browser settings.
+  </p>
+  <h2>Third parties</h2>
+  <p>
+    We may use fonts or analytics services in the future; this policy will be updated if that changes. We do not sell your personal
+    information.
+  </p>
+  <h2>Children</h2>
+  <p>
+    The site is intended for general audiences. Parents and guardians should supervise minors using online quizzes.
+  </p>
+  <h2>Contact</h2>
+  <p>
+    Privacy questions: <a href={`mailto:${site.email}`}>{site.email}</a>
+  </p>
+</PageLayout>

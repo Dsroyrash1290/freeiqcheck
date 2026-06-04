@@ -1,0 +1,23 @@
+---
+interface Props {
+  title: string;
+  text: string;
+  icon: string;
+  accent?: string;
+  delay?: number;
+}
+const { title, text, icon, accent = 'from-brand-500 to-brand-700', delay = 0 } = Astro.props;
+---
+
+<article
+  class="feature-card card-surface group p-6 motion-safe:animate-fade-up"
+  style={`animation-delay: ${delay}ms`}
+>
+  <div class={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br ${accent} text-white shadow-lg transition group-hover:scale-105 motion-safe:transition-transform`}>
+    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icon} />
+    </svg>
+  </div>
+  <h3 class="mt-5 font-display text-lg font-bold text-slate-900 dark:text-white">{title}</h3>
+  <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{text}</p>
+</article>

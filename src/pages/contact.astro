@@ -1,0 +1,31 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { site } from '../config/site';
+import { webPageJsonLd } from '../lib/seo';
+
+const title = 'Contact FreeIQCheck';
+const description = 'Contact the FreeIQCheck team with questions about our free online iq test, privacy, or site feedback.';
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  path="/contact"
+  heading="Contact us"
+  subheading="Questions, feedback, or partnership inquiries."
+  jsonLd={[webPageJsonLd(title, description, '/contact')]}
+>
+  <p>
+    We read every message and aim to respond within a few business days. For privacy-related requests, include
+    &quot;Privacy&quot; in your subject line.
+  </p>
+  <p>
+    Email: <a href={`mailto:${site.email}`}>{site.email}</a>
+  </p>
+  <h2>Before you write</h2>
+  <ul>
+    <li>We cannot provide clinical IQ assessments or official certificates.</li>
+    <li>For quiz help, see our <a href="/faq">FAQ</a> or retake the <a href="/test">free iq test</a>.</li>
+    <li>For legal terms, see <a href="/terms">Terms of Use</a> and <a href="/privacy-policy">Privacy Policy</a>.</li>
+  </ul>
+</PageLayout>

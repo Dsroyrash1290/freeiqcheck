@@ -1,0 +1,43 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { site } from '../config/site';
+import { webPageJsonLd } from '../lib/seo';
+
+const title = 'Terms of Use — FreeIQCheck';
+const description = `Terms of use for ${site.domain} and our free online iq test. Educational and entertainment purposes only.`;
+---
+
+<PageLayout
+  title={title}
+  description={description}
+  path="/terms"
+  heading="Terms of Use"
+  subheading={`Last updated: June 4, 2026 · ${site.domain}`}
+  jsonLd={[webPageJsonLd(title, description, '/terms')]}
+>
+  <p>By using FreeIQCheck, you agree to these terms. If you do not agree, please do not use the site.</p>
+  <h2>Educational and entertainment only</h2>
+  <p>
+    Our iq score test and related content are for fun, self-study, and general cognitive practice. They are not medical, psychological,
+    or employment assessments. Do not rely on results for diagnosis, hiring, or academic decisions.
+  </p>
+  <h2>No professional advice</h2>
+  <p>Nothing on this site constitutes professional health, legal, or career advice.</p>
+  <h2>Acceptable use</h2>
+  <p>You agree not to misuse the site, attempt unauthorized access, scrape content at scale, or interfere with other users.</p>
+  <h2>Intellectual property</h2>
+  <p>Site design, text, and original quiz content are owned by FreeIQCheck unless otherwise noted. Personal, non-commercial use is permitted.</p>
+  <h2>Disclaimer of warranties</h2>
+  <p>The site is provided &quot;as is&quot; without warranties of accuracy, fitness for a particular purpose, or uninterrupted availability.</p>
+  <h2>Limitation of liability</h2>
+  <p>
+    To the fullest extent permitted by law, FreeIQCheck is not liable for indirect or consequential damages arising from use of the site
+    or quiz results.
+  </p>
+  <h2>Changes</h2>
+  <p>We may update these terms. Continued use after changes constitutes acceptance.</p>
+  <h2>Contact</h2>
+  <p>
+    <a href={`mailto:${site.email}`}>{site.email}</a> · <a href="/contact">Contact page</a>
+  </p>
+</PageLayout>

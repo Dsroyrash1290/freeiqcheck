@@ -1,0 +1,285 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+import { webPageJsonLd } from '../lib/seo';
+
+const title = 'Your IQ Test Results — Instant Score & Analysis';
+const description =
+  'View your illustrative IQ-style score, percentile estimate, reasoning strengths, badges, and full question review from FreeIQCheck.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path="/results"
+  jsonLd={[webPageJsonLd(title, description, '/results')]}
+  noindex
+>
+  <section class="section-pad mx-auto max-w-4xl">
+    <div id="results-loading" class="py-20 text-center text-slate-600 dark:text-slate-400">Analyzing your responses…</div>
+
+    <div id="results-empty" class="hidden card-surface p-10 text-center">
+      <h1 class="font-display text-2xl font-bold text-slate-900 dark:text-white">No results yet</h1>
+      <p class="mt-2 text-slate-600 dark:text-slate-400">Complete the 25-question quiz to unlock your full report.</p>
+      <a href="/test" class="btn-primary mt-8 !inline-flex text-sm">Take the free IQ test</a>
+    </div>
+
+    <div id="results-content" class="hidden space-y-8">
+      <header class="text-center">
+        <p class="text-sm font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">Performance report</p>
+        <h1 class="mt-2 font-display text-3xl font-bold text-slate-900 sm:text-4xl dark:text-white">Your IQ Test Results</h1>
+        <p class="mx-auto mt-3 max-w-xl text-sm text-slate-600 dark:text-slate-400">
+          Illustrative scores for education and entertainment—not a clinical or normed IQ examination.
+        </p>
+      </header>
+
+      <!-- Score ring + hero card -->
+      <div class="card-surface overflow-hidden">
+        <div class="grid gap-0 lg:grid-cols-5">
+          <div class="flex flex-col items-center justify-center bg-gradient-to-br from-brand-600 via-brand-700 to-violet-800 p-8 text-white lg:col-span-2">
+            <p class="text-xs font-semibold uppercase tracking-widest text-brand-200">Estimated IQ-style score</p>
+            <div class="relative mt-4">
+              <svg class="h-40 w-40 -rotate-90" viewBox="0 0 120 120" aria-hidden="true">
+                <circle cx="60" cy="60" r="54" fill="none" stroke="rgb(255 255 255 / 0.15)" stroke-width="8" />
+                <circle
+                  id="score-ring"
+                  cx="60"
+                  cy="60"
+                  r="54"
+                  fill="none"
+                  stroke="url(#scoreGrad)"
+                  stroke-width="8"
+                  stroke-linecap="round"
+                  stroke-dasharray="339.292"
+                  stroke-dashoffset="339.292"
+                  class="score-ring-animate"
+                />
+                <defs>
+                  <linearGradient id="scoreGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#34d399" />
+                    <stop offset="100%" stop-color="#a5f3fc" />
+                  </linearGradient>
+                </defs>
+              </svg>
+              <p id="score-value" class="absolute inset-0 flex items-center justify-center font-display text-5xl font-extrabold tabular-nums">—</p>
+            </div>
+            <p id="score-band" class="mt-4 text-center text-lg font-bold">—</p>
+            <p id="score-range" class="mt-1 text-sm text-brand-200">—</p>
+          </div>
+          <div class="grid grid-cols-2 gap-px bg-slate-200 dark:bg-slate-800 lg:col-span-3">
+            <div class="bg-white p-5 dark:bg-slate-900">
+              <p class="text-xs font-medium uppercase text-slate-500">Percentile est.</p>
+              <p id="stat-percentile" class="mt-1 font-display text-2xl font-bold text-slate-900 dark:text-white">—</p>
+            </div>
+            <div class="bg-white p-5 dark:bg-slate-900">
+              <p class="text-xs font-medium uppercase text-slate-500">Accuracy</p>
+              <p id="stat-pct" class="mt-1 font-display text-2xl font-bold text-slate-900 dark:text-white">—</p>
+            </div>
+            <div class="bg-white p-5 dark:bg-slate-900">
+              <p class="text-xs font-medium uppercase text-slate-500">Correct</p>
+              <p id="stat-correct" class="mt-1 font-display text-2xl font-bold text-slate-900 dark:text-white">—</p>
+            </div>
+            <div class="bg-white p-5 dark:bg-slate-900">
+              <p class="text-xs font-medium uppercase text-slate-500">Time</p>
+              <p id="stat-time" class="mt-1 font-display text-2xl font-bold text-slate-900 dark:text-white">—</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <Disclaimer />
+
+      <!-- Badges -->
+      <div id="badges-section" class="hidden">
+        <h2 class="font-display text-lg font-bold text-slate-900 dark:text-white">Achievements</h2>
+        <div id="badges-grid" class="mt-4 grid gap-3 sm:grid-cols-2"></div>
+      </div>
+
+      <!-- Summary + strengths + tips -->
+      <div class="grid gap-6 lg:grid-cols-2">
+        <div class="card-surface p-6">
+          <h2 class="font-display text-lg font-bold text-slate-900 dark:text-white">Performance summary</h2>
+          <p id="performance-summary" class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400"></p>
+          <p id="score-detail" class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400"></p>
+        </div>
+        <div class="card-surface p-6">
+          <h2 class="font-display text-lg font-bold text-slate-900 dark:text-white">Reasoning strengths</h2>
+          <ul id="strengths-list" class="mt-3 space-y-2 text-sm text-slate-600 dark:text-slate-400"></ul>
+          <h3 class="mt-6 font-display text-sm font-bold text-slate-900 dark:text-white">Tips to improve</h3>
+          <ul id="tips-list" class="mt-2 space-y-2 text-sm text-slate-600 dark:text-slate-400"></ul>
+        </div>
+      </div>
+
+      <!-- Difficulty breakdown -->
+      <div class="card-surface p-6">
+        <h2 class="font-display text-lg font-bold text-slate-900 dark:text-white">By difficulty</h2>
+        <div id="difficulty-bars" class="mt-4 space-y-4"></div>
+      </div>
+
+      <!-- Question review -->
+      <div>
+        <h2 class="font-display text-xl font-bold text-slate-900 dark:text-white">Question review</h2>
+        <ul id="breakdown-list" class="mt-4 space-y-3"></ul>
+      </div>
+
+      <div class="flex flex-col gap-3 border-t border-slate-200 pt-8 sm:flex-row sm:justify-center dark:border-slate-800">
+        <a href="/test" id="restart-btn" class="btn-primary !inline-flex justify-center text-sm">Restart test</a>
+        <a
+          href="/"
+          class="inline-flex justify-center rounded-2xl border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300"
+        >
+          Back to home
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    import {
+      formatDuration,
+      normalizeStoredResult,
+      scoreRingOffset,
+      STORAGE_KEY,
+      type QuizResult,
+    } from '../lib/quizScoring';
+
+    const difficultyColors: Record<string, string> = {
+      easy: 'bg-emerald-500',
+      medium: 'bg-amber-500',
+      hard: 'bg-rose-500',
+    };
+
+    function renderResults(result: QuizResult) {
+      const {
+        correct,
+        total,
+        seconds,
+        breakdown,
+        illustrativeIQ,
+        percentile,
+        accuracy,
+        band,
+        performanceSummary,
+        strengths,
+        improvementTips,
+        badges,
+        byDifficulty,
+      } = result;
+
+      document.getElementById('score-value')!.textContent = String(illustrativeIQ);
+      document.getElementById('score-band')!.textContent = band.label;
+      document.getElementById('score-range')!.textContent = `Illustrative range: ${band.iqRange}`;
+      document.getElementById('stat-percentile')!.textContent = `${percentile}th`;
+      document.getElementById('stat-pct')!.textContent = `${accuracy}%`;
+      document.getElementById('stat-correct')!.textContent = `${correct}/${total}`;
+      document.getElementById('stat-time')!.textContent = formatDuration(seconds || 0);
+      document.getElementById('performance-summary')!.textContent = performanceSummary;
+      document.getElementById('score-detail')!.textContent = band.detail;
+
+      const ring = document.getElementById('score-ring');
+      if (ring) {
+        const offset = scoreRingOffset(illustrativeIQ);
+        ring.setAttribute('stroke-dashoffset', String(offset));
+      }
+
+      const strengthsList = document.getElementById('strengths-list')!;
+      strengthsList.innerHTML = '';
+      strengths.forEach((s) => {
+        const li = document.createElement('li');
+        li.className = 'flex gap-2';
+        li.innerHTML = `<span class="text-accent-500" aria-hidden="true">✓</span><span>${s}</span>`;
+        strengthsList.appendChild(li);
+      });
+
+      const tipsList = document.getElementById('tips-list')!;
+      improvementTips.forEach((tip) => {
+        const li = document.createElement('li');
+        li.className = 'flex gap-2';
+        li.innerHTML = `<span class="text-brand-500" aria-hidden="true">→</span><span>${tip}</span>`;
+        tipsList.appendChild(li);
+      });
+
+      const diffBars = document.getElementById('difficulty-bars')!;
+      (['easy', 'medium', 'hard'] as const).forEach((d) => {
+        const { correct: c, total: t } = byDifficulty[d];
+        const pct = t > 0 ? Math.round((c / t) * 100) : 0;
+        const row = document.createElement('div');
+        row.innerHTML = `
+          <div class="flex justify-between text-sm">
+            <span class="font-medium capitalize text-slate-700 dark:text-slate-300">${d}</span>
+            <span class="text-slate-500">${c}/${t} (${pct}%)</span>
+          </div>
+          <div class="mt-1.5 h-2 overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800">
+            <div class="h-full rounded-full ${difficultyColors[d]} transition-all duration-700" style="width: 0%" data-width="${pct}%"></div>
+          </div>
+        `;
+        diffBars.appendChild(row);
+        requestAnimationFrame(() => {
+          const bar = row.querySelector('[data-width]') as HTMLElement;
+          if (bar) bar.style.width = bar.dataset.width || '0%';
+        });
+      });
+
+      if (badges.length > 0) {
+        document.getElementById('badges-section')!.classList.remove('hidden');
+        const grid = document.getElementById('badges-grid')!;
+        badges.forEach((b) => {
+          const div = document.createElement('div');
+          div.className =
+            'flex items-start gap-3 rounded-2xl border border-brand-200/80 bg-gradient-to-br from-brand-50 to-white p-4 dark:border-brand-800 dark:from-brand-950/40 dark:to-slate-900';
+          div.innerHTML = `
+            <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-600 text-lg text-white">★</span>
+            <div>
+              <p class="font-display font-bold text-slate-900 dark:text-white">${b.title}</p>
+              <p class="mt-0.5 text-xs text-slate-600 dark:text-slate-400">${b.description}</p>
+            </div>
+          `;
+          grid.appendChild(div);
+        });
+      }
+
+      const list = document.getElementById('breakdown-list')!;
+      breakdown.forEach((item) => {
+        const li = document.createElement('li');
+        li.className = 'card-surface p-4';
+        const status = item.correct
+          ? '<span class="rounded-full bg-emerald-100 px-2 py-0.5 text-xs font-semibold text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300">Correct</span>'
+          : '<span class="rounded-full bg-red-100 px-2 py-0.5 text-xs font-semibold text-red-800 dark:bg-red-950 dark:text-red-300">Incorrect</span>';
+        const diffClass =
+          item.difficulty === 'easy'
+            ? 'text-emerald-600'
+            : item.difficulty === 'medium'
+              ? 'text-amber-600'
+              : 'text-rose-600';
+        li.innerHTML = `
+          <div class="flex flex-wrap items-center gap-2">
+            <span class="text-sm font-bold text-slate-900 dark:text-white">Q${item.id}</span>
+            <span class="text-xs font-semibold uppercase ${diffClass}">${item.difficulty}</span>
+            ${status}
+          </div>
+          <p class="mt-2 text-sm text-slate-700 dark:text-slate-300">${item.prompt}</p>
+          <p class="mt-2 text-xs leading-relaxed text-slate-500">${item.explanation}</p>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    const loading = document.getElementById('results-loading');
+    const empty = document.getElementById('results-empty');
+    const content = document.getElementById('results-content');
+
+    loading?.classList.add('hidden');
+    const raw = sessionStorage.getItem(STORAGE_KEY);
+    const result = raw ? normalizeStoredResult(JSON.parse(raw)) : null;
+
+    if (!result) {
+      empty?.classList.remove('hidden');
+    } else {
+      renderResults(result);
+      content?.classList.remove('hidden');
+      document.getElementById('restart-btn')?.addEventListener('click', () => {
+        sessionStorage.removeItem(STORAGE_KEY);
+      });
+    }
+  </script>
+</BaseLayout>

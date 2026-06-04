@@ -1,0 +1,28 @@
+---
+interface Props {
+  compact?: boolean;
+}
+const { compact = false } = Astro.props;
+---
+
+<aside
+  class:list={[
+    'rounded-2xl border border-amber-200/80 bg-amber-50/80 dark:border-amber-900/50 dark:bg-amber-950/30',
+    compact ? 'p-4' : 'p-6',
+  ]}
+  role="note"
+  aria-label="Educational disclaimer"
+>
+  <div class="flex gap-3">
+    <svg class="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <div>
+      <p class="text-sm font-semibold text-amber-900 dark:text-amber-200">Educational & entertainment only</p>
+      <p class:list={['mt-1 text-sm leading-relaxed text-amber-800/90 dark:text-amber-100/80', !compact && 'max-w-3xl']}>
+        FreeIQCheck is not an official psychological, medical, or normed IQ test. Results are illustrative and
+        intended for fun, self-reflection, and cognitive practice—not diagnosis, hiring, or academic placement.
+      </p>
+    </div>
+  </div>
+</aside>

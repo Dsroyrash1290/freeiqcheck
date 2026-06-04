@@ -1,0 +1,46 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<svg
+  class:list={['w-full max-w-md', className]}
+  viewBox="0 0 400 360"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label="Abstract brain and logic illustration"
+>
+  <defs>
+    <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b6ff5" />
+      <stop offset="50%" stop-color="#8b5cf6" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#3b6ff5" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#3b6ff5" stop-opacity="0" />
+    </linearGradient>
+  </defs>
+  <ellipse cx="200" cy="320" rx="140" ry="24" fill="url(#glowGrad)" />
+  <path
+    d="M200 60c-48 0-88 36-92 82-2 22 4 44 18 60-12 8-20 22-18 38 4 28 32 48 62 52 8 12 22 20 38 20h24c16 0 30-8 38-20 30-4 58-24 62-52 2-16-6-30-18-38 14-16 20-38 18-60-4-46-44-82-92-82z"
+    fill="url(#brainGrad)"
+    opacity="0.9"
+  />
+  <path
+    d="M160 120c8-16 24-28 40-28s32 12 40 28M140 180c20-8 44-8 64 0M156 220c16-6 32-6 48 0M180 260c12-4 28-4 40 0"
+    stroke="white"
+    stroke-width="3"
+    stroke-linecap="round"
+    opacity="0.35"
+  />
+  <circle cx="120" cy="140" r="28" fill="#3b6ff5" opacity="0.2" />
+  <circle cx="300" cy="120" r="20" fill="#10b981" opacity="0.25" />
+  <rect x="88" y="88" width="48" height="48" rx="12" fill="#3b6ff5" opacity="0.15" transform="rotate(-12 112 112)" />
+  <rect x="268" y="200" width="40" height="40" rx="10" fill="#8b5cf6" opacity="0.2" transform="rotate(15 288 220)" />
+  <path d="M100 280h24M276 280h24M188 300h24" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" opacity="0.5" />
+  <text x="200" y="175" text-anchor="middle" fill="white" font-size="42" font-weight="700" opacity="0.9">?</text>
+</svg>

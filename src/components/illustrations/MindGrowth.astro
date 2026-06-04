@@ -1,0 +1,29 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<svg
+  class:list={['w-full max-w-md', className]}
+  viewBox="0 0 400 300"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-hidden="true"
+>
+  <defs>
+    <linearGradient id="growthGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2550ea" />
+      <stop offset="100%" stop-color="#34d399" />
+    </linearGradient>
+  </defs>
+  <path d="M200 260 L200 120" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" opacity="0.4" />
+  <path d="M200 200 C160 200 120 170 100 130 C80 90 120 60 160 80 C180 50 220 50 240 80 C280 60 320 90 300 130 C280 170 240 200 200 200 Z" fill="url(#growthGrad)" opacity="0.85" />
+  <circle cx="200" cy="100" r="24" fill="url(#growthGrad)" />
+  <path d="M140 140 Q200 110 260 140" stroke="white" stroke-width="2" opacity="0.3" fill="none" />
+  {[0, 1, 2].map((i) => (
+    <circle cx={120 + i * 80} cy={60 + i * 15} r="6" fill="#8b5cf6" opacity={0.3 + i * 0.15} />
+  ))}
+</svg>

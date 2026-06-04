@@ -1,0 +1,32 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<svg
+  class:list={['w-full max-w-sm', className]}
+  viewBox="0 0 360 280"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-hidden="true"
+>
+  <rect x="40" y="40" width="80" height="80" rx="16" fill="#3b6ff5" opacity="0.15" />
+  <rect x="140" y="40" width="80" height="80" rx="16" fill="#8b5cf6" opacity="0.2" />
+  <rect x="240" y="40" width="80" height="80" rx="16" fill="#10b981" opacity="0.15" />
+  <rect x="90" y="140" width="80" height="80" rx="16" fill="#10b981" opacity="0.2" />
+  <rect x="190" y="140" width="80" height="80" rx="16" fill="#3b6ff5" opacity="0.25" />
+  <circle cx="80" cy="80" r="20" fill="#3b6ff5" opacity="0.6" />
+  <path d="M180 60 L200 100 L160 100 Z" fill="#8b5cf6" opacity="0.5" />
+  <rect x="265" y="65" width="30" height="30" rx="6" fill="#10b981" opacity="0.6" />
+  <text x="130" y="195" font-size="28" font-weight="700" fill="#64748b" opacity="0.5">+ ? =</text>
+  <path d="M40 230 Q180 200 320 230" stroke="url(#puzzleLine)" stroke-width="2" fill="none" opacity="0.4" />
+  <defs>
+    <linearGradient id="puzzleLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3b6ff5" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+  </defs>
+</svg>

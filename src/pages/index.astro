@@ -1,17 +1,328 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BrainIllustration from '../components/BrainIllustration.astro';
+import Disclaimer from '../components/Disclaimer.astro';
+import FaqAccordion from '../components/FaqAccordion.astro';
+import FeatureCard from '../components/FeatureCard.astro';
+import SectionDivider from '../components/SectionDivider.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CognitivePuzzle from '../components/illustrations/CognitivePuzzle.astro';
+import MindGrowth from '../components/illustrations/MindGrowth.astro';
+import NeuralNetwork from '../components/illustrations/NeuralNetwork.astro';
+import { faqItems } from '../data/faq';
+import {
+  brainTraining,
+  cognitiveBenefits,
+  improveTips,
+  insights,
+  quizSteps,
+  scoreBands,
+  trustStats,
+} from '../data/homepage';
+import { site } from '../config/site';
+import { faqJsonLd, organizationJsonLd, websiteJsonLd } from '../lib/seo';
 
+const title = 'Free Online IQ Check — Free IQ Test with Instant Results';
+const description =
+  'Take a free online IQ test with 25 logical reasoning questions and scaled difficulty. Build cognitive skills with FreeIQCheck — instant results and educational insights.';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title={title}
+  description={description}
+  path="/"
+  jsonLd={[organizationJsonLd(), websiteJsonLd(), faqJsonLd(faqItems)]}
+>
+  <!-- Hero -->
+  <section class="hero-glow relative overflow-hidden border-b border-slate-200/80 dark:border-slate-800">
+    <div class="pointer-events-none absolute inset-0 mesh-gradient dark:mesh-gradient-dark" aria-hidden="true"></div>
+    <div class="section-pad relative mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-2 lg:gap-20">
+      <div class="motion-safe:animate-fade-up">
+        <p class="inline-flex items-center gap-2 rounded-full border border-brand-200/80 bg-white/60 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-700 backdrop-blur-sm dark:border-brand-800 dark:bg-slate-900/60 dark:text-brand-300">
+          <span class="h-2 w-2 animate-pulse-soft rounded-full bg-accent-500" aria-hidden="true"></span>
+          Cognitive skills platform
+        </p>
+        <h1 class="mt-6 font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-[3.25rem] dark:text-white">
+          Free Online <span class="text-gradient">IQ Check</span>
+        </h1>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+          A premium, trustworthy place for a <strong class="font-medium text-slate-800 dark:text-slate-200">free iq test</strong>,
+          brain training, and practical guidance on reasoning—designed for learning, not hype.
+        </p>
+        <div class="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
+          <a href="/test" class="btn-primary">Start Free IQ Quiz</a>
+          <a
+            href="#cognitive-benefits"
+            class="text-center text-sm font-semibold text-slate-600 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400"
+          >
+            Explore cognitive benefits ↓
+          </a>
+        </div>
+        <ul class="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-500 dark:text-slate-400" aria-label="Platform highlights">
+          <li class="flex items-center gap-2"><span class="text-accent-500" aria-hidden="true">✓</span> 25-question quiz</li>
+          <li class="flex items-center gap-2"><span class="text-accent-500" aria-hidden="true">✓</span> Instant iq score test</li>
+          <li class="flex items-center gap-2"><span class="text-accent-500" aria-hidden="true">✓</span> Educational content</li>
+        </ul>
+      </div>
+      <div class="relative flex justify-center motion-safe:animate-fade-in lg:justify-end" style="animation-delay: 150ms">
+        <div class="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-brand-500/25 via-violet-500/15 to-accent-500/20 blur-3xl" aria-hidden="true"></div>
+        <BrainIllustration class="relative w-full max-w-lg drop-shadow-2xl" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust stats -->
+  <section class="border-b border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-950" aria-label="Platform statistics">
+    <div class="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 lg:py-14">
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {trustStats.map((stat, i) => (
+          <div
+            class="stat-card card-surface p-6 text-center motion-safe:animate-fade-up"
+            style={`animation-delay: ${i * 80}ms`}
+          >
+            <p class="font-display text-3xl font-extrabold tracking-tight text-gradient sm:text-4xl">{stat.value}</p>
+            <p class="mt-2 font-semibold text-slate-900 dark:text-white">{stat.label}</p>
+            <p class="mt-1 text-xs text-slate-500 dark:text-slate-500">{stat.sub}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <SectionDivider />
+
+  <!-- Platform intro -->
+  <section class="section-pad relative mx-auto max-w-6xl overflow-hidden">
+    <div class="card-surface grid gap-10 overflow-hidden lg:grid-cols-2 lg:gap-0">
+      <div class="p-8 lg:p-12">
+        <SectionHeading
+          eyebrow="Intelligence & logic"
+          title="A modern iq checker for curious minds"
+          description="Practice logical reasoning with a clean brain test online experience—no clutter, no pressure, no misleading clinical claims."
+        />
+        <p class="mt-5 text-slate-600 leading-relaxed dark:text-slate-400">
+          Whether you search for an <em>online iq test</em>, <em>instant iq test</em>, or <em>logical reasoning test</em>,
+          FreeIQCheck pairs assessment with education so you leave sharper—not sold to.
+        </p>
+        <a href="/test" class="mt-6 inline-flex text-sm font-semibold text-brand-600 hover:underline dark:text-brand-400">
+          Try the quick iq test →
+        </a>
+      </div>
+      <div class="relative flex items-center justify-center bg-gradient-to-br from-brand-50/80 via-violet-50/50 to-accent-50/30 p-8 dark:from-brand-950/40 dark:via-slate-900 dark:to-slate-900">
+        <NeuralNetwork class="max-w-md" id="intro-neural" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Cognitive benefits -->
+  <section id="cognitive-benefits" class="section-pad relative mesh-gradient dark:mesh-gradient-dark">
+    <div class="mx-auto max-w-6xl">
+      <SectionHeading
+        eyebrow="Cognitive wellness"
+        title="Benefits of strong cognitive skills"
+        description="Reasoning, memory, and creativity support how you learn, decide, and adapt—skills you can practice deliberately over time."
+        align="center"
+      />
+      <div class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {cognitiveBenefits.map((b, i) => (
+          <FeatureCard title={b.title} text={b.text} icon={b.icon} accent={b.accent} delay={i * 60} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <SectionDivider />
+
+  <!-- How to improve -->
+  <section id="improve-cognition" class="section-pad mx-auto max-w-6xl">
+    <div class="grid gap-12 lg:grid-cols-12 lg:gap-16">
+      <div class="lg:col-span-5">
+        <SectionHeading
+          eyebrow="Evidence-informed habits"
+          title="How to improve IQ and cognitive ability"
+          description="No miracle promises—just practical habits that support focus, learning, and mental clarity alongside occasional brain challenges."
+        />
+        <div class="mt-8 hidden lg:block">
+          <MindGrowth />
+        </div>
+      </div>
+      <article class="lg:col-span-7">
+        <div class="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm sm:p-8 dark:border-slate-800 dark:bg-slate-900/80">
+          <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+            Research suggests cognition is influenced by sleep, nutrition, movement, and lifelong learning—not a single number from
+            a short quiz. Use these tips alongside our <a href="/test" class="font-medium text-brand-600 dark:text-brand-400">free iq test</a> as
+            part of a balanced routine.
+          </p>
+          <ul class="mt-8 space-y-5">
+            {improveTips.map((tip, i) => (
+              <li
+                class="flex gap-4 rounded-2xl border border-slate-100 bg-slate-50/50 p-4 transition motion-safe:hover:border-brand-200/80 motion-safe:hover:bg-brand-50/30 dark:border-slate-800 dark:bg-slate-800/30 dark:motion-safe:hover:border-brand-800 dark:motion-safe:hover:bg-brand-950/20"
+                style={`animation-delay: ${i * 40}ms`}
+              >
+                <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-600/10 text-brand-600 dark:text-brand-400">
+                  <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={tip.icon} />
+                  </svg>
+                </span>
+                <div>
+                  <h3 class="font-display font-bold text-slate-900 dark:text-white">{tip.title}</h3>
+                  <p class="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{tip.text}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </article>
+    </div>
+    <div class="mt-10 flex justify-center lg:hidden">
+      <MindGrowth class="max-w-xs" />
+    </div>
+  </section>
+
+  <!-- Brain training -->
+  <section class="section-pad border-y border-slate-200/80 bg-slate-100/60 dark:border-slate-800 dark:bg-slate-900/40">
+    <div class="mx-auto max-w-6xl">
+      <div class="flex flex-col items-center gap-8 lg:flex-row lg:justify-between">
+        <SectionHeading
+          eyebrow="Brain training"
+          title="Train core thinking skills"
+          description="Four pillars of cognitive practice—each reflected in our quiz and recommended daily habits."
+          align="center"
+        />
+        <CognitivePuzzle class="hidden max-w-[200px] shrink-0 lg:block" />
+      </div>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {brainTraining.map((item, i) => (
+          <a
+            href={item.href}
+            class={`brain-card card-surface group relative overflow-hidden p-6 motion-safe:animate-fade-up bg-gradient-to-br ${item.gradient}`}
+            style={`animation-delay: ${i * 70}ms`}
+          >
+            <div class="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-brand-500/10 transition group-hover:scale-150" aria-hidden="true"></div>
+            <div class="relative">
+              <span class="inline-flex rounded-lg bg-brand-600/10 px-2.5 py-1 text-xs font-semibold text-brand-700 dark:text-brand-300">
+                Practice
+              </span>
+              <h3 class="mt-4 font-display text-lg font-bold text-slate-900 dark:text-white">{item.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{item.text}</p>
+              <span class="mt-4 inline-flex text-sm font-semibold text-brand-600 group-hover:underline dark:text-brand-400">
+                Start training →
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section id="how-it-works" class="section-pad mx-auto max-w-6xl">
+    <SectionHeading eyebrow="Simple flow" title="How the quiz works" align="center" />
+    <ol class="mt-14 grid gap-8 md:grid-cols-3">
+      {quizSteps.map((s, i) => (
+        <li
+          class="card-surface relative p-8 pt-12 motion-safe:animate-fade-up"
+          style={`animation-delay: ${i * 100}ms`}
+        >
+          <span class="absolute -top-5 left-8 flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-sm font-bold text-white shadow-lg shadow-brand-600/30">
+            {s.step}
+          </span>
+          <h3 class="font-display text-xl font-bold text-slate-900 dark:text-white">{s.title}</h3>
+          <p class="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{s.text}</p>
+        </li>
+      ))}
+    </ol>
+    <p class="mt-12 text-center">
+      <a href="/test" class="btn-primary !px-6 !py-3 text-sm">Start your instant iq test</a>
+    </p>
+  </section>
+
+  <SectionDivider />
+
+  <!-- Score meaning -->
+  <section class="section-pad bg-white dark:bg-slate-950">
+    <div class="mx-auto max-w-6xl lg:grid lg:grid-cols-2 lg:gap-20">
+      <div>
+        <SectionHeading
+          eyebrow="Understanding results"
+          title="What the score means"
+          description="Your iq score test outcome reflects weighted performance across 25 questions. We map that to an illustrative range—not an official certificate."
+        />
+        <p class="mt-4 text-sm text-slate-600 dark:text-slate-400">
+          Treat results as a snapshot of performance on this <strong class="font-medium text-slate-800 dark:text-slate-200">brain test online</strong>,
+          useful for practice and reflection.
+        </p>
+      </div>
+      <ul class="mt-10 space-y-3 lg:mt-0">
+        {scoreBands.map((band) => (
+          <li class="flex gap-4 rounded-2xl border border-slate-200/80 bg-slate-50/80 px-5 py-4 transition motion-safe:hover:border-brand-200 dark:border-slate-800 dark:bg-slate-900/50 dark:motion-safe:hover:border-brand-800">
+            <span class="shrink-0 font-mono text-sm font-bold text-brand-600 dark:text-brand-400">{band.range}</span>
+            <span class="text-sm leading-relaxed text-slate-600 dark:text-slate-400">{band.meaning}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="mx-auto mt-12 max-w-3xl">
+      <Disclaimer />
+    </div>
+  </section>
+
+  <!-- Insights / blog -->
+  <section id="insights" class="section-pad relative overflow-hidden">
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand-50/50 via-transparent to-transparent dark:from-brand-950/20" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-6xl">
+      <SectionHeading
+        eyebrow="Learn & reflect"
+        title="Insights on intelligence and thinking"
+        description="Short, honest articles on cognition—written for curious readers, not clickbait."
+        align="center"
+      />
+      <div class="mt-14 grid gap-6 sm:grid-cols-2">
+        {insights.map((post, i) => (
+          <article
+            class="article-card card-surface flex flex-col p-6 sm:p-8 motion-safe:animate-fade-up"
+            style={`animation-delay: ${i * 80}ms`}
+          >
+            <p class="text-xs font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">{post.readTime}</p>
+            <h3 class="mt-3 font-display text-xl font-bold leading-snug text-slate-900 dark:text-white">{post.title}</h3>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{post.excerpt}</p>
+            <p class="mt-5 text-xs text-slate-500 dark:text-slate-500">Educational overview · Not medical advice</p>
+          </article>
+        ))}
+      </div>
+      <p class="mt-10 text-center text-sm text-slate-600 dark:text-slate-400">
+        Want more detail? Browse our <a href="/faq" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">FAQ</a> or
+        <a href="/about" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">about page</a>.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section-pad border-t border-slate-200/80 bg-slate-50/80 dark:border-slate-800 dark:bg-slate-900/30">
+    <div class="mx-auto max-w-3xl">
+      <SectionHeading eyebrow="FAQ" title="Frequently asked questions" align="center" />
+      <div class="mt-12">
+        <FaqAccordion items={faqItems} />
+      </div>
+      <p class="mt-10 text-center text-sm text-slate-600 dark:text-slate-400">
+        <a href="/faq" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">View all FAQ →</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="relative overflow-hidden bg-gradient-to-br from-brand-600 via-brand-700 to-brand-800 text-white">
+    <div class="absolute inset-0 opacity-30" aria-hidden="true">
+      <NeuralNetwork class="h-full w-full opacity-40" id="cta-neural" />
+    </div>
+    <div class="section-pad relative mx-auto max-w-3xl text-center">
+      <h2 class="font-display text-3xl font-bold sm:text-4xl lg:text-5xl">Ready for your free iq check?</h2>
+      <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-brand-100">
+        Join a growing community using {site.domain} for thoughtful practice—a professional {site.primaryKeyword} without the spam.
+      </p>
+      <a href="/test" class="mt-10 inline-flex rounded-2xl bg-white px-10 py-4 text-base font-semibold text-brand-700 shadow-xl transition motion-safe:hover:scale-[1.02] motion-safe:hover:bg-brand-50">
+        Start Free IQ Quiz
+      </a>
+    </div>
+  </section>
+</BaseLayout>
