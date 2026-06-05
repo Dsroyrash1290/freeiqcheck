@@ -1,11 +1,12 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import InternalLinks from '../components/InternalLinks.astro';
 import Disclaimer from '../components/Disclaimer.astro';
 import { webPageJsonLd } from '../lib/seo';
 
-const title = 'About FreeIQCheck — Free Online IQ-Style Quiz';
+const title = 'About Our Free IQ Test Online — FreeIQCheck';
 const description =
-  'Learn about FreeIQCheck, a free educational logical reasoning quiz. We provide instant iq test results for entertainment—not clinical assessment.';
+  'Learn why FreeIQCheck offers a trustworthy free iq test online with instant results, no email, and clear educational disclaimers—not clinical hype.';
 ---
 
 <PageLayout
@@ -13,29 +14,36 @@ const description =
   description={description}
   path="/about"
   heading="About FreeIQCheck"
-  subheading="A trustworthy place to practice logical reasoning online."
+  subheading="A trustworthy free iq test online with instant results and honest limits."
   jsonLd={[webPageJsonLd(title, description, '/about')]}
 >
   <p>
-    FreeIQCheck was built for people searching for a <strong>free iq test</strong> or <strong>online iq test</strong> who want a
-    clean, honest experience without aggressive upsells or misleading claims.
+    FreeIQCheck was built for people searching for a <strong>free iq test</strong>,
+    <strong>free iq test online</strong>, or the <strong>best free iq test</strong> experience without aggressive upsells or misleading claims.
   </p>
   <p>
-    Our 25-question <strong>logical reasoning test</strong> draws on classic puzzle formats: number sequences, verbal analogies, simple
-    logic, and everyday deduction. When you finish, you receive an illustrative score and explanations you can learn from.
+    Our 25-question <strong>logical reasoning test</strong> draws on classic puzzle formats: number sequences, verbal analogies, deduction, and spatial items.
+    When you finish, you receive a <a href="/results">free iq test with results</a> immediately—a
+    <strong>free iq test with instant results</strong> with explanations you can learn from.
+  </p>
+  <h2>Free iq test with instant results no email</h2>
+  <p>
+    We never require an email address to start or view scores. Your attempt is a
+    <strong>free iq test with free results</strong> processed in the browser. That makes us a practical choice among
+    <strong>free iq tests</strong> when you want quick practice without creating an account.
   </p>
   <h2>What we are not</h2>
   <p>
-    We are not psychologists, clinicians, or a licensed testing organization. Scores on this site are not normed against population
-    data and must not be used for medical diagnosis, employment screening, or school placement.
+    We are not psychologists, clinicians, or a licensed testing organization. Scores are not normed against population data and must not be used for medical diagnosis, employment screening, or school placement.
   </p>
   <Disclaimer />
   <h2>Our mission</h2>
   <p>
-    We believe brain challenges should be accessible, transparent, and enjoyable. Whether you call it an <strong>iq checker</strong>,
-    <strong>brain test online</strong>, or <strong>quick iq test</strong>, the value is in the practice—not a label on your identity.
+    We believe brain challenges should be accessible, transparent, and enjoyable. Whether you want a
+    <strong>free iq test and results</strong> for curiosity or regular practice, the value is in learning—not a label on your identity.
   </p>
   <p>
-    <a href="/test">Take the free quiz →</a>
+    <a href="/test">Take the free iq test online →</a> · <a href="/faq">Read the FAQ →</a>
   </p>
+  <InternalLinks class="mt-8" />
 </PageLayout>

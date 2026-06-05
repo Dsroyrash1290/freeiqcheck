@@ -1,13 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
+import InternalLinks from '../components/InternalLinks.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import { faqItems } from '../data/faq';
 import { faqJsonLd, webPageJsonLd } from '../lib/seo';
 
-const title = 'FAQ — Free IQ Test & Online IQ Check Questions';
+const title = 'FAQ — Free IQ Test Online, Instant Results & No Email';
 const description =
-  'Answers about our free online iq test: scoring, accuracy, retakes, privacy, and whether FreeIQCheck is a real clinical IQ assessment.';
+  'Answers about our free iq test online: instant results, no email, scoring, accuracy, retakes, and how FreeIQCheck compares to other free iq tests.';
 ---
 
 <BaseLayout
@@ -18,17 +19,23 @@ const description =
 >
   <section class="hero-glow border-b border-slate-200/80 dark:border-slate-800">
     <div class="section-pad mx-auto max-w-3xl">
+      <h1 class="sr-only">Free IQ test FAQ</h1>
       <SectionHeading
-        title="Frequently asked questions"
-        description="Everything you need to know about our instant iq test and iq score test results."
+        title="Free IQ test — frequently asked questions"
+        description="Everything about our free iq test with instant results, free iq test with results, and why scores are educational only."
         align="center"
       />
     </div>
   </section>
   <section class="section-pad mx-auto max-w-3xl">
     <FaqAccordion items={faqItems} />
-    <p class="mt-10 text-center">
-      <a href="/test" class="rounded-xl bg-brand-600 px-6 py-3 text-sm font-semibold text-white hover:bg-brand-700">Start Free IQ Quiz</a>
+    <p class="mt-8 text-center text-sm text-slate-600 dark:text-slate-400">
+      Ready to try it? Our <a href="/test" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">free iq test online</a> takes about 15–25 minutes.
+      Afterward, open the <a href="/results" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">results page</a> for your full report.
     </p>
+    <div class="mt-8 text-center">
+      <a href="/test" class="btn-primary !inline-flex text-sm">Start free iq test</a>
+    </div>
+    <InternalLinks class="mt-10" />
   </section>
 </BaseLayout>

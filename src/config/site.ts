@@ -1,20 +1,25 @@
 export const site = {
   name: 'FreeIQCheck',
-  domain: 'freeiqcheck.com',
-  url: 'https://freeiqcheck.com',
-  tagline: 'Free online IQ-style reasoning quiz with instant results',
+  domain: 'www.freeiqcheck.com',
+  url: 'https://www.freeiqcheck.com',
+  tagline: 'Free IQ test online with instant results — no email required',
   email: 'hello@freeiqcheck.com',
   primaryKeyword: 'free iq test',
+  ogImage: '/og-image.svg',
   keywords: [
     'free iq test',
+    'free iq test online',
+    'free iq test with results',
+    'free iq test with instant results',
+    'free iq test and results',
+    'best free iq test',
+    'free iq tests',
+    'free iq test with free results',
+    'free iq test with instant results no email',
     'online iq test',
     'free iq check',
-    'iq checker',
-    'instant iq test',
-    'quick iq test',
-    'iq score test',
-    'brain test online',
     'logical reasoning test',
+    'brain test online',
   ],
 } as const;
 
@@ -24,4 +29,11 @@ export const navLinks = [
   { href: '/about', label: 'About' },
   { href: '/faq', label: 'FAQ' },
   { href: '/contact', label: 'Contact' },
+] as const;
+
+export const seoNavLinks = [
+  { href: '/test', label: 'Free IQ test' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/about', label: 'About' },
+  { href: '/results', label: 'View results' },
 ] as const;

@@ -1,11 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Disclaimer from '../components/Disclaimer.astro';
+import InternalLinks from '../components/InternalLinks.astro';
 import { webPageJsonLd } from '../lib/seo';
 
-const title = 'Your IQ Test Results — Instant Score & Analysis';
+const title = 'Free IQ Test Results — Instant Score & Analysis';
 const description =
-  'View your illustrative IQ-style score, percentile estimate, reasoning strengths, badges, and full question review from FreeIQCheck.';
+  'Your free iq test with results: illustrative IQ-style score, percentile estimate, strengths, badges, and question review. Educational use only.';
 ---
 
 <BaseLayout
@@ -123,7 +124,7 @@ const description =
       </div>
 
       <div class="flex flex-col gap-3 border-t border-slate-200 pt-8 sm:flex-row sm:justify-center dark:border-slate-800">
-        <a href="/test" id="restart-btn" class="btn-primary !inline-flex justify-center text-sm">Restart test</a>
+        <a href="/test" id="restart-btn" class="btn-primary !inline-flex justify-center text-sm">Retake free iq test</a>
         <a
           href="/"
           class="inline-flex justify-center rounded-2xl border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300"
@@ -131,6 +132,8 @@ const description =
           Back to home
         </a>
       </div>
+
+      <InternalLinks class="mt-8" title="Continue exploring" />
     </div>
   </section>
 

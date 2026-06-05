@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://freeiqcheck.com',
+  site: 'https://www.freeiqcheck.com',
   vite: {
     plugins: [tailwindcss()],
   },

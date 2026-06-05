@@ -22,6 +22,7 @@ export function organizationJsonLd() {
     '@type': 'Organization',
     name: site.name,
     url: site.url,
+    logo: `${site.url}/favicon.svg`,
     description: site.tagline,
   };
 }
@@ -49,5 +50,18 @@ export function webPageJsonLd(title: string, description: string, path: string) 
     description,
     url: `${site.url}${path}`,
     isPartOf: { '@type': 'WebSite', url: site.url, name: site.name },
+  };
+}
+
+export function quizJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Quiz',
+    name: 'FreeIQCheck Logical Reasoning Quiz',
+    description:
+      'A free iq test online with 25 multiple-choice reasoning questions and instant illustrative results. Educational use only.',
+    url: `${site.url}/test`,
+    educationalLevel: 'General',
+    isAccessibleForFree: true,
   };
 }

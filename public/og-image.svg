@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="FreeIQCheck - Free IQ Test Online">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d3fd6"/>
+      <stop offset="50%" stop-color="#2550ea"/>
+      <stop offset="100%" stop-color="#5b21b6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="900" cy="120" r="180" fill="#10b981" opacity="0.15"/>
+  <circle cx="200" cy="500" r="220" fill="#8b5cf6" opacity="0.12"/>
+  <text x="80" y="280" fill="white" font-family="system-ui, sans-serif" font-size="72" font-weight="800">FreeIQCheck</text>
+  <text x="80" y="360" fill="#dbeafe" font-family="system-ui, sans-serif" font-size="36" font-weight="600">Free IQ Test Online</text>
+  <text x="80" y="420" fill="#a5f3fc" font-family="system-ui, sans-serif" font-size="28">Instant results · No email required</text>
+</svg>
