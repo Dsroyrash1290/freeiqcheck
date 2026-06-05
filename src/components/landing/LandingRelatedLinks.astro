@@ -1,0 +1,34 @@
+---
+import { allLandingPages, type LandingSlug } from '../../data/landingPages';
+
+interface Props {
+  current: LandingSlug;
+}
+const { current } = Astro.props;
+const others = allLandingPages.filter((p) => p.slug !== current);
+---
+
+<aside class="card-surface p-6" aria-label="Related IQ test guides">
+  <h2 class="font-display text-lg font-bold text-slate-900 dark:text-white">Related guides</h2>
+  <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+    Explore other topics, or return to the <a href="/" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">homepage</a>
+    and <a href="/faq" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">FAQ</a>.
+  </p>
+  <ul class="mt-4 space-y-2">
+    {others.map((p) => (
+      <li>
+        <a href={p.path} class="text-sm font-medium text-brand-600 hover:underline dark:text-brand-400">
+          {p.linkLabel}
+        </a>
+      </li>
+    ))}
+    <li>
+      <a href="/test" class="text-sm font-semibold text-slate-800 hover:text-brand-600 dark:text-slate-200 dark:hover:text-brand-400">
+        Take the quiz →
+      </a>
+    </li>
+    <li>
+      <a href="/about" class="text-sm font-medium text-brand-600 hover:underline dark:text-brand-400">About FreeIQCheck</a>
+    </li>
+  </ul>
+</aside>
