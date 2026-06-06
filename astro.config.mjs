@@ -34,6 +34,12 @@ export default defineConfig({
         if (learnPaths.some((p) => url.pathname === p || url.pathname === `${p}/`)) {
           return { ...item, priority: 0.75, changefreq: 'monthly' };
         }
+        if (url.pathname === '/blog' || url.pathname === '/blog/') {
+          return { ...item, priority: 0.8, changefreq: 'weekly' };
+        }
+        if (url.pathname.startsWith('/blog/')) {
+          return { ...item, priority: 0.7, changefreq: 'monthly' };
+        }
         return item;
       },
     }),

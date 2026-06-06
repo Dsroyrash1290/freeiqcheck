@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/blog/BlogCard.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { blogPosts } from '../../data/blog';
+import { blogJsonLd, webPageJsonLd } from '../../lib/seo';
+
+const title = 'Blog — IQ Tests, Scores & Cognitive Skills | FreeIQCheck';
+const description =
+  'FreeIQCheck blog: articles on good IQ scores, free test accuracy, improving reasoning, classic question types, and IQ vs EQ—educational, not medical advice.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path="/blog"
+  jsonLd={[
+    blogJsonLd(),
+    webPageJsonLd(title, description, '/blog'),
+  ]}
+>
+  <header class="hero-glow border-b border-slate-200/80 dark:border-slate-800">
+    <div class="section-pad mx-auto max-w-6xl text-center">
+      <p class="text-sm font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">FreeIQCheck Blog</p>
+      <h1 class="mt-4 font-display text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl dark:text-white">
+        IQ & Reasoning Insights
+      </h1>
+      <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+        Long-form guides on IQ scores, online tests, and cognitive skills—written for curious readers, not clickbait.
+      </p>
+      <a href="/test" class="btn-primary mt-8 !inline-flex">Take the Free IQ Test</a>
+    </div>
+  </header>
+
+  <section class="section-pad mx-auto max-w-6xl" aria-labelledby="blog-grid">
+    <SectionHeading
+      eyebrow="Latest articles"
+      title="All posts"
+      description="Each article includes FAQs, internal links, and educational disclaimers."
+      align="center"
+    />
+    <h2 id="blog-grid" class="sr-only">Blog articles</h2>
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {blogPosts.map((post) => (
+        <BlogCard post={post} />
+      ))}
+    </div>
+    <nav class="mt-12 card-surface p-6 text-center" aria-label="More resources">
+      <p class="text-sm text-slate-600 dark:text-slate-400">
+        Also explore our
+        <a href="/what-is-iq" class="font-semibold text-brand-600 hover:underline dark:text-brand-400"> IQ guides</a>,
+        <a href="/faq" class="font-semibold text-brand-600 hover:underline dark:text-brand-400"> FAQ</a>, and
+        <a href="/free-iq-test-online" class="font-semibold text-brand-600 hover:underline dark:text-brand-400"> free iq test online</a> page.
+      </p>
+    </nav>
+  </section>
+</BaseLayout>

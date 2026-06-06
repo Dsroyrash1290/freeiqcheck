@@ -65,3 +65,39 @@ export function quizJsonLd() {
     isAccessibleForFree: true,
   };
 }
+
+export function blogPostingJsonLd(post: {
+  title: string;
+  description: string;
+  path: string;
+  publishedAt: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.description,
+    url: `${site.url}${post.path}`,
+    datePublished: post.publishedAt,
+    dateModified: post.publishedAt,
+    author: { '@type': 'Organization', name: site.name, url: site.url },
+    publisher: {
+      '@type': 'Organization',
+      name: site.name,
+      url: site.url,
+      logo: { '@type': 'ImageObject', url: `${site.url}/favicon.svg` },
+    },
+    mainEntityOfPage: `${site.url}${post.path}`,
+  };
+}
+
+export function blogJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: `${site.name} Blog`,
+    url: `${site.url}/blog`,
+    description: 'Educational articles about IQ tests, cognitive skills, and logical reasoning.',
+    publisher: { '@type': 'Organization', name: site.name, url: site.url },
+  };
+}
