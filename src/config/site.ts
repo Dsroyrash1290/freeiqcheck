@@ -5,6 +5,7 @@ export const site = {
   tagline: 'Free IQ test online with instant results — no email required',
   email: 'hello@freeiqcheck.com',
   primaryKeyword: 'free iq test',
+  gaMeasurementId: 'G-T70SBQKFG6',
   ogImage: '/og-image.svg',
   keywords: [
     'free iq test',

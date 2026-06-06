@@ -1,0 +1,25 @@
+---
+import { site } from '../config/site';
+
+/** Load GA4 in production only — single include via BaseLayout prevents duplicate tracking. */
+const isProd = import.meta.env.PROD;
+const gaId = site.gaMeasurementId;
+---
+
+{isProd && gaId && (
+  <>
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+    <script is:inline define:vars={{ gaId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', gaId, {
+        anonymize_ip: true,
+        send_page_view: true,
+      });
+    </script>
+  </>
+)}
