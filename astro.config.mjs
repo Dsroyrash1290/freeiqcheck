@@ -30,6 +30,10 @@ export default defineConfig({
         if (url.pathname.startsWith('/free-iq-test') || url.pathname.startsWith('/best-free-iq-test')) {
           return { ...item, priority: 0.8, changefreq: 'monthly' };
         }
+        const learnPaths = ['/what-is-iq', '/average-iq-by-age', '/iq-score-chart', '/how-iq-tests-work'];
+        if (learnPaths.some((p) => url.pathname === p || url.pathname === `${p}/`)) {
+          return { ...item, priority: 0.75, changefreq: 'monthly' };
+        }
         return item;
       },
     }),
