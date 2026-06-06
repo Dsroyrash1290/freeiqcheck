@@ -1,0 +1,48 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import LegalNav from '../components/legal/LegalNav.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { legalLastUpdated } from '../data/legal';
+import { site } from '../config/site';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  heading: string;
+  subheading?: string;
+  jsonLd?: Record<string, unknown>[];
+}
+
+const { title, description, path, heading, subheading, jsonLd } = Astro.props;
+const defaultSub = `Last updated: ${legalLastUpdated} · ${site.domain}`;
+---
+
+<BaseLayout title={title} description={description} path={path} jsonLd={jsonLd}>
+  <article>
+    <header class="hero-glow border-b border-slate-200/80 dark:border-slate-800">
+      <div class="section-pad mx-auto max-w-3xl text-center">
+        <SectionHeading title={heading} description={subheading ?? defaultSub} align="center" />
+      </div>
+    </header>
+
+    <div class="section-pad mx-auto max-w-3xl">
+      <div
+        class="legal-prose space-y-4 text-slate-600 leading-relaxed dark:text-slate-400 [&_h2]:mt-12 [&_h2]:border-b [&_h2]:border-slate-200 [&_h2]:pb-2 [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-slate-900 dark:[&_h2]:border-slate-800 dark:[&_h2]:text-white [&_h3]:mt-8 [&_h3]:font-display [&_h3]:text-lg [&_h3]:font-semibold [&_h3]:text-slate-800 dark:[&_h3]:text-slate-200 [&_a]:font-medium [&_a]:text-brand-600 [&_a]:underline-offset-2 hover:[&_a]:underline dark:[&_a]:text-brand-400 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:space-y-2 [&_ol]:pl-5 [&_strong]:font-medium [&_strong]:text-slate-800 dark:[&_strong]:text-slate-200"
+      >
+        <slot />
+      </div>
+
+      <div class="mt-12 grid gap-6 lg:grid-cols-3">
+        <LegalNav current={path} />
+        <div class="card-surface p-6 lg:col-span-2">
+          <p class="text-sm font-semibold text-slate-900 dark:text-white">Questions?</p>
+          <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+            Contact us at <a href={`mailto:${site.email}`}>{site.email}</a> or visit our
+            <a href="/contact">contact page</a>. For quiz help, see the <a href="/faq">FAQ</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

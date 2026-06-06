@@ -40,6 +40,10 @@ export default defineConfig({
         if (url.pathname.startsWith('/blog/')) {
           return { ...item, priority: 0.7, changefreq: 'monthly' };
         }
+        const legalPaths = ['/privacy-policy', '/terms', '/disclaimer'];
+        if (legalPaths.some((p) => url.pathname === p || url.pathname === `${p}/`)) {
+          return { ...item, priority: 0.5, changefreq: 'yearly' };
+        }
         return item;
       },
     }),

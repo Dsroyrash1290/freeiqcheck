@@ -1,0 +1,119 @@
+---
+import LegalLayout from '../../layouts/LegalLayout.astro';
+import { site } from '../../config/site';
+import { webPageJsonLd } from '../../lib/seo';
+
+const title = 'Disclaimer — FreeIQCheck';
+const description = `Disclaimer for ${site.domain}. Free IQ test for education and entertainment only—not a clinical, medical, or diagnostic assessment.`;
+---
+
+<LegalLayout
+  title={title}
+  description={description}
+  path="/disclaimer"
+  heading="Disclaimer"
+  jsonLd={[webPageJsonLd(title, description, '/disclaimer')]}
+>
+  <p>
+    Please read this Disclaimer carefully before using <a href={site.url}>FreeIQCheck</a> ({site.domain}). By using our website, quiz,
+    blog, or related content, you acknowledge and agree to the statements below.
+  </p>
+
+  <h2>Not a clinical or medical IQ test</h2>
+  <p>
+    FreeIQCheck is <strong>not</strong> an official psychological, psychiatric, or medical intelligence test. We are not a licensed
+    testing organization, hospital, or clinic. Our 25-question logical reasoning quiz produces an <strong>illustrative score</strong> for
+    education and entertainment—it is not a normed IQ score suitable for diagnosis, treatment, employment screening, gifted program
+    placement, or legal proceedings.
+  </p>
+  <p>
+    If you need formal cognitive assessment, consult a qualified psychologist or other licensed professional who administers validated
+    instruments under controlled conditions.
+  </p>
+
+  <h2>No professional advice</h2>
+  <p>
+    All content on this site—including articles, guides, blog posts, FAQs, score explanations, and emails—is provided for general
+    informational purposes only. It does not constitute medical advice, mental health advice, legal advice, or career counseling.
+  </p>
+  <p>Never disregard professional advice or delay seeking it because of something you read on FreeIQCheck.</p>
+
+  <h2>Accuracy and limitations of results</h2>
+  <p>
+    Quiz outcomes depend on question selection, timing, your physical and mental state, device, and scoring methodology. Illustrative
+    IQ-style numbers and percentile estimates on our results page are <strong>not</strong> population-normed and may differ substantially
+    from scores on professional batteries such as WAIS, WISC, or Stanford-Binet.
+  </p>
+  <p>
+    We make reasonable efforts to provide clear explanations and fair-weighted scoring, but we do <strong>not</strong> guarantee
+    accuracy, completeness, or fitness for any particular purpose.
+  </p>
+
+  <h2>Educational and entertainment use only</h2>
+  <p>FreeIQCheck is intended for:</p>
+  <ul>
+    <li>Curiosity and self-directed learning</li>
+    <li>Practicing logical reasoning and puzzle formats</li>
+    <li>Comparing your own retakes over time for personal motivation</li>
+  </ul>
+  <p>It is <strong>not</strong> intended for:</p>
+  <ul>
+    <li>Clinical diagnosis of intellectual disability or giftedness</li>
+    <li>Employment or insurance decisions</li>
+    <li>Academic admissions or scholarship eligibility</li>
+    <li>Establishing legal competence or disability status</li>
+  </ul>
+
+  <h2>Advertising disclosure</h2>
+  <p>
+    FreeIQCheck may display third-party advertisements, including Google AdSense. We may earn revenue when visitors view or interact with
+    ads. Advertisers are independent third parties; we do not control ad content and are not responsible for products or services
+    advertised.
+  </p>
+  <p>
+    Editorial content—including articles about IQ scores, accuracy, and improvement—is written for education and is not influenced by
+    advertisers. See our <a href="/privacy-policy">Privacy Policy</a> for cookie and ad personalization information.
+  </p>
+
+  <h2>Third-party links and tools</h2>
+  <p>
+    Our site may link to external websites (e.g., Google opt-out pages, reference materials). We are not responsible for the content,
+    privacy practices, or availability of third-party sites. Use them at your own risk.
+  </p>
+  <p>
+    We use third-party services such as Google Analytics and hosting providers. Their processing of data is described in our Privacy
+    Policy.
+  </p>
+
+  <h2>No warranties</h2>
+  <p>
+    THE SERVICE IS PROVIDED &quot;AS IS&quot; WITHOUT WARRANTIES OF ANY KIND. WE DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+  </p>
+
+  <h2>Limitation of liability</h2>
+  <p>
+    TO THE MAXIMUM EXTENT PERMITTED BY LAW, FREEIQCHECK SHALL NOT BE LIABLE FOR ANY DAMAGES ARISING FROM YOUR USE OF OR RELIANCE ON THE
+    QUIZ, SCORES, OR CONTENT, INCLUDING DIRECT, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL DAMAGES.
+  </p>
+
+  <h2>Children and vulnerable users</h2>
+  <p>
+    Parents and guardians should supervise minors using online quizzes. Results should not be used to label or limit a child&apos;s
+    potential. For developmental or educational concerns, seek guidance from qualified educators or clinicians.
+  </p>
+
+  <h2>Changes</h2>
+  <p>
+    We may update this Disclaimer at any time. The date at the top of this page indicates the latest revision. Continued use constitutes
+    acceptance of the updated Disclaimer.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Questions: <a href={`mailto:${site.email}`}>{site.email}</a> · <a href="/contact">Contact</a>
+  </p>
+  <p>
+    Related: <a href="/terms">Terms of Service</a> · <a href="/privacy-policy">Privacy Policy</a> · <a href="/test">Take the quiz</a>
+  </p>
+</LegalLayout>

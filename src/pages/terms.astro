@@ -1,43 +1,135 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import LegalLayout from '../layouts/LegalLayout.astro';
 import { site } from '../config/site';
 import { webPageJsonLd } from '../lib/seo';
 
-const title = 'Terms of Use — FreeIQCheck';
-const description = `Terms of use for ${site.domain} and our free online iq test. Educational and entertainment purposes only.`;
+const title = 'Terms of Service — FreeIQCheck';
+const description = `Terms of Service for ${site.domain}. Rules for using our free IQ test, content, advertising, and educational quiz platform.`;
 ---
 
-<PageLayout
+<LegalLayout
   title={title}
   description={description}
   path="/terms"
-  heading="Terms of Use"
-  subheading={`Last updated: June 4, 2026 · ${site.domain}`}
+  heading="Terms of Service"
   jsonLd={[webPageJsonLd(title, description, '/terms')]}
 >
-  <p>By using FreeIQCheck, you agree to these terms. If you do not agree, please do not use the site.</p>
-  <h2>Educational and entertainment only</h2>
   <p>
-    Our iq score test and related content are for fun, self-study, and general cognitive practice. They are not medical, psychological,
-    or employment assessments. Do not rely on results for diagnosis, hiring, or academic decisions.
+    Welcome to FreeIQCheck. These Terms of Service (&quot;Terms&quot;) govern your access to and use of <a href={site.url}>{site.url}</a>,
+    including our free online IQ-style quiz, blog, guides, and related content (collectively, the &quot;Service&quot;). By accessing or
+    using the Service, you agree to these Terms. If you do not agree, do not use the Service.
   </p>
+
+  <h2>Eligibility</h2>
+  <p>
+    You must be at least 13 years old (or the minimum age required in your country to consent to online services) to use FreeIQCheck. If
+    you are under 18, you should use the Service with parental or guardian permission. The quiz is for educational and entertainment
+    purposes and is not directed at children under 13 for data collection purposes.
+  </p>
+
+  <h2>Educational and entertainment purpose</h2>
+  <p>
+    FreeIQCheck provides a <strong>free iq test online</strong> and related materials for fun, self-study, and general cognitive practice.
+    Our scores are <strong>illustrative</strong> and are not clinical, medical, psychological, or employment assessments.
+  </p>
+  <p>
+    Do not use quiz results for diagnosis, hiring, academic placement, legal proceedings, or any high-stakes decision. See our full
+    <a href="/disclaimer">Disclaimer</a> for details.
+  </p>
+
   <h2>No professional advice</h2>
-  <p>Nothing on this site constitutes professional health, legal, or career advice.</p>
+  <p>
+    Content on FreeIQCheck—including blog articles, guides, FAQs, and results explanations—is general information only. It does not
+    constitute medical, psychological, legal, financial, or career advice. Always consult qualified professionals for matters requiring
+    expert judgment.
+  </p>
+
+  <h2>Accounts and quiz use</h2>
+  <p>
+    No account is required to take the quiz. You are responsible for maintaining the confidentiality of any information stored in your
+    browser. Results are processed locally for display; we do not guarantee permanent storage of your attempts.
+  </p>
+
   <h2>Acceptable use</h2>
-  <p>You agree not to misuse the site, attempt unauthorized access, scrape content at scale, or interfere with other users.</p>
+  <p>You agree not to:</p>
+  <ul>
+    <li>Use the Service for any unlawful purpose or in violation of applicable laws</li>
+    <li>Attempt to gain unauthorized access to systems, data, or accounts</li>
+    <li>Scrape, crawl, or harvest content at scale without written permission</li>
+    <li>Interfere with or disrupt the Service, servers, or networks</li>
+    <li>Upload malware, spam, or harmful code</li>
+    <li>Misrepresent affiliation with FreeIQCheck or impersonate others</li>
+    <li>Automate quiz submissions to manipulate statistics or rankings</li>
+  </ul>
+  <p>We may suspend or block access for violations at our discretion.</p>
+
   <h2>Intellectual property</h2>
-  <p>Site design, text, and original quiz content are owned by FreeIQCheck unless otherwise noted. Personal, non-commercial use is permitted.</p>
+  <p>
+    The Service, including design, logos, text, quiz questions, graphics, and software, is owned by FreeIQCheck or its licensors and
+    protected by copyright and other intellectual property laws. You may view and use the Service for personal, non-commercial purposes.
+  </p>
+  <p>
+    You may not copy, modify, distribute, sell, or create derivative works from our content without prior written consent, except as
+    permitted by fair use or applicable law.
+  </p>
+
+  <h2>Advertising and third-party links</h2>
+  <p>
+    The Service may display advertisements (including through Google AdSense) and links to third-party websites. Ads and external links
+    are provided for convenience. We do not endorse third-party products, services, or content and are not responsible for their
+    practices. Your dealings with advertisers are solely between you and the advertiser.
+  </p>
+  <p>
+    Third-party ad partners may use cookies and tracking technologies subject to their own policies. See our
+    <a href="/privacy-policy">Privacy Policy</a> for information on cookies and opt-out options.
+  </p>
+
   <h2>Disclaimer of warranties</h2>
-  <p>The site is provided &quot;as is&quot; without warranties of accuracy, fitness for a particular purpose, or uninterrupted availability.</p>
+  <p>
+    THE SERVICE IS PROVIDED &quot;AS IS&quot; AND &quot;AS AVAILABLE&quot; WITHOUT WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED,
+    INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT.
+  </p>
+  <p>
+    We do not warrant that the Service will be uninterrupted, error-free, secure, or that quiz scores are accurate, complete, or
+    suitable for any particular purpose.
+  </p>
+
   <h2>Limitation of liability</h2>
   <p>
-    To the fullest extent permitted by law, FreeIQCheck is not liable for indirect or consequential damages arising from use of the site
-    or quiz results.
+    TO THE FULLEST EXTENT PERMITTED BY LAW, FREEIQCHECK AND ITS OPERATORS, AFFILIATES, AND SUPPLIERS SHALL NOT BE LIABLE FOR ANY
+    INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS OF PROFITS, DATA, OR GOODWILL, ARISING FROM YOUR USE
+    OF THE SERVICE OR RELIANCE ON QUIZ RESULTS.
   </p>
-  <h2>Changes</h2>
-  <p>We may update these terms. Continued use after changes constitutes acceptance.</p>
+  <p>
+    OUR TOTAL LIABILITY FOR ANY CLAIM ARISING FROM THESE TERMS OR THE SERVICE SHALL NOT EXCEED THE GREATER OF (A) THE AMOUNT YOU PAID US
+    IN THE TWELVE MONTHS BEFORE THE CLAIM (TYPICALLY ZERO FOR FREE USERS) OR (B) ONE HUNDRED U.S. DOLLARS (USD $100).
+  </p>
+  <p>Some jurisdictions do not allow certain limitations; in those cases, our liability is limited to the maximum extent permitted by law.</p>
+
+  <h2>Indemnification</h2>
+  <p>
+    You agree to indemnify and hold harmless FreeIQCheck from claims, damages, and expenses (including reasonable legal fees) arising
+    from your misuse of the Service or violation of these Terms.
+  </p>
+
+  <h2>Changes to the Service and Terms</h2>
+  <p>
+    We may modify, suspend, or discontinue any part of the Service at any time. We may update these Terms by posting a revised version
+    on this page with an updated date. Material changes will be reflected in the &quot;Last updated&quot; notice. Continued use after
+    changes constitutes acceptance.
+  </p>
+
+  <h2>Governing law</h2>
+  <p>
+    These Terms are governed by the laws of the United States and the State in which the operator resides, without regard to conflict of
+    law principles, except where mandatory consumer protection laws in your country provide otherwise.
+  </p>
+
   <h2>Contact</h2>
   <p>
-    <a href={`mailto:${site.email}`}>{site.email}</a> · <a href="/contact">Contact page</a>
+    Questions about these Terms: <a href={`mailto:${site.email}`}>{site.email}</a> · <a href="/contact">Contact page</a>
   </p>
-</PageLayout>
+  <p>
+    Related documents: <a href="/privacy-policy">Privacy Policy</a> · <a href="/disclaimer">Disclaimer</a>
+  </p>
+</LegalLayout>

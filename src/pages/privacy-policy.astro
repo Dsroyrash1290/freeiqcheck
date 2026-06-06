@@ -1,55 +1,169 @@
 ---
-import PageLayout from '../layouts/PageLayout.astro';
+import LegalLayout from '../layouts/LegalLayout.astro';
 import { site } from '../config/site';
 import { webPageJsonLd } from '../lib/seo';
 
 const title = 'Privacy Policy — FreeIQCheck';
-const description = `Privacy policy for ${site.domain}. How we handle data when you use our free online iq test and website.`;
+const description = `Privacy Policy for ${site.domain}. Learn how we collect, use, and protect data including cookies, Google Analytics, and advertising.`;
 ---
 
-<PageLayout
+<LegalLayout
   title={title}
   description={description}
   path="/privacy-policy"
   heading="Privacy Policy"
-  subheading={`Last updated: June 4, 2026 · ${site.domain}`}
   jsonLd={[webPageJsonLd(title, description, '/privacy-policy')]}
 >
   <p>
-    FreeIQCheck (&quot;we,&quot; &quot;us&quot;) operates {site.url}. This policy explains what information we collect when you use our
-    website and free iq test.
+    FreeIQCheck (&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;) operates <a href={site.url}>{site.url}</a>, a free online IQ-style
+    reasoning quiz and educational website. This Privacy Policy explains how we collect, use, disclose, and safeguard information when
+    you visit our site.
   </p>
+  <p>
+    By using FreeIQCheck, you agree to the practices described here. If you do not agree, please discontinue use of the website.
+  </p>
+
   <h2>Information we collect</h2>
+  <h3>Information you provide</h3>
   <p>
-    The quiz runs primarily in your browser. Answer selections may be stored temporarily in session storage on your device to display
-    results. We do not require an account to take the test.
+    We do not require an account to take our quiz. If you contact us by email, we receive the information you choose to send (such as your
+    email address and message content) solely to respond to your inquiry.
   </p>
+  <h3>Quiz and browser data</h3>
   <p>
-    Like most websites, our hosting may log standard technical data (IP address, browser type, pages visited, timestamps) for security
-    and performance.
+    The IQ quiz runs primarily in your browser. Answer selections may be stored temporarily in <strong>session storage</strong> on your
+    device to display results on the results page. Theme preference (light/dark mode) may be stored in <strong>local storage</strong>.
+    You can clear this data anytime through your browser settings.
   </p>
-  <h2>How we use information</h2>
+  <h3>Automatically collected information</h3>
+  <p>
+    Like most websites, we and our service providers may automatically collect certain technical information, including:
+  </p>
   <ul>
-    <li>Operate and improve the website and quiz experience</li>
-    <li>Protect against abuse and technical issues</li>
-    <li>Respond to contact requests you send us</li>
+    <li>IP address (often truncated or anonymized where supported)</li>
+    <li>Browser type, device type, and operating system</li>
+    <li>Pages viewed, referring URLs, and approximate geographic region</li>
+    <li>Date, time, and duration of visits</li>
   </ul>
-  <h2>Cookies and storage</h2>
   <p>
-    We use local storage for theme preference (light/dark mode) and session storage for quiz results between the test and results pages.
-    You can clear these in your browser settings.
+    Our hosting provider (e.g., Cloudflare Pages) may process server logs for security, performance, and reliability.
   </p>
-  <h2>Third parties</h2>
+
+  <h2>How we use information</h2>
+  <p>We use collected information to:</p>
+  <ul>
+    <li>Operate, maintain, and improve the website and quiz experience</li>
+    <li>Understand aggregate traffic and usage patterns through analytics</li>
+    <li>Display advertisements (where enabled) and measure ad performance</li>
+    <li>Detect, prevent, and address technical issues or abuse</li>
+    <li>Respond to contact requests and legal obligations</li>
+  </ul>
+  <p>We do <strong>not</strong> sell your personal information to third parties.</p>
+
+  <h2>Cookies and similar technologies</h2>
   <p>
-    We may use fonts or analytics services in the future; this policy will be updated if that changes. We do not sell your personal
-    information.
+    Cookies are small text files stored on your device. We and our partners use cookies and similar technologies for essential site
+    functions, analytics, and advertising.
   </p>
-  <h2>Children</h2>
+  <h3>Types of cookies we may use</h3>
+  <ul>
+    <li><strong>Essential / functional:</strong> theme preference and quiz session data stored locally</li>
+    <li><strong>Analytics:</strong> to understand how visitors use our site (see Google Analytics below)</li>
+    <li><strong>Advertising:</strong> to serve and measure ads, including through Google AdSense and its partners</li>
+  </ul>
   <p>
-    The site is intended for general audiences. Parents and guardians should supervise minors using online quizzes.
+    You can control cookies through your browser settings. Blocking cookies may affect site functionality. To opt out of personalized
+    advertising from Google, visit <a href="https://www.google.com/settings/ads" rel="noopener noreferrer" target="_blank">Google Ads Settings</a>.
+    For industry opt-out tools, see <a href="https://optout.aboutads.info/" rel="noopener noreferrer" target="_blank">aboutads.info</a> (US) or
+    <a href="https://www.youronlinechoices.eu/" rel="noopener noreferrer" target="_blank">Your Online Choices</a> (EU).
   </p>
-  <h2>Contact</h2>
+
+  <h2>Google Analytics</h2>
   <p>
-    Privacy questions: <a href={`mailto:${site.email}`}>{site.email}</a>
+    We use <strong>Google Analytics 4</strong> (measurement ID: {site.gaMeasurementId}) to collect aggregated usage statistics. Google
+    Analytics uses cookies and may collect information such as how often users visit pages, what pages were viewed, and what other sites
+    were used prior to visiting. We use this data to improve content and user experience.
   </p>
-</PageLayout>
+  <p>
+    Google&apos;s ability to use and share information collected by Analytics is governed by the
+    <a href="https://policies.google.com/privacy" rel="noopener noreferrer" target="_blank">Google Privacy Policy</a>. You may opt out
+    using the <a href="https://tools.google.com/dlpage/gaoptout" rel="noopener noreferrer" target="_blank">Google Analytics Opt-out Browser Add-on</a>
+    or your browser&apos;s privacy controls.
+  </p>
+
+  <h2>Google AdSense and advertising partners</h2>
+  <p>
+    We may display advertisements served by <strong>Google AdSense</strong> and other third-party ad vendors. These partners may use
+    cookies, web beacons, and similar technologies to serve ads based on your visits to this and other websites, and to measure ad
+    effectiveness.
+  </p>
+  <ul>
+    <li>
+      Third-party vendors, including Google, use cookies to serve ads based on a user&apos;s prior visits to our website or other
+      websites.
+    </li>
+    <li>
+      Google&apos;s use of advertising cookies enables it and its partners to serve ads to users based on their visit to our site
+      and/or other sites on the Internet.
+    </li>
+    <li>
+      Users may opt out of personalized advertising by visiting
+      <a href="https://www.google.com/settings/ads" rel="noopener noreferrer" target="_blank">Google Ads Settings</a>.
+    </li>
+  </ul>
+  <p>
+    For more information about how Google uses data from partner sites, see
+    <a href="https://policies.google.com/technologies/partner-sites" rel="noopener noreferrer" target="_blank">How Google uses information from sites or apps that use our services</a>.
+  </p>
+  <p>
+    Ad partners are independent controllers of data they collect. We encourage you to review their privacy policies. We do not control
+    third-party ad content or tracking practices.
+  </p>
+
+  <h2>Legal bases (EEA/UK visitors)</h2>
+  <p>
+    Where applicable, we process personal data based on: (a) your consent (e.g., non-essential cookies where required); (b) legitimate
+    interests in operating and improving our site; and (c) compliance with legal obligations.
+  </p>
+
+  <h2>Data retention</h2>
+  <p>
+    Server logs and analytics data are retained only as long as necessary for the purposes described above, typically in aggregated or
+    anonymized form. Email correspondence is retained as needed to resolve inquiries. Local quiz data remains on your device until you
+    clear browser storage.
+  </p>
+
+  <h2>Children&apos;s privacy</h2>
+  <p>
+    FreeIQCheck is intended for a general audience. We do not knowingly collect personal information from children under 13 (or the
+    applicable age in your jurisdiction) without parental consent. If you believe a child has provided personal information, contact us
+    and we will take reasonable steps to delete it.
+  </p>
+
+  <h2>International visitors</h2>
+  <p>
+    If you access the site from outside the United States, your information may be processed in countries where our service providers
+    operate, which may have different data protection laws than your country.
+  </p>
+
+  <h2>Your rights</h2>
+  <p>
+    Depending on your location, you may have rights to access, correct, delete, or restrict processing of personal data, or to object
+    to certain processing. To exercise rights, email <a href={`mailto:${site.email}`}>{site.email}</a>. We will respond within a
+    reasonable timeframe as required by law.
+  </p>
+
+  <h2>Changes to this policy</h2>
+  <p>
+    We may update this Privacy Policy from time to time. The &quot;Last updated&quot; date at the top will reflect revisions. Material
+    changes may be noted on this page. Continued use after changes constitutes acceptance.
+  </p>
+
+  <h2>Contact us</h2>
+  <p>
+    Privacy questions: <a href={`mailto:${site.email}`}>{site.email}</a> · <a href="/contact">Contact form page</a>
+  </p>
+  <p>
+    See also our <a href="/terms">Terms of Service</a> and <a href="/disclaimer">Disclaimer</a>.
+  </p>
+</LegalLayout>
