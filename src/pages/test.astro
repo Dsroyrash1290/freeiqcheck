@@ -2,14 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Disclaimer from '../components/Disclaimer.astro';
 import InternalLinks from '../components/InternalLinks.astro';
-import { QUESTION_COUNT, QUIZ_DIFFICULTY_COUNTS, questionBank } from '../data/questions';
+import { QUESTION_COUNT, QUIZ_DIFFICULTY_COUNTS } from '../data/questions';
 import { quizJsonLd, webPageJsonLd } from '../lib/seo';
 
-const title = 'Free IQ Test Online — 25 Questions, Instant Results';
+const title = 'Free IQ Test Online — Instant Results';
 const description =
-  'Take a free iq test online with instant results and no email. 25 reasoning questions randomly drawn from our 100+ item bank, with balanced difficulty.';
-
-const bankSize = questionBank.length;
+  'Take a free iq test online with instant results and no email. Randomized reasoning questions with balanced difficulty and shuffled answer choices.';
 ---
 
 <BaseLayout
@@ -23,7 +21,7 @@ const bankSize = questionBank.length;
       <p class="text-center text-sm font-medium text-brand-600 dark:text-brand-400">Free iq test with instant results</p>
       <h1 class="mt-2 text-center font-display text-3xl font-bold text-slate-900 dark:text-white">Free IQ Test Online</h1>
       <p class="mt-2 text-center text-slate-600 dark:text-slate-400">
-        {QUESTION_COUNT} questions · {bankSize}+ item bank · No email ·
+        Randomized questions · No email · Instant results ·
         <a href="/practice-iq-questions" class="font-medium text-brand-600 hover:underline dark:text-brand-400">Practice first</a> ·
         <a href="/methodology" class="font-medium text-brand-600 hover:underline dark:text-brand-400">Methodology</a>
       </p>
@@ -41,8 +39,8 @@ const bankSize = questionBank.length;
           <span class="rounded-full bg-rose-100 px-3 py-1 text-rose-800 dark:bg-rose-950 dark:text-rose-300">{QUIZ_DIFFICULTY_COUNTS.hard} hard</span>
         </div>
         <p class="text-slate-600 dark:text-slate-400">
-          Each attempt draws <strong class="font-medium text-slate-800 dark:text-slate-200">{QUESTION_COUNT} random questions</strong> from our
-          {bankSize}-item bank—answer choices are shuffled too. Retakes feel different but stay fairly balanced.
+          Each attempt draws a balanced mix of randomized questions. Answer choices are shuffled so every retake feels
+          different.
         </p>
         <p id="resume-hint" class="mt-3 hidden text-sm font-medium text-brand-600 dark:text-brand-400"></p>
         <div class="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
@@ -56,7 +54,7 @@ const bankSize = questionBank.length;
       <div id="quiz-active" class="hidden" role="form" aria-label="IQ reasoning quiz">
         <div class="mb-6 space-y-3">
           <div class="flex flex-wrap items-center justify-between gap-3 text-sm font-medium text-slate-600 dark:text-slate-400">
-            <span id="progress-label">Question 1 of {QUESTION_COUNT}</span>
+            <span id="progress-label">Question 1</span>
             <span id="timer" class="rounded-lg bg-slate-100 px-3 py-1 font-mono tabular-nums dark:bg-slate-800" aria-live="polite">0:00</span>
           </div>
           <div
@@ -170,7 +168,7 @@ const bankSize = questionBank.length;
     function render() {
       if (!session) return;
       const q = session.questions[session.index];
-      progressLabel!.textContent = `Question ${session.index + 1} of ${total}`;
+      progressLabel!.textContent = `Question ${session.index + 1}`;
       progressBar!.style.width = `${((session.index + 1) / total) * 100}%`;
       progressWrap?.setAttribute('aria-valuenow', String(session.index + 1));
       qNumber!.textContent = `Question ${session.index + 1}`;
@@ -262,7 +260,7 @@ const bankSize = questionBank.length;
     const existing = loadSession();
     if (existing) {
       const answered = existing.answers.filter((a) => a >= 0).length;
-      resumeHint!.textContent = `You have an in-progress quiz (${answered}/${total} answered).`;
+      resumeHint!.textContent = `You have an in-progress quiz (${answered} answered so far).`;
       resumeHint!.classList.remove('hidden');
       startBtn!.textContent = 'Resume Quiz';
       restartBtn?.classList.remove('hidden');

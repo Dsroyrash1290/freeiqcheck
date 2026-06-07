@@ -252,7 +252,7 @@ function deriveBadges(
     badges.push({
       id: 'high_accuracy',
       title: 'Sharp Mind',
-      description: '88%+ accuracy across all 25 questions.',
+      description: '88%+ accuracy on this attempt.',
       icon: 'accuracy',
     });
   }
