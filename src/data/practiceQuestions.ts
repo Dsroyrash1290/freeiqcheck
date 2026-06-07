@@ -1,4 +1,4 @@
-import { questions } from './questions';
+import { questionBank } from './questions';
 
 /** Curated sample items for the practice page — not the full quiz bank. */
-export const practiceQuestions = questions.filter((q) => [1, 3, 4, 9, 12, 14].includes(q.id));
+export const practiceQuestions = questionBank.filter((q) => [1, 3, 4, 36, 39, 42].includes(q.id));

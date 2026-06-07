@@ -1,5 +1,6 @@
-import type { Difficulty, Question, QuestionCategory } from '../data/questions';
-import { categoryLabels, questions } from '../data/questions';
+import { categoryLabels } from '../data/questions/categoryLabels';
+import type { Difficulty, Question, QuestionCategory } from '../data/questions/types';
+import type { QuizQuestion } from '../data/questions/types';
 
 export type ScoreBandId =
   | 'developing'
@@ -28,10 +29,13 @@ export type BreakdownItem = {
   prompt: string;
   selected: number;
   correctIndex: number;
+  selectedLabel: string;
+  correctLabel: string;
   explanation: string;
   correct: boolean;
   difficulty: Difficulty;
   category: QuestionCategory;
+  visualId?: string;
 };
 
 export type QuizResult = {
@@ -309,23 +313,27 @@ function buildPerformanceSummary(
 }
 
 export function computeQuizResult(
-  questionList: Question[],
+  questionList: Question[] | QuizQuestion[],
   answers: number[],
   seconds: number,
 ): QuizResult {
   let correct = 0;
   const breakdown: BreakdownItem[] = questionList.map((q, i) => {
-    const ok = answers[i] === q.correctIndex;
+    const selected = answers[i] ?? -1;
+    const ok = selected === q.correctIndex;
     if (ok) correct++;
     return {
       id: q.id,
       prompt: q.prompt,
-      selected: answers[i],
+      selected,
       correctIndex: q.correctIndex,
+      selectedLabel: selected >= 0 ? q.options[selected] : 'No answer',
+      correctLabel: q.options[q.correctIndex],
       explanation: q.explanation,
       correct: ok,
       difficulty: q.difficulty,
       category: q.category,
+      visualId: q.visualId,
     };
   });
 
@@ -375,13 +383,10 @@ export function normalizeStoredResult(raw: unknown): QuizResult | null {
   const data = raw as Record<string, unknown>;
   if (data.illustrativeIQ != null && data.band != null) return data as QuizResult;
 
-  const answers = (data.answers as number[]) ?? [];
-  const seconds = (data.seconds as number) ?? 0;
-  if (!answers.length) return null;
-  return computeQuizResult(questions, answers, seconds);
+  return null;
 }
 
-export const STORAGE_KEY = 'freeiqcheck-result';
+export { STORAGE_KEY } from './quizSession';
 
 export function scoreRingOffset(iq: number): number {
   const min = 70;
