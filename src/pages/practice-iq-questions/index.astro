@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Disclaimer from '../../components/Disclaimer.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import GuideRelatedLinks from '../../components/content/GuideRelatedLinks.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import type { FaqItem } from '../../data/faq';
+import { categoryLabels } from '../../data/questions';
+import { practiceQuestions } from '../../data/practiceQuestions';
+import { faqJsonLd, webPageJsonLd } from '../../lib/seo';
+
+const path = '/practice-iq-questions';
+const title = 'Practice IQ Questions — Sample Puzzles with Answers | FreeIQCheck';
+const description =
+  'Try six original practice IQ questions with explanations. Warm up before the full FreeIQCheck quiz—educational reasoning puzzles, not a clinical test.';
+
+const faq: FaqItem[] = [
+  {
+    question: 'Are these the same questions as the full quiz?',
+    answer:
+      'These are a curated sample from our bank. The full test uses 25 items including others not shown here.',
+  },
+  {
+    question: 'Should I time myself?',
+    answer:
+      'The full quiz displays a timer for awareness, but calm accuracy matters more than speed for learning.',
+  },
+  {
+    question: 'Why reveal answers below each question?',
+    answer:
+      'Practice mode is for learning. The full quiz hides feedback until your results page.',
+  },
+  {
+    question: 'Ready for the complete experience?',
+    answer: 'Take the 25-question free IQ test when you want illustrative scoring and category breakdowns.',
+  },
+];
+
+const difficultyStyles = {
+  easy: 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300',
+  medium: 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300',
+  hard: 'bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-300',
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path={path}
+  jsonLd={[webPageJsonLd(title, description, path), faqJsonLd(faq)]}
+>
+  <article>
+    <header class="hero-glow border-b border-slate-200/80 dark:border-slate-800">
+      <div class="section-pad mx-auto max-w-3xl text-center">
+        <p class="text-sm font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">Warm-up</p>
+        <h1 class="mt-4 font-display text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl dark:text-white">
+          Practice IQ Questions
+        </h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+          Sample reasoning puzzles from the FreeIQCheck item bank. Think through each one, then open the answer to
+          compare your approach—not for clinical scoring.
+        </p>
+        <a href="/test" class="btn-primary mt-8 !inline-flex">Take the Full 25-Question Quiz</a>
+      </div>
+    </header>
+
+    <div class="section-pad mx-auto max-w-3xl">
+      <p class="text-sm text-slate-500 dark:text-slate-500">
+        New to IQ-style tests? Read <a href="/what-is-iq" class="text-brand-600 dark:text-brand-400">what IQ means</a> or
+        <a href="/how-iq-tests-work" class="text-brand-600 dark:text-brand-400">how scoring works</a> first.
+      </p>
+
+      <ol class="mt-10 space-y-8">
+        {practiceQuestions.map((q, i) => (
+          <li class="card-surface overflow-hidden">
+            <div class="border-b border-slate-200 px-5 py-4 dark:border-slate-800 sm:px-6">
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="font-display text-sm font-bold text-slate-900 dark:text-white">Question {i + 1}</span>
+                <span class:list={['rounded-full px-2.5 py-0.5 text-xs font-semibold capitalize', difficultyStyles[q.difficulty]]}>
+                  {q.difficulty}
+                </span>
+                <span class="rounded-full bg-slate-100 px-2.5 py-0.5 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+                  {categoryLabels[q.category]}
+                </span>
+              </div>
+              <p class="mt-3 text-base font-medium leading-relaxed text-slate-800 dark:text-slate-200">{q.prompt}</p>
+            </div>
+            <ul class="divide-y divide-slate-100 dark:divide-slate-800" role="list">
+              {q.options.map((opt, oi) => (
+                <li class="flex items-start gap-3 px-5 py-3 sm:px-6">
+                  <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-slate-100 text-xs font-bold text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+                    {String.fromCharCode(65 + oi)}
+                  </span>
+                  <span class="text-sm text-slate-700 dark:text-slate-300">{opt}</span>
+                </li>
+              ))}
+            </ul>
+            <details class="group border-t border-slate-200 bg-slate-50/80 dark:border-slate-800 dark:bg-slate-900/40">
+              <summary class="cursor-pointer list-none px-5 py-4 text-sm font-semibold text-brand-700 marker:content-none dark:text-brand-400 sm:px-6">
+                <span class="group-open:hidden">Show answer & explanation</span>
+                <span class="hidden group-open:inline">Hide answer</span>
+              </summary>
+              <div class="border-t border-slate-200 px-5 pb-5 pt-3 dark:border-slate-800 sm:px-6">
+                <p class="text-sm text-slate-600 dark:text-slate-400">
+                  <strong class="text-slate-900 dark:text-white">Answer:</strong>{' '}
+                  {String.fromCharCode(65 + q.correctIndex)} — {q.options[q.correctIndex]}
+                </p>
+                <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{q.explanation}</p>
+              </div>
+            </details>
+          </li>
+        ))}
+      </ol>
+
+      <div class="mt-12 rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 p-8 text-center text-white">
+        <h2 class="font-display text-2xl font-bold">Ready for the full challenge?</h2>
+        <p class="mx-auto mt-3 max-w-md text-brand-100">
+          25 weighted questions, category stats, badges, and an illustrative score—completed in one sitting.
+        </p>
+        <a
+          href="/test"
+          class="mt-6 inline-flex rounded-2xl bg-white px-8 py-3.5 text-base font-semibold text-brand-700 shadow-lg transition hover:bg-brand-50"
+        >
+          Start Free IQ Test
+        </a>
+      </div>
+
+      <Disclaimer />
+
+      <section class="mt-14" aria-labelledby="practice-faq">
+        <SectionHeading eyebrow="FAQ" title="Practice questions — FAQ" align="center" />
+        <h2 id="practice-faq" class="sr-only">Practice questions FAQ</h2>
+        <div class="mt-10">
+          <FaqAccordion items={faq} />
+        </div>
+      </section>
+
+      <div class="mt-12">
+        <GuideRelatedLinks current={path} />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

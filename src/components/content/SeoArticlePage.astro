@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Disclaimer from '../Disclaimer.astro';
 import FaqAccordion from '../FaqAccordion.astro';
 import SectionHeading from '../SectionHeading.astro';
-import ArticleRelatedLinks from './ArticleRelatedLinks.astro';
+import GuideRelatedLinks from './GuideRelatedLinks.astro';
 import type { SeoArticle } from '../../data/seoArticles';
 import { faqJsonLd, webPageJsonLd } from '../../lib/seo';
 
@@ -108,7 +108,7 @@ const { article } = Astro.props;
             {article.ctaLabel}
           </a>
         </div>
-        <ArticleRelatedLinks current={article.slug} />
+        <GuideRelatedLinks current={article.path} />
       </div>
     </div>
   </article>

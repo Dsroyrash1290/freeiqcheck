@@ -1,6 +1,14 @@
 import type { FaqItem } from './faq';
 
-export type ArticleSlug = 'what-is-iq' | 'average-iq-by-age' | 'iq-score-chart' | 'how-iq-tests-work';
+export type ArticleSlug =
+  | 'what-is-iq'
+  | 'average-iq-by-age'
+  | 'iq-score-chart'
+  | 'how-iq-tests-work'
+  | 'are-online-iq-tests-accurate'
+  | 'can-you-improve-your-iq'
+  | 'mensa-iq-test-guide'
+  | 'iq-vs-eq';
 
 export type ArticleSubsection = {
   heading: string;
@@ -435,6 +443,396 @@ export const seoArticles: Record<ArticleSlug, SeoArticle> = {
         question: 'How do I try a free online version?',
         answer:
           'Visit our test page for 25 reasoning questions and instant educational feedback.',
+      },
+    ],
+  },
+
+  'are-online-iq-tests-accurate': {
+    slug: 'are-online-iq-tests-accurate',
+    path: '/are-online-iq-tests-accurate',
+    linkLabel: 'Online IQ test accuracy',
+    title: 'Are Online IQ Tests Accurate? — Honest Guide | FreeIQCheck',
+    description:
+      'Learn what makes an online IQ test useful or misleading. Validity cues, limitations of browser quizzes, and how FreeIQCheck fits in.',
+    h1: 'Are Online IQ Tests Accurate?',
+    eyebrow: 'Validity & expectations',
+    intro:
+      'A quick search returns thousands of IQ quizzes. Some are thoughtfully designed practice tools; others are engagement bait with inflated scores. Knowing the difference protects your time and your self-image.',
+    ctaLabel: 'Try Our Practice Quiz',
+    ctaSubtext: '25 reasoning questions with transparent scoring—not a clinical battery.',
+    faqTitle: 'Online IQ test accuracy — FAQ',
+    sections: [
+      {
+        heading: 'What “accurate” means in psychometrics',
+        paragraphs: [
+          'In professional testing, accuracy means a score reliably reflects the construct being measured—often general reasoning—within known error margins, compared to a validated norm group. Accuracy is not “feels right” or “matches my self-image.”',
+          'Clinical instruments report reliability coefficients, norm tables, and administration rules. Most free websites publish none of that. Without transparency, “accuracy” is marketing language.',
+          eduNote,
+        ],
+      },
+      {
+        heading: 'Green flags for credible online tools',
+        subsections: [
+          {
+            heading: 'Clear limitations',
+            paragraphs: [
+              'Reputable practice sites state upfront that results are educational, not diagnostic. They avoid claiming equivalence to WAIS, Stanford–Binet, or school placement tests.',
+            ],
+          },
+          {
+            heading: 'Consistent question design',
+            paragraphs: [
+              'Items should test reasoning—patterns, logic, analogies—not celebrity trivia or trick riddles with multiple “correct” answers. Difficulty should progress so guessing cannot carry the whole session.',
+            ],
+          },
+          {
+            heading: 'Stable retest behavior',
+            paragraphs: [
+              'If you retake the same quiz under similar conditions, scores should land in a modest band—not swing 40 points because of hidden randomization or score inflation.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'Red flags to watch for',
+        paragraphs: [
+          'Mandatory email gates before results, paywalls on every score, pop-up “genius certificates,” or numbers that always cluster above 120 are signs the product optimizes sharing—not measurement.',
+          'Tests that never explain wrong answers teach little. Tests that promise Mensa qualification from ten clicks are not serious assessments.',
+        ],
+      },
+      {
+        heading: 'Why browser conditions matter',
+        subsections: [
+          {
+            heading: 'Distraction and fatigue',
+            paragraphs: [
+              'You might take an online quiz on a phone during a commute. A clinic session uses quiet rooms, breaks, and trained proctors. Environment alone can shift performance.',
+            ],
+          },
+          {
+            heading: 'No individual interpretation',
+            paragraphs: [
+              'Psychologists integrate scores with history, interviews, and other data. A webpage cannot notice anxiety, language barriers, or vision issues that affected one subtest.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'How FreeIQCheck approaches accuracy',
+        paragraphs: [
+          'We publish our methodology openly: 25 multiple-choice items across seven reasoning categories, weighted by difficulty, mapped to an illustrative IQ-style scale for motivation—not population percentiles.',
+          'We do not norm against national samples or claim clinical validity. We do provide per-question explanations, category breakdowns, and consistent scoring so you can track your own progress over time.',
+          'For a deeper look at question design and weighting, read our methodology page. For score bands, see the IQ score chart guide.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Can an online test replace a psychologist?',
+        answer:
+          'No. Formal evaluation requires licensed professionals, validated batteries, and contextual interpretation.',
+      },
+      {
+        question: 'Why did two websites give me different scores?',
+        answer:
+          'Different items, scales, and scoring rules produce different numbers. Only normed tests on the same instrument are directly comparable.',
+      },
+      {
+        question: 'Are free tests always less accurate?',
+        answer:
+          'Price does not guarantee quality. Transparency about limits matters more than whether a quiz costs money.',
+      },
+      {
+        question: 'Is FreeIQCheck normed?',
+        answer:
+          'No. Our score is illustrative for practice and entertainment, not a clinical percentile.',
+      },
+    ],
+  },
+
+  'can-you-improve-your-iq': {
+    slug: 'can-you-improve-your-iq',
+    path: '/can-you-improve-your-iq',
+    linkLabel: 'Can you improve IQ?',
+    title: 'Can You Improve Your IQ? — Evidence & Practice | FreeIQCheck',
+    description:
+      'What research says about raising IQ scores, building reasoning skills, and realistic goals for brain training and lifelong learning.',
+    h1: 'Can You Improve Your IQ?',
+    eyebrow: 'Growth & training',
+    intro:
+      'People hope puzzles and apps will permanently raise intelligence. Science offers a nuanced answer: some skills improve with practice, while full-scale IQ on normed tests tends to be more stable in adulthood.',
+    ctaLabel: 'Practice Reasoning Now',
+    ctaSubtext: 'Build fluency with our free 25-question quiz—track your own retakes.',
+    faqTitle: 'Improving IQ — FAQ',
+    sections: [
+      {
+        heading: 'Fluid skills vs. full-scale IQ',
+        paragraphs: [
+          'IQ batteries combine several abilities. Training one format—matrix puzzles, for example—often raises scores on similar items for a while. That is real learning, but it may not lift every subtest equally.',
+          'Researchers distinguish narrow transfer (better at the exact task practiced) from broad transfer (better at unrelated reasoning). Most commercial brain games show narrow transfer at best.',
+          eduNote,
+        ],
+      },
+      {
+        heading: 'What evidence supports',
+        subsections: [
+          {
+            heading: 'Education and enrichment',
+            paragraphs: [
+              'Quality schooling, reading, and structured problem solving build knowledge and strategies that show up on crystallized portions of tests. Childhood interventions can shift trajectories meaningfully.',
+            ],
+          },
+          {
+            heading: 'Healthy foundations',
+            paragraphs: [
+              'Sleep, exercise, and managing chronic stress support day-to-day cognitive performance. You perform closer to your capable range when rested—not necessarily changing your innate ceiling.',
+            ],
+          },
+          {
+            heading: 'Deliberate practice',
+            paragraphs: [
+              'Reviewing explanations after missed logic items, spacing practice over weeks, and mixing question types builds reasoning fluency. FreeIQCheck is designed for that kind of repeat engagement.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'What is unlikely or oversold',
+        paragraphs: [
+          'Single apps promising +15 IQ points in a month rarely hold up in independent studies. “Brain age” scores are gamified metrics, not clinical IQ.',
+          'Adult full-scale IQ scores on normed tests typically move only a few points with retesting—even after training—because of practice effects and measurement error.',
+        ],
+      },
+      {
+        heading: 'Practical goals that help',
+        table: {
+          caption: 'Realistic ways to support cognitive performance',
+          headers: ['Habit', 'Likely benefit', 'IQ test note'],
+          rows: [
+            ['Regular reading & learning', 'Vocabulary, knowledge, focus', 'May help crystallized sections'],
+            ['Puzzle practice', 'Faster pattern recognition', 'May raise similar item types'],
+            ['Sleep 7–9 hours', 'Attention, memory encoding', 'Better same-day performance'],
+            ['Aerobic exercise', 'Executive function, mood', 'Indirect test-day benefit'],
+            ['Social & creative hobbies', 'Well-being, perspective', 'Not measured by IQ items'],
+          ],
+        },
+      },
+      {
+        heading: 'Measure your own progress wisely',
+        paragraphs: [
+          'Instead of chasing a label, compare your accuracy by category on FreeIQCheck over multiple honest attempts. Improvement in deduction or spatial items is a meaningful win—even if a single IQ-style number moves little.',
+          'If you need documentation of ability for school or clinical reasons, work with qualified professionals rather than retaking browser quizzes.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Does practicing IQ tests cheat the system?',
+        answer:
+          'Familiarity raises scores on similar formats. Clinical retests use alternate forms to limit this. Practice is fine for learning; it is not a substitute for normed assessment.',
+      },
+      {
+        question: 'At what age is IQ most malleable?',
+        answer:
+          'Childhood and adolescence show the largest developmental change. Adults can still learn skills but should expect smaller shifts in full-scale scores.',
+      },
+      {
+        question: 'Can nutrition supplements boost IQ?',
+        answer:
+          'Correcting deficiencies can help if they existed. General supplement stacks lack strong evidence for healthy adults.',
+      },
+      {
+        question: 'How often should I practice on FreeIQCheck?',
+        answer:
+          'Weekly sessions with review of explanations beat marathon cramming. Consistency matters more than volume.',
+      },
+    ],
+  },
+
+  'mensa-iq-test-guide': {
+    slug: 'mensa-iq-test-guide',
+    path: '/mensa-iq-test-guide',
+    linkLabel: 'Mensa IQ test guide',
+    title: 'Mensa IQ Test Guide — Qualifying Scores Explained | FreeIQCheck',
+    description:
+      'Educational overview of Mensa and high-IQ societies: qualifying scores, test options, and why online quizzes are not admission tools.',
+    h1: 'Mensa IQ Test Guide',
+    eyebrow: 'High-IQ societies',
+    intro:
+      'Mensa is the best-known high-IQ society, open to people who score in the top two percent on approved intelligence tests. This guide explains how qualification works—in plain language, without replacing official Mensa materials.',
+    ctaLabel: 'Take a Practice Quiz',
+    ctaSubtext: 'Warm up with reasoning puzzles. FreeIQCheck is not a Mensa admissions test.',
+    faqTitle: 'Mensa & IQ societies — FAQ',
+    sections: [
+      {
+        heading: 'What Mensa membership means',
+        paragraphs: [
+          'Mensa is a social organization for people with high scores on standardized intelligence tests—not a credential for employment or a measure of life success. Members connect through local groups, puzzles, and events worldwide.',
+          'National Mensa chapters set their own schedules for supervised testing and may accept scores from certain prior assessments taken elsewhere.',
+          eduNote,
+        ],
+      },
+      {
+        heading: 'Qualifying scores in general terms',
+        paragraphs: [
+          'The common threshold is performance at or above the 98th percentile on an approved test. Because different tests use different scales, Mensa publishes conversion tables rather than one universal number.',
+        ],
+        table: {
+          caption: 'Illustrative qualifying equivalents (varies by test and country—verify with official Mensa)',
+          headers: ['Test scale', 'Example qualifying level', 'Notes'],
+          rows: [
+            ['SD 15 IQ scale', '~130+', 'Top ~2% on many normed tests'],
+            ['SD 16 scale', '~132+', 'Scale differs—do not mix formulas'],
+            ['Cattell scale', '~148+', 'Different standard deviation'],
+            ['Supervised Mensa battery', 'Set by proctor', 'Administered at official sessions'],
+          ],
+        },
+      },
+      {
+        heading: 'How people typically qualify',
+        subsections: [
+          {
+            heading: 'Supervised Mensa test',
+            paragraphs: [
+              'Many applicants sit a group-administered session arranged by their national organization. Conditions are controlled and scores are official for membership purposes.',
+            ],
+          },
+          {
+            heading: 'Prior evidence',
+            paragraphs: [
+              'Some chapters accept recent scores from certain clinical or educational batteries documented on paper. Rules change—always check current policies on the official Mensa website for your region.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'Online quizzes and Mensa',
+        paragraphs: [
+          'Free browser quizzes—including FreeIQCheck—are not Mensa admission instruments. An illustrative score of 130+ on a practice site does not grant membership and should not be submitted as evidence.',
+          'Use online tools to build comfort with logic puzzles before a supervised session if you choose to pursue one. Expect different formats, timing, and difficulty under proctoring.',
+        ],
+      },
+      {
+        heading: 'Beyond the threshold',
+        paragraphs: [
+          'Qualifying opens the door to community—not a ranking of human worth. Creativity, empathy, craftsmanship, and persistence matter outside any single test session.',
+          'If you are curious about your reasoning style today, try our practice questions or full quiz. If you want society membership, follow official Mensa pathways in your country.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Does FreeIQCheck qualify me for Mensa?',
+        answer:
+          'No. Our quiz is educational only and is not affiliated with or accepted by Mensa.',
+      },
+      {
+        question: 'Is Mensa the only high-IQ society?',
+        answer:
+          'Other societies exist with different thresholds and focuses. Research each organization independently.',
+      },
+      {
+        question: 'Can I retake if I miss the cutoff?',
+        answer:
+          'Mensa policies allow retesting after waiting periods in many regions. Check local rules.',
+      },
+      {
+        question: 'What should I study beforehand?',
+        answer:
+          'Familiarity with matrix and sequence problems helps comfort level. Cramming trivia is less useful than calm sleep and reading instructions carefully.',
+      },
+    ],
+  },
+
+  'iq-vs-eq': {
+    slug: 'iq-vs-eq',
+    path: '/iq-vs-eq',
+    linkLabel: 'IQ vs EQ',
+    title: 'IQ vs EQ — Cognitive vs Emotional Intelligence | FreeIQCheck',
+    description:
+      'Compare IQ and EQ: what each measures, how they differ, and why both matter for learning, work, and relationships—without ranking people.',
+    h1: 'IQ vs EQ',
+    eyebrow: 'Two lenses on ability',
+    intro:
+      'IQ-style tests highlight analytical reasoning under structured rules. Emotional intelligence (often called EQ) highlights how people perceive, use, and manage emotions—in themselves and others. They overlap in places but are not interchangeable.',
+    ctaLabel: 'Train Logical Reasoning',
+    ctaSubtext: 'FreeIQCheck focuses on puzzle-based practice; EQ grows through different experiences.',
+    faqTitle: 'IQ vs EQ — FAQ',
+    sections: [
+      {
+        heading: 'Definitions side by side',
+        table: {
+          caption: 'IQ and EQ at a glance (simplified for education)',
+          headers: ['Dimension', 'IQ (cognitive tests)', 'EQ (emotional intelligence)'],
+          rows: [
+            ['Core focus', 'Reasoning, memory, problem solving', 'Emotion awareness, regulation, empathy'],
+            ['Typical formats', 'Timed puzzles, vocabulary, sequences', 'Surveys, scenarios, 360° feedback'],
+            ['Stability', 'Relatively stable in adulthood', 'Can grow with coaching and experience'],
+            ['Workplace signal', 'Complex analysis, learning speed', 'Teamwork, leadership, conflict repair'],
+            ['FreeIQCheck coverage', 'Practice quiz emphasizes IQ-style items', 'Not measured on our site'],
+          ],
+        },
+        paragraphs: [eduNote],
+      },
+      {
+        heading: 'Where IQ-style skills shine',
+        paragraphs: [
+          'Abstract patterns, quantitative deduction, and verbal analogies predict success in some academic and technical paths. They help you learn new symbolic systems quickly—coding, mathematics, legal analysis.',
+          'Our quiz targets that family of tasks for entertainment and skill practice. High performance suggests comfort with structured puzzles, not superior emotional wisdom.',
+        ],
+      },
+      {
+        heading: 'Where EQ matters',
+        subsections: [
+          {
+            heading: 'Relationships and leadership',
+            paragraphs: [
+              'Reading tone, de-escalating conflict, and giving feedback constructively depend heavily on emotional skills. Teams often fail from communication breakdowns IQ scores never capture.',
+            ],
+          },
+          {
+            heading: 'Self-regulation',
+            paragraphs: [
+              'Managing anxiety before an exam or staying persistent after setbacks blends emotional control with cognitive effort. EQ frameworks name habits IQ tests ignore.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'False rivalries',
+        paragraphs: [
+          'Headlines pit IQ against EQ as if you must choose. Research suggests both contribute in different contexts. A brilliant analyst who dismisses colleagues may underperform a balanced teammate on group outcomes.',
+          'Neither score defines moral character. Ethical behavior, curiosity, and kindness are not licensed by test results.',
+        ],
+      },
+      {
+        heading: 'Building both over a lifetime',
+        paragraphs: [
+          'Puzzle practice, reading, and courses sharpen analytical tools—try our test and practice questions for that path.',
+          'EQ grows through reflective conversation, mentorship, mindfulness, and real-world social challenges. Seek assessments designed for emotional skills if that is your focus; do not expect IQ quizzes to measure it.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Which is more important?',
+        answer:
+          'It depends on context. Technical roles weight analytical skills; collaborative roles weight interpersonal skills. Most lives need both.',
+      },
+      {
+        question: 'Can someone have high IQ and low EQ?',
+        answer:
+          'Yes. Profiles vary. Tests measure different constructs and should not stereotype individuals.',
+      },
+      {
+        question: 'Does FreeIQCheck measure EQ?',
+        answer:
+          'No. We only offer logical reasoning practice with illustrative cognitive scores.',
+      },
+      {
+        question: 'Is EQ scientifically debated?',
+        answer:
+          'Models and tests for EQ are less standardized than major IQ batteries. Treat EQ scores as one perspective, not absolute truth.',
       },
     ],
   },

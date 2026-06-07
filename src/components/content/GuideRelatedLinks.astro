@@ -1,0 +1,28 @@
+---
+import { getRelatedGuides } from '../../data/guides';
+
+interface Props {
+  current: string;
+}
+const { current } = Astro.props;
+const related = getRelatedGuides(current, 6);
+---
+
+<aside class="card-surface p-6" aria-label="Related guides">
+  <h2 class="font-display text-lg font-bold text-slate-900 dark:text-white">Related guides</h2>
+  <ul class="mt-4 space-y-3">
+    {related.map((g) => (
+      <li>
+        <a href={g.path} class="group block">
+          <span class="text-sm font-medium text-brand-600 group-hover:underline dark:text-brand-400">{g.label}</span>
+          <span class="mt-0.5 block text-xs text-slate-500 dark:text-slate-500">{g.description}</span>
+        </a>
+      </li>
+    ))}
+    <li class="border-t border-slate-200 pt-3 dark:border-slate-800">
+      <a href="/test" class="text-sm font-semibold text-slate-800 hover:text-brand-600 dark:text-slate-200 dark:hover:text-brand-400">
+        Take the free IQ test →
+      </a>
+    </li>
+  </ul>
+</aside>

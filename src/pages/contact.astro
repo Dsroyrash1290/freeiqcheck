@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
+import InternalLinks from '../components/InternalLinks.astro';
 import { site } from '../config/site';
 import { webPageJsonLd } from '../lib/seo';
 
@@ -27,5 +28,7 @@ const description = 'Contact FreeIQCheck about our free iq test online, instant 
     <li>We cannot provide clinical IQ assessments or official certificates.</li>
     <li>For quiz help, see our <a href="/faq">FAQ</a>, <a href="/about">about page</a>, or retake the <a href="/test">free iq test online</a>.</li>
     <li>For legal terms, see <a href="/terms">Terms of Use</a> and <a href="/privacy-policy">Privacy Policy</a>.</li>
+    <li>For how scoring works, read <a href="/methodology">our methodology</a>.</li>
   </ul>
+  <InternalLinks class="mt-8" limit={6} />
 </PageLayout>

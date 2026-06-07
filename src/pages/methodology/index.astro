@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Disclaimer from '../../components/Disclaimer.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import GuideRelatedLinks from '../../components/content/GuideRelatedLinks.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import type { FaqItem } from '../../data/faq';
+import { faqJsonLd, webPageJsonLd } from '../../lib/seo';
+
+const path = '/methodology';
+const title = 'FreeIQCheck Methodology — How We Score the Practice Quiz';
+const description =
+  'Transparent overview of FreeIQCheck quiz design: 25 reasoning questions, difficulty weighting, illustrative scoring, and why results are educational—not clinical.';
+
+const faq: FaqItem[] = [
+  {
+    question: 'Is FreeIQCheck scientifically normed?',
+    answer:
+      'No. We use an illustrative scale inspired by common IQ charts. Scores are not percentiles against a national population sample.',
+  },
+  {
+    question: 'Why weight harder questions more?',
+    answer:
+      'Weighted credit rewards solving difficult items without letting lucky guesses on easy items dominate the total. It better reflects reasoning depth in a short session.',
+  },
+  {
+    question: 'Do you store my answers on a server?',
+    answer:
+      'Scoring runs in your browser. We do not require an account. See our Privacy Policy for analytics and cookie details.',
+  },
+  {
+    question: 'Can I compare my score to Mensa or clinical tests?',
+    answer:
+      'No. Our quiz is not affiliated with Mensa or licensed clinical batteries. Use results for personal practice only.',
+  },
+];
+
+const categories = [
+  { name: 'Sequence', desc: 'Number and letter patterns with predictable rules.' },
+  { name: 'Pattern', desc: 'Visual or symbolic alternation and completion.' },
+  { name: 'Analogy', desc: 'Word and concept relationships.' },
+  { name: 'Logic', desc: 'Syllogisms and conditional statements.' },
+  { name: 'Numerical', desc: 'Arithmetic, ratios, and quantitative puzzles.' },
+  { name: 'Deduction', desc: 'Elimination, ordering, and odd-one-out tasks.' },
+  { name: 'Spatial', desc: 'Symmetry, rotation, and spatial judgment.' },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path={path}
+  jsonLd={[webPageJsonLd(title, description, path), faqJsonLd(faq)]}
+>
+  <article>
+    <header class="hero-glow border-b border-slate-200/80 dark:border-slate-800">
+      <div class="section-pad mx-auto max-w-3xl text-center">
+        <p class="text-sm font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">Transparency</p>
+        <h1 class="mt-4 font-display text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl dark:text-white">
+          Our Methodology
+        </h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+          FreeIQCheck is a browser-based practice quiz—not a clinical assessment. This page explains how we select
+          questions, score attempts, and present results so you know exactly what you are getting.
+        </p>
+        <a href="/test" class="btn-primary mt-8 !inline-flex">Start the Free Quiz</a>
+      </div>
+    </header>
+
+    <div class="section-pad mx-auto max-w-3xl">
+      <div class="space-y-14">
+        <section>
+          <h2 class="font-display text-2xl font-bold text-slate-900 dark:text-white">Design principles</h2>
+          <ul class="mt-4 list-disc space-y-2 pl-5 text-slate-600 dark:text-slate-400">
+            <li><strong class="text-slate-800 dark:text-slate-200">Honest limits</strong> — We never claim clinical validity or population percentiles.</li>
+            <li><strong class="text-slate-800 dark:text-slate-200">Teach after every item</strong> — Explanations appear on the results page so missed questions become lessons.</li>
+            <li><strong class="text-slate-800 dark:text-slate-200">Progressive difficulty</strong> — Eight easy, nine medium, and eight hard items mirror a typical practice arc.</li>
+            <li><strong class="text-slate-800 dark:text-slate-200">Privacy-first flow</strong> — No email gate; scoring happens locally in your session.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-slate-900 dark:text-white">Question structure</h2>
+          <p class="mt-4 text-slate-600 dark:text-slate-400">
+            The quiz contains 25 multiple-choice items spanning seven reasoning categories. Each question has one
+            defensible correct answer and a short explanation written in plain language.
+          </p>
+          <div class="mt-6 grid gap-3 sm:grid-cols-2">
+            {categories.map((c) => (
+              <div class="rounded-2xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900/50">
+                <p class="font-semibold text-slate-900 dark:text-white">{c.name}</p>
+                <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">{c.desc}</p>
+              </div>
+            ))}
+          </div>
+          <p class="mt-6 text-sm text-slate-500">
+            Want to preview formats? Visit <a href="/practice-iq-questions" class="font-medium text-brand-600 dark:text-brand-400">practice IQ questions</a> before the full run.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-slate-900 dark:text-white">Scoring model</h2>
+          <div class="mt-6 overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800">
+            <table class="w-full text-left text-sm">
+              <thead class="border-b border-slate-200 bg-brand-50/80 dark:border-slate-800 dark:bg-brand-950/40">
+                <tr>
+                  <th class="px-4 py-3 font-semibold text-slate-900 dark:text-white" scope="col">Difficulty</th>
+                  <th class="px-4 py-3 font-semibold text-slate-900 dark:text-white" scope="col">Items</th>
+                  <th class="px-4 py-3 font-semibold text-slate-900 dark:text-white" scope="col">Weight</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+                <tr class="bg-white dark:bg-slate-900/50">
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400">Easy</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400">8</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400">1.0×</td>
+                </tr>
+                <tr class="bg-white dark:bg-slate-900/50">
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400">Medium</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400">9</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400">1.5×</td>
+                </tr>
+                <tr class="bg-white dark:bg-slate-900/50">
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400">Hard</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400">8</td>
+                  <td class="px-4 py-3 text-slate-600 dark:text-slate-400">2.0×</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="mt-4 text-slate-600 dark:text-slate-400">
+            Weighted accuracy maps to an illustrative IQ-style score and band label for motivation. The mapping is
+            monotonic—better performance yields a higher number—but it is not calibrated to WAIS, Stanford–Binet, or
+            any published norm table. Read our <a href="/iq-score-chart">IQ score chart</a> guide for how clinical
+            scales differ.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-slate-900 dark:text-white">What we do not measure</h2>
+          <p class="mt-4 text-slate-600 dark:text-slate-400">
+            Processing speed under strict proctoring, working memory span, long-form vocabulary depth, and emotional
+            intelligence are outside our scope. For how cognitive tests differ from EQ, see
+            <a href="/iq-vs-eq">IQ vs EQ</a>. For professional pipelines, read
+            <a href="/how-iq-tests-work">how IQ tests work</a>.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="font-display text-2xl font-bold text-slate-900 dark:text-white">Using results responsibly</h2>
+          <p class="mt-4 text-slate-600 dark:text-slate-400">
+            Track category strengths, review explanations, and retake when curious—not when anxious. If you need
+            documentation for school, clinical, or employment purposes, seek licensed evaluation. Our
+            <a href="/are-online-iq-tests-accurate">accuracy guide</a> explains why browser quizzes cannot replace that
+            process.
+          </p>
+        </section>
+      </div>
+
+      <Disclaimer />
+
+      <section class="mt-14" aria-labelledby="methodology-faq">
+        <SectionHeading eyebrow="FAQ" title="Methodology — FAQ" align="center" />
+        <h2 id="methodology-faq" class="sr-only">Methodology FAQ</h2>
+        <div class="mt-10">
+          <FaqAccordion items={faq} />
+        </div>
+      </section>
+
+      <div class="mt-12 grid gap-6 lg:grid-cols-3">
+        <div class="rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 p-8 text-center text-white lg:col-span-2 lg:p-10">
+          <h2 class="font-display text-2xl font-bold">Experience the full quiz</h2>
+          <p class="mx-auto mt-3 max-w-md text-brand-100">
+            25 questions, instant illustrative scoring, and a detailed breakdown—free, no email required.
+          </p>
+          <a
+            href="/test"
+            class="mt-6 inline-flex rounded-2xl bg-white px-8 py-3.5 text-base font-semibold text-brand-700 shadow-lg transition hover:bg-brand-50"
+          >
+            Take the Free IQ Test
+          </a>
+        </div>
+        <GuideRelatedLinks current={path} />
+      </div>
+    </div>
+  </article>
+</BaseLayout>

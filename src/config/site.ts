@@ -35,9 +35,10 @@ export const navLinks = [
 
 export const seoNavLinks = [
   { href: '/test', label: 'Free IQ test' },
+  { href: '/methodology', label: 'Methodology' },
   { href: '/what-is-iq', label: 'What is IQ?' },
-  { href: '/how-iq-tests-work', label: 'How IQ tests work' },
+  { href: '/practice-iq-questions', label: 'Practice questions' },
+  { href: '/are-online-iq-tests-accurate', label: 'Test accuracy' },
   { href: '/iq-score-chart', label: 'IQ score chart' },
   { href: '/faq', label: 'FAQ' },
-  { href: '/about', label: 'About' },
 ] as const;

@@ -30,7 +30,18 @@ export default defineConfig({
         if (url.pathname.startsWith('/free-iq-test') || url.pathname.startsWith('/best-free-iq-test')) {
           return { ...item, priority: 0.8, changefreq: 'monthly' };
         }
-        const learnPaths = ['/what-is-iq', '/average-iq-by-age', '/iq-score-chart', '/how-iq-tests-work'];
+        const learnPaths = [
+          '/what-is-iq',
+          '/average-iq-by-age',
+          '/iq-score-chart',
+          '/how-iq-tests-work',
+          '/are-online-iq-tests-accurate',
+          '/can-you-improve-your-iq',
+          '/mensa-iq-test-guide',
+          '/practice-iq-questions',
+          '/iq-vs-eq',
+          '/methodology',
+        ];
         if (learnPaths.some((p) => url.pathname === p || url.pathname === `${p}/`)) {
           return { ...item, priority: 0.75, changefreq: 'monthly' };
         }
