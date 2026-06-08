@@ -27,14 +27,27 @@ const { class: className = '' } = Astro.props;
           aria-hidden={index !== 0 ? 'true' : 'false'}
         >
           <div class="flex items-start gap-4">
-            <div
-              class:list={[
-                'flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br text-lg font-bold text-white shadow-md',
-                mind.avatarGradient,
-              ]}
-              aria-hidden="true"
-            >
-              {mind.initials}
+            <div class="famous-mind-avatar relative h-14 w-14 shrink-0">
+              <img
+                src={mind.image}
+                alt={mind.imageAlt}
+                width="56"
+                height="56"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+                fetchpriority={index === 0 ? 'high' : 'low'}
+                class="famous-mind-photo h-14 w-14 rounded-full object-cover object-center shadow-md ring-2 ring-brand-200 dark:ring-brand-800"
+                data-initials={mind.initials}
+              />
+              <div
+                class:list={[
+                  'famous-mind-fallback absolute inset-0 hidden items-center justify-center rounded-full bg-gradient-to-br text-lg font-bold text-white shadow-md ring-2 ring-brand-200 dark:ring-brand-800',
+                  mind.avatarGradient,
+                ]}
+                aria-hidden="true"
+              >
+                {mind.initials}
+              </div>
             </div>
             <div class="min-w-0 flex-1">
               <h2 class="font-display text-xl font-bold text-slate-900 dark:text-white">{mind.name}</h2>
@@ -212,5 +225,13 @@ const { class: className = '' } = Astro.props;
     carousel.addEventListener('focusout', startAutoplay);
 
     startAutoplay();
+
+    carousel.querySelectorAll<HTMLImageElement>('.famous-mind-photo').forEach((img) => {
+      img.addEventListener('error', () => {
+        img.classList.add('hidden');
+        img.parentElement?.querySelector('.famous-mind-fallback')?.classList.remove('hidden');
+        img.parentElement?.querySelector('.famous-mind-fallback')?.classList.add('flex');
+      });
+    });
   }
 </script>
