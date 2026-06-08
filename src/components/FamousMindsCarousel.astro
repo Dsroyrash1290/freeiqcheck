@@ -1,0 +1,216 @@
+---
+import { famousMinds, famousMindsDisclaimer } from '../data/famousMinds';
+
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div class:list={['w-full max-w-md lg:max-w-lg', className]}>
+  <div
+    class="card-surface relative overflow-hidden p-6 shadow-lg shadow-brand-500/10 sm:p-8 dark:shadow-brand-900/20"
+    id="famous-minds-carousel"
+    aria-roledescription="carousel"
+    aria-label="Famous minds — educational IQ estimates"
+  >
+    <p class="text-xs font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">Famous minds</p>
+
+    <div class="relative mt-4 min-h-[280px] sm:min-h-[300px]">
+      {famousMinds.map((mind, index) => (
+        <article
+          class:list={[
+            'famous-mind-slide absolute inset-0 flex flex-col',
+            index === 0 && 'is-active',
+          ]}
+          data-slide={index}
+          aria-hidden={index !== 0 ? 'true' : 'false'}
+        >
+          <div class="flex items-start gap-4">
+            <div
+              class:list={[
+                'flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br text-lg font-bold text-white shadow-md',
+                mind.avatarGradient,
+              ]}
+              aria-hidden="true"
+            >
+              {mind.initials}
+            </div>
+            <div class="min-w-0 flex-1">
+              <h2 class="font-display text-xl font-bold text-slate-900 dark:text-white">{mind.name}</h2>
+              <p class="mt-1 text-sm font-medium text-brand-600 dark:text-brand-400">
+                Est. IQ {mind.iqRange}
+              </p>
+            </div>
+          </div>
+
+          <dl class="mt-5 space-y-2 text-sm">
+            <div class="flex flex-wrap gap-x-2">
+              <dt class="font-medium text-slate-500 dark:text-slate-500">Field</dt>
+              <dd class="text-slate-700 dark:text-slate-300">{mind.field}</dd>
+            </div>
+            <div class="flex flex-wrap gap-x-2">
+              <dt class="font-medium text-slate-500 dark:text-slate-500">Region</dt>
+              <dd class="text-slate-700 dark:text-slate-300">{mind.country}</dd>
+            </div>
+          </dl>
+
+          <p class="mt-4 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{mind.achievement}</p>
+
+          <a
+            href="/test"
+            class="mt-5 inline-flex w-full items-center justify-center rounded-xl bg-brand-600 px-4 py-2.5 text-sm font-semibold text-white shadow-md shadow-brand-600/25 transition hover:bg-brand-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500"
+          >
+            Start IQ Test
+          </a>
+        </article>
+      ))}
+    </div>
+
+    <div class="mt-5 flex items-center justify-between gap-3">
+      <div class="flex gap-1.5" role="tablist" aria-label="Carousel slides">
+        {famousMinds.map((mind, index) => (
+          <button
+            type="button"
+            class:list={['famous-mind-dot', index === 0 && 'is-active']}
+            data-dot={index}
+            role="tab"
+            aria-label={`Show ${mind.name}`}
+            aria-selected={index === 0 ? 'true' : 'false'}
+          />
+        ))}
+      </div>
+      <span class="famous-mind-counter text-xs tabular-nums text-slate-500 dark:text-slate-500" aria-live="polite">
+        1 / {famousMinds.length}
+      </span>
+    </div>
+  </div>
+
+  <p class="mt-3 text-center text-[11px] leading-relaxed text-slate-500 dark:text-slate-500">
+    {famousMindsDisclaimer}
+  </p>
+</div>
+
+<style>
+  .famous-mind-slide {
+    opacity: 0;
+    transform: translateX(1.25rem);
+    pointer-events: none;
+    transition:
+      opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .famous-mind-slide.is-active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    z-index: 1;
+  }
+
+  .famous-mind-slide.is-exiting {
+    opacity: 0;
+    transform: translateX(-1.25rem);
+  }
+
+  .famous-mind-dot {
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 9999px;
+    background-color: rgb(203 213 225);
+    transition: all 0.3s ease;
+  }
+
+  .famous-mind-dot:hover {
+    background-color: rgb(90 146 255);
+  }
+
+  .famous-mind-dot.is-active {
+    width: 1.5rem;
+    background-color: rgb(37 80 234);
+  }
+
+  :global(.dark) .famous-mind-dot {
+    background-color: rgb(71 85 105);
+  }
+
+  :global(.dark) .famous-mind-dot.is-active {
+    background-color: rgb(90 146 255);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .famous-mind-slide {
+      transition: opacity 0.2s ease;
+      transform: none;
+    }
+
+    .famous-mind-slide.is-exiting {
+      transform: none;
+    }
+  }
+</style>
+
+<script>
+  import { famousMinds } from '../data/famousMinds';
+
+  const INTERVAL_MS = 2500;
+  const carousel = document.getElementById('famous-minds-carousel');
+  if (carousel) {
+    const slides = Array.from(carousel.querySelectorAll<HTMLElement>('.famous-mind-slide'));
+    const dots = Array.from(carousel.querySelectorAll<HTMLButtonElement>('.famous-mind-dot'));
+    const counter = carousel.querySelector<HTMLElement>('.famous-mind-counter');
+    let current = 0;
+    let timer = 0;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function goTo(next: number) {
+      if (next === current || !slides.length) return;
+      const prev = slides[current];
+      const nextSlide = slides[next];
+
+      prev.classList.remove('is-active');
+      prev.classList.add('is-exiting');
+      prev.setAttribute('aria-hidden', 'true');
+
+      nextSlide.classList.add('is-active');
+      nextSlide.setAttribute('aria-hidden', 'false');
+
+      dots.forEach((dot, i) => {
+        const active = i === next;
+        dot.setAttribute('aria-selected', String(active));
+        dot.classList.toggle('is-active', active);
+      });
+
+      if (counter) counter.textContent = `${next + 1} / ${famousMinds.length}`;
+
+      window.setTimeout(() => prev.classList.remove('is-exiting'), reducedMotion ? 200 : 550);
+      current = next;
+    }
+
+    function next() {
+      goTo((current + 1) % slides.length);
+    }
+
+    function startAutoplay() {
+      clearInterval(timer);
+      timer = window.setInterval(next, INTERVAL_MS);
+    }
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', () => {
+        const idx = Number(dot.dataset.dot);
+        if (!Number.isNaN(idx)) {
+          goTo(idx);
+          startAutoplay();
+        }
+      });
+    });
+
+    carousel.addEventListener('mouseenter', () => clearInterval(timer));
+    carousel.addEventListener('mouseleave', startAutoplay);
+    carousel.addEventListener('focusin', () => clearInterval(timer));
+    carousel.addEventListener('focusout', startAutoplay);
+
+    startAutoplay();
+  }
+</script>

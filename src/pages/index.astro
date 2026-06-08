@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import BrainIllustration from '../components/BrainIllustration.astro';
+import FamousMindsCarousel from '../components/FamousMindsCarousel.astro';
 import Disclaimer from '../components/Disclaimer.astro';
 import FaqAccordion from '../components/FaqAccordion.astro';
 import FeatureCard from '../components/FeatureCard.astro';
@@ -41,8 +41,8 @@ const description =
   <!-- Hero -->
   <section class="hero-glow relative overflow-hidden border-b border-slate-200/80 dark:border-slate-800" aria-labelledby="hero-heading">
     <div class="pointer-events-none absolute inset-0 mesh-gradient dark:mesh-gradient-dark" aria-hidden="true"></div>
-    <div class="section-pad relative mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-2 lg:gap-20">
-      <div class="motion-safe:animate-fade-up">
+    <div class="section-pad relative mx-auto grid max-w-6xl items-center gap-10 lg:grid-cols-2 lg:gap-20">
+      <div class="order-1 motion-safe:animate-fade-up lg:order-1">
         <p class="inline-flex items-center gap-2 rounded-full border border-brand-200/80 bg-white/60 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-700 backdrop-blur-sm dark:border-brand-800 dark:bg-slate-900/60 dark:text-brand-300">
           <span class="h-2 w-2 animate-pulse-soft rounded-full bg-accent-500" aria-hidden="true"></span>
           Free iq test online · No email
@@ -70,9 +70,9 @@ const description =
           <li class="flex items-center gap-2"><span class="text-accent-500" aria-hidden="true">✓</span> 25-question reasoning quiz</li>
         </ul>
       </div>
-      <div class="relative flex justify-center motion-safe:animate-fade-in lg:justify-end" style="animation-delay: 150ms">
-        <div class="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-brand-500/25 via-violet-500/15 to-accent-500/20 blur-3xl" aria-hidden="true"></div>
-        <BrainIllustration class="relative w-full max-w-lg drop-shadow-2xl" />
+      <div class="order-2 relative mx-auto flex w-full justify-center motion-safe:animate-fade-in lg:order-2 lg:mx-0 lg:justify-end" style="animation-delay: 150ms">
+        <div class="pointer-events-none absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-brand-500/25 via-violet-500/15 to-accent-500/20 blur-3xl" aria-hidden="true"></div>
+        <FamousMindsCarousel class="relative w-full drop-shadow-2xl" />
       </div>
     </div>
   </section>
