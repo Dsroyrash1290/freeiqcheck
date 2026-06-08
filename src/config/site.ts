@@ -6,6 +6,7 @@ export const site = {
   email: 'hello@freeiqcheck.com',
   primaryKeyword: 'free iq test',
   gaMeasurementId: 'G-T70SB0KFG6',
+  adsenseClientId: 'ca-pub-5802094504680008',
   ogImage: '/og-image.svg',
   keywords: [
     'free iq test',

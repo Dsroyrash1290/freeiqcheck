@@ -1,0 +1,17 @@
+---
+import { site } from '../config/site';
+
+/** AdSense site verification — production only, single include via BaseLayout. */
+const isProd = import.meta.env.PROD;
+const clientId = site.adsenseClientId;
+---
+
+{isProd && clientId && (
+  <>
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
+    <script
+      async
+      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${clientId}`}
+      crossorigin="anonymous"></script>
+  </>
+)}
