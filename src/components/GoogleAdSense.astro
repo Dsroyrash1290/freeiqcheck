@@ -1,15 +1,19 @@
 ---
 import { site } from '../config/site';
 
-/** AdSense site verification — production only, single include via BaseLayout. */
+/**
+ * Google AdSense site tag — production builds only.
+ * Included once via BaseLayout. Matches Google's snippet format for crawler verification.
+ */
 const isProd = import.meta.env.PROD;
 const clientId = site.adsenseClientId;
 ---
 
 {isProd && clientId && (
   <>
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin />
+    <!-- Google AdSense -->
     <script
+      is:inline
       async
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${clientId}`}
       crossorigin="anonymous"></script>
