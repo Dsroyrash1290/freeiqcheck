@@ -1,0 +1,147 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Disclaimer from '../../Disclaimer.astro';
+import FaqAccordion from '../../FaqAccordion.astro';
+import SectionHeading from '../../SectionHeading.astro';
+import BlogCard from '../BlogCard.astro';
+import type { BlogPost } from '../../../data/blog';
+import { getRelatedPosts } from '../../../data/blog';
+import { getTocHeadings } from '../../../lib/blogContent';
+import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from '../../../lib/seo';
+import BlogArticleHero from './BlogArticleHero.astro';
+import BlogBreadcrumbs from './BlogBreadcrumbs.astro';
+import BlogContentRenderer from './BlogContentRenderer.astro';
+import BlogReadingProgress from './BlogReadingProgress.astro';
+import BlogReferences from './BlogReferences.astro';
+import BlogRelatedArticles from './BlogRelatedArticles.astro';
+import BlogStickyCta from './BlogStickyCta.astro';
+import BlogTableOfContents from './BlogTableOfContents.astro';
+
+interface Props {
+  post: BlogPost;
+}
+const { post } = Astro.props;
+const blocks = post.blocks ?? [];
+const toc = getTocHeadings(blocks);
+const related = getRelatedPosts(post);
+const author = post.author ?? 'FreeIQCheck Research Team';
+const updatedLabel = post.updatedAt
+  ? new Date(post.updatedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })
+  : new Date(post.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+const ogImage = post.featuredImage ?? '/images/blog/brain-neurons.svg';
+---
+
+<BaseLayout
+  title={post.seoTitle}
+  description={post.description}
+  path={post.path}
+  ogType="article"
+  ogImage={ogImage}
+  jsonLd={[
+    articleJsonLd({
+      title: post.title,
+      description: post.description,
+      path: post.path,
+      publishedAt: post.publishedAt,
+      updatedAt: post.updatedAt,
+      author,
+      image: ogImage,
+    }),
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Blog', path: '/blog' },
+      { name: post.title, path: post.path },
+    ]),
+    faqJsonLd(post.faq),
+  ]}
+>
+  <BlogReadingProgress />
+
+  <article itemscope itemtype="https://schema.org/Article">
+    <meta itemprop="headline" content={post.title} />
+    <meta itemprop="datePublished" content={post.publishedAt} />
+    <meta itemprop="dateModified" content={post.updatedAt ?? post.publishedAt} />
+    <meta itemprop="author" content={author} />
+
+    <BlogArticleHero
+      title={post.title}
+      excerpt={post.excerpt}
+      author={author}
+      readTime={post.readTime}
+      updatedLabel={updatedLabel}
+      path={post.path}
+      featuredImage={post.featuredImage}
+    />
+
+    <div class="section-pad mx-auto max-w-6xl">
+      <div class="lg:grid lg:grid-cols-[minmax(0,1fr)_240px] lg:gap-12 xl:grid-cols-[minmax(0,1fr)_260px]">
+        <div class="mx-auto min-w-0 max-w-[52rem] lg:max-w-none">
+          <BlogBreadcrumbs
+            items={[
+              { label: 'Home', href: '/' },
+              { label: 'Blog', href: '/blog' },
+              { label: post.title },
+            ]}
+          />
+
+          <div id="blog-article-body" class="blog-article-prose" itemprop="articleBody">
+            <BlogContentRenderer blocks={blocks} />
+          </div>
+
+          <BlogReferences references={post.references ?? []} />
+
+          <Disclaimer />
+
+          <section class="mt-14" aria-labelledby="article-faq">
+            <SectionHeading eyebrow="FAQ" title="Frequently asked questions" align="left" />
+            <h2 id="article-faq" class="sr-only">Article FAQ</h2>
+            <div class="mt-8">
+              <FaqAccordion items={post.faq} />
+            </div>
+          </section>
+
+          {post.relatedLinks && post.relatedLinks.length > 0 && (
+            <BlogRelatedArticles links={post.relatedLinks} />
+          )}
+
+          {related.length > 0 && (
+            <section class="mt-16" aria-labelledby="related-blog-posts">
+              <h2 id="related-blog-posts" class="font-display text-2xl font-bold text-slate-900 dark:text-white">
+                More from the blog
+              </h2>
+              <div class="mt-6 grid gap-6 sm:grid-cols-2">
+                {related.map((r) => (
+                  <BlogCard post={r} />
+                ))}
+              </div>
+            </section>
+          )}
+
+          <div class="mt-14 rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 p-8 text-center text-white sm:p-10">
+            <h2 class="font-display text-2xl font-bold sm:text-3xl">Ready to challenge your reasoning?</h2>
+            <p class="mx-auto mt-3 max-w-md text-brand-100">
+              Take our free <a href="/test" class="font-semibold underline underline-offset-2">IQ test online</a> — 25 questions,
+              instant results, no email required.
+            </p>
+            <a
+              href="/test"
+              class="mt-6 inline-flex rounded-2xl bg-white px-8 py-3.5 font-semibold text-brand-700 shadow-lg transition motion-safe:hover:bg-brand-50"
+            >
+              Start Free IQ Test
+            </a>
+          </div>
+        </div>
+
+        <aside class="hidden lg:block">
+          <BlogTableOfContents items={toc} />
+        </aside>
+      </div>
+
+      <div class="mx-auto mt-8 max-w-[52rem] lg:hidden">
+        <BlogTableOfContents items={toc} />
+      </div>
+    </div>
+  </article>
+
+  <BlogStickyCta />
+</BaseLayout>

@@ -1,4 +1,5 @@
 ---
+import BlogArticlePage from '../../../components/blog/article/BlogArticlePage.astro';
 import BlogPostPage from '../../../components/blog/BlogPostPage.astro';
 import { blogPosts } from '../../../data/blog';
 
@@ -15,4 +16,8 @@ interface Props {
 const { post } = Astro.props as Props;
 ---
 
-<BlogPostPage post={post} />
+{post.format === 'rich' && post.blocks ? (
+  <BlogArticlePage post={post} />
+) : (
+  <BlogPostPage post={post} />
+)}

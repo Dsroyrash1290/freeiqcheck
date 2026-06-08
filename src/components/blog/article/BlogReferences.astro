@@ -1,0 +1,35 @@
+---
+import type { BlogReference } from '../../../data/blog/types';
+
+interface Props {
+  references: BlogReference[];
+}
+const { references } = Astro.props;
+---
+
+{references.length > 0 && (
+  <section class="mt-14" aria-labelledby="references-heading">
+    <h2 id="references-heading" class="font-display text-xl font-bold text-slate-900 dark:text-white">
+      Scientific references
+    </h2>
+    <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">
+      Selected peer-reviewed and institutional sources for further reading.
+    </p>
+    <ol class="mt-5 space-y-3">
+      {references.map((ref, i) => (
+        <li class="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+          <span class="font-medium text-slate-800 dark:text-slate-200">{i + 1}.</span>{' '}
+          <a
+            href={ref.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="font-medium text-brand-600 underline decoration-brand-300 underline-offset-2 transition hover:text-brand-700 dark:text-brand-400 dark:decoration-brand-700"
+          >
+            {ref.title}
+          </a>
+          {ref.source && <span class="text-slate-500"> — {ref.source}</span>}
+        </li>
+      ))}
+    </ol>
+  </section>
+)}

@@ -1,0 +1,118 @@
+---
+import type { BlogContentBlock } from '../../../data/blog/types';
+import BlogInlineCta from './BlogInlineCta.astro';
+import BlogArticleImage from './callouts/BlogArticleImage.astro';
+import BlogDidYouKnow from './callouts/BlogDidYouKnow.astro';
+import BlogMythReality from './callouts/BlogMythReality.astro';
+import BlogPullQuote from './callouts/BlogPullQuote.astro';
+import BlogScienceFact from './callouts/BlogScienceFact.astro';
+import BlogStatistics from './callouts/BlogStatistics.astro';
+
+interface Props {
+  blocks: BlogContentBlock[];
+}
+const { blocks } = Astro.props;
+---
+
+<div class="blog-content-blocks space-y-1">
+  {blocks.map((block, i) => {
+    const isFirstH2 =
+      block.type === 'heading' &&
+      block.level === 2 &&
+      !blocks.slice(0, i).some((b) => b.type === 'heading' && b.level === 2);
+
+    switch (block.type) {
+      case 'paragraph':
+        return (
+          <p
+            class="blog-fade-section mt-4 text-[1.0625rem] leading-[1.75] text-slate-600 dark:text-slate-300"
+            style={`animation-delay: ${Math.min(i * 30, 300)}ms`}
+            set:html={block.text}
+          />
+        );
+      case 'heading':
+        if (block.level === 2) {
+          return (
+            <>
+              {!isFirstH2 && (
+                <hr class="blog-section-separator my-12 border-0 border-t border-slate-200/80 dark:border-slate-800" aria-hidden="true" />
+              )}
+              <h2
+                id={block.id}
+                class="blog-fade-section scroll-mt-28 font-display text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl dark:text-white"
+              >
+                {block.text}
+              </h2>
+            </>
+          );
+        }
+        return (
+          <h3
+            id={block.id}
+            class="blog-fade-section mt-8 scroll-mt-28 font-display text-xl font-bold text-slate-800 dark:text-slate-100"
+          >
+            {block.text}
+          </h3>
+        );
+      case 'list':
+        const ListTag = block.ordered ? 'ol' : 'ul';
+        return (
+          <ListTag
+            class:list={[
+              'mt-4 space-y-2 pl-5 text-[1.0625rem] leading-relaxed text-slate-600 dark:text-slate-300',
+              block.ordered ? 'list-decimal' : 'list-disc',
+            ]}
+          >
+            {block.items.map((item) => (
+              <li set:html={item} />
+            ))}
+          </ListTag>
+        );
+      case 'pullQuote':
+        return <BlogPullQuote text={block.text} attribution={block.attribution} />;
+      case 'scienceFact':
+        return <BlogScienceFact title={block.title} text={block.text} />;
+      case 'didYouKnow':
+        return <BlogDidYouKnow text={block.text} />;
+      case 'mythReality':
+        return <BlogMythReality myth={block.myth} reality={block.reality} />;
+      case 'statistics':
+        return <BlogStatistics stats={block.stats} />;
+      case 'highlight':
+        return (
+          <aside class="my-6 rounded-xl border border-brand-200/60 bg-brand-50/50 p-5 dark:border-brand-800/50 dark:bg-brand-950/30">
+            <p class="text-sm font-bold text-brand-700 dark:text-brand-400">{block.title}</p>
+            <p class="mt-2 text-[1.0625rem] leading-relaxed text-slate-700 dark:text-slate-300" set:html={block.text} />
+          </aside>
+        );
+      case 'image':
+        return (
+          <BlogArticleImage
+            src={block.src}
+            alt={block.alt}
+            caption={block.caption}
+            width={block.width}
+            height={block.height}
+          />
+        );
+      case 'separator':
+        return <hr class="my-10 border-0 border-t border-dashed border-slate-200 dark:border-slate-800" aria-hidden="true" />;
+      case 'inlineCta':
+        return <BlogInlineCta title={block.title} text={block.text} />;
+      default:
+        return null;
+    }
+  })}
+</div>
+
+<style>
+  .blog-fade-section {
+    animation: fade-up 0.6s ease-out both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blog-fade-section {
+      animation: none;
+    }
+  }
+</style>

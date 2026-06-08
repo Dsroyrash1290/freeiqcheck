@@ -1,0 +1,31 @@
+---
+interface Props {
+  href?: string;
+  label?: string;
+}
+const { href = '/test', label = 'Take Free IQ Test' } = Astro.props;
+---
+
+<a
+  href={href}
+  id="blog-sticky-cta"
+  class="fixed bottom-6 right-6 z-50 hidden rounded-2xl bg-brand-600 px-5 py-3.5 text-sm font-semibold text-white shadow-xl shadow-brand-600/30 transition motion-safe:hover:scale-105 motion-safe:hover:bg-brand-700 motion-safe:hover:shadow-2xl sm:bottom-8 sm:right-8 sm:px-6 sm:text-base"
+  aria-label={label}
+>
+  {label}
+</a>
+
+<script>
+  const cta = document.getElementById('blog-sticky-cta');
+  const hero = document.getElementById('blog-article-hero');
+
+  function toggleCta() {
+    if (!cta || !hero) return;
+    const pastHero = window.scrollY > hero.offsetHeight * 0.6;
+    cta.classList.toggle('hidden', !pastHero);
+    cta.classList.toggle('animate-fade-in', pastHero);
+  }
+
+  toggleCta();
+  window.addEventListener('scroll', toggleCta, { passive: true });
+</script>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" role="img" aria-label="Neuroplasticity visualization showing brain rewiring">
+  <defs>
+    <linearGradient id="brain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8eb8ff"/>
+      <stop offset="100%" stop-color="#1d3fd6"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="#eef4ff" rx="24"/>
+  <path d="M320 120 C260 120, 220 180, 220 240 C220 300, 260 340, 320 360 C380 380, 440 360, 480 320 C520 280, 540 220, 520 180 C500 140, 440 120, 400 120 C380 100, 340 100, 320 120 Z" fill="url(#brain)" opacity="0.25"/>
+  <g stroke="#2550ea" stroke-width="2.5" fill="none">
+    <path d="M300 200 L360 180 L420 210 L480 190"/>
+    <path d="M280 260 L340 280 L400 250 L460 270 L520 240"/>
+    <path d="M320 320 L380 300 L440 330"/>
+  </g>
+  <g fill="#10b981">
+    <circle cx="360" cy="180" r="8"/><circle cx="420" cy="210" r="8"/><circle cx="400" cy="250" r="8"/>
+    <circle cx="460" cy="270" r="8"/><circle cx="380" cy="300" r="8"/>
+  </g>
+  <text x="400" y="430" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="#1e35ad">New connections form through repeated practice</text>
+  <text x="400" y="56" text-anchor="middle" font-family="system-ui,sans-serif" font-size="20" font-weight="600" fill="#1e293b">Neuroplasticity</text>
+</svg>

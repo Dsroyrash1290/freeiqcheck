@@ -1,0 +1,80 @@
+---
+import BlogShareButtons from './BlogShareButtons.astro';
+
+interface Props {
+  title: string;
+  excerpt: string;
+  author: string;
+  readTime: string;
+  updatedLabel: string;
+  path: string;
+  featuredImage?: string;
+}
+const { title, excerpt, author, readTime, updatedLabel, path, featuredImage } = Astro.props;
+---
+
+<header
+  id="blog-article-hero"
+  class="relative overflow-hidden border-b border-slate-200/80 dark:border-slate-800"
+>
+  <div class="absolute inset-0 mesh-gradient dark:mesh-gradient-dark" aria-hidden="true" />
+  <div class="absolute inset-0 opacity-30 dark:opacity-20" aria-hidden="true">
+    <svg class="h-full w-full" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="neural-glow" cx="50%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#5a92ff" stop-opacity="0.4" />
+          <stop offset="100%" stop-color="transparent" />
+        </radialGradient>
+      </defs>
+      <rect width="1200" height="400" fill="url(#neural-glow)" />
+      <g fill="none" stroke="currentColor" class="text-brand-400/30" stroke-width="1">
+        <path d="M0 200 Q300 80, 600 200 T1200 200" />
+        <path d="M0 260 Q400 140, 800 260 T1200 260" />
+      </g>
+    </svg>
+  </div>
+
+  <div class="section-pad relative mx-auto max-w-4xl">
+    <div class="flex flex-wrap items-center justify-center gap-3 text-sm">
+      <span class="rounded-full bg-brand-100 px-3 py-1 font-semibold text-brand-700 dark:bg-brand-900/50 dark:text-brand-300">
+        {readTime}
+      </span>
+      <span class="text-slate-500 dark:text-slate-400">·</span>
+      <span class="text-slate-600 dark:text-slate-400">Updated {updatedLabel}</span>
+    </div>
+
+    <h1 class="mt-6 text-center font-display text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-[3.25rem] lg:leading-tight dark:text-white">
+      {title}
+    </h1>
+
+    <p class="mx-auto mt-6 max-w-2xl text-center text-lg leading-relaxed text-slate-600 sm:text-xl dark:text-slate-400">
+      {excerpt}
+    </p>
+
+    <div class="mt-6 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+      <p class="text-sm text-slate-500 dark:text-slate-400">
+        By <span class="font-semibold text-slate-700 dark:text-slate-200">{author}</span>
+      </p>
+      <BlogShareButtons title={title} path={path} />
+    </div>
+
+    {featuredImage && (
+      <div class="mx-auto mt-10 max-w-3xl overflow-hidden rounded-2xl border border-slate-200/80 shadow-lg dark:border-slate-700">
+        <img
+          src={featuredImage}
+          alt=""
+          width={800}
+          height={480}
+          class="h-auto w-full"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </div>
+    )}
+
+    <div class="mt-10 text-center">
+      <a href="/test" class="btn-primary !inline-flex">Take Free IQ Test</a>
+    </div>
+  </div>
+</header>

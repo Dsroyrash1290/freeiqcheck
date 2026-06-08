@@ -1,13 +1,21 @@
 import type { BlogPost } from './types';
+import { canYouIncreaseYourIq } from './can-you-increase-your-iq';
 import { freeIqTestsAccurate } from './free-iq-tests-accurate';
 import { goodIqScore } from './good-iq-score';
 import { improveIq } from './improve-iq';
 import { iqVsEq } from './iq-vs-eq';
 import { top10Questions } from './top-10-questions';
 
-export type { BlogPost, BlogSection } from './types';
+export type {
+  BlogPost,
+  BlogSection,
+  BlogContentBlock,
+  BlogReference,
+  BlogRelatedLink,
+} from './types';
 
 export const blogPosts: BlogPost[] = [
+  canYouIncreaseYourIq,
   goodIqScore,
   freeIqTestsAccurate,
   improveIq,

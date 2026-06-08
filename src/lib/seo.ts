@@ -66,29 +66,66 @@ export function quizJsonLd() {
   };
 }
 
-export function blogPostingJsonLd(post: {
+export function breadcrumbJsonLd(items: { name: string; path: string }[]) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: `${site.url}${item.path}`,
+    })),
+  };
+}
+
+export function articleJsonLd(post: {
   title: string;
   description: string;
   path: string;
   publishedAt: string;
+  updatedAt?: string;
+  author?: string;
+  image?: string;
 }) {
+  const imageUrl = post.image ? new URL(post.image, site.url).href : `${site.url}${site.ogImage}`;
   return {
     '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
+    '@type': 'Article',
     headline: post.title,
     description: post.description,
     url: `${site.url}${post.path}`,
     datePublished: post.publishedAt,
-    dateModified: post.publishedAt,
-    author: { '@type': 'Organization', name: site.name, url: site.url },
+    dateModified: post.updatedAt ?? post.publishedAt,
+    author: {
+      '@type': 'Organization',
+      name: post.author ?? site.name,
+      url: site.url,
+    },
     publisher: {
       '@type': 'Organization',
       name: site.name,
       url: site.url,
       logo: { '@type': 'ImageObject', url: `${site.url}/favicon.svg` },
     },
-    mainEntityOfPage: `${site.url}${post.path}`,
+    image: imageUrl,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${site.url}${post.path}`,
+    },
   };
+}
+
+export function blogPostingJsonLd(post: {
+  title: string;
+  description: string;
+  path: string;
+  publishedAt: string;
+  updatedAt?: string;
+  author?: string;
+  image?: string;
+}) {
+  return articleJsonLd(post);
 }
 
 export function blogJsonLd() {

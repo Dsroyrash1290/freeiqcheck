@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" role="img" aria-label="IQ score bell curve distribution chart">
+  <defs>
+    <linearGradient id="curveFill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2550ea" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#2550ea" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" fill="#f8fafc" rx="24"/>
+  <line x1="80" y1="380" x2="720" y2="380" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="80" y1="80" x2="80" y2="380" stroke="#94a3b8" stroke-width="2"/>
+  <path d="M80 380 Q200 380, 280 200 T400 120 T520 200 T640 380 L80 380 Z" fill="url(#curveFill)" stroke="#2550ea" stroke-width="3"/>
+  <line x1="400" y1="120" x2="400" y2="400" stroke="#10b981" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="400" y="420" text-anchor="middle" font-family="system-ui,sans-serif" font-size="16" fill="#334155">IQ 100 (average)</text>
+  <text x="220" y="420" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#64748b">85</text>
+  <text x="580" y="420" text-anchor="middle" font-family="system-ui,sans-serif" font-size="14" fill="#64748b">115</text>
+  <text x="400" y="56" text-anchor="middle" font-family="system-ui,sans-serif" font-size="20" font-weight="600" fill="#1e293b">Normal IQ Distribution</text>
+</svg>

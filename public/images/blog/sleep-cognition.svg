@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" role="img" aria-label="Sleep and cognitive performance graphic">
+  <rect width="800" height="480" fill="#0f172a" rx="24"/>
+  <circle cx="620" cy="100" r="48" fill="#fbbf24" opacity="0.9"/>
+  <path d="M180 280 Q280 180, 380 280 T580 280" fill="none" stroke="#5a92ff" stroke-width="3" opacity="0.5"/>
+  <path d="M200 320 C260 260, 340 360, 400 300 S520 240, 600 300" fill="none" stroke="#34d399" stroke-width="4"/>
+  <g fill="#8eb8ff" opacity="0.85">
+    <circle cx="240" cy="300" r="6"/><circle cx="320" cy="250" r="5"/><circle cx="400" cy="300" r="7"/>
+    <circle cx="480" cy="270" r="5"/><circle cx="560" cy="300" r="6"/>
+  </g>
+  <text x="400" y="420" text-anchor="middle" font-family="system-ui,sans-serif" font-size="18" fill="#cbd5e1">Deep sleep supports memory consolidation</text>
+  <text x="400" y="56" text-anchor="middle" font-family="system-ui,sans-serif" font-size="20" font-weight="600" fill="#f1f5f9">Sleep &amp; Brain Performance</text>
+</svg>

@@ -1,0 +1,49 @@
+---
+import { site } from '../../../config/site';
+
+interface Props {
+  title: string;
+  path: string;
+}
+const { title, path } = Astro.props;
+const url = new URL(path, site.url).href;
+const encodedUrl = encodeURIComponent(url);
+const encodedTitle = encodeURIComponent(title);
+const shareLinks = [
+  {
+    name: 'X (Twitter)',
+    href: `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`,
+    icon: '𝕏',
+  },
+  {
+    name: 'Facebook',
+    href: `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`,
+    icon: 'f',
+  },
+  {
+    name: 'Reddit',
+    href: `https://www.reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`,
+    icon: '◉',
+  },
+  {
+    name: 'LinkedIn',
+    href: `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`,
+    icon: 'in',
+  },
+];
+---
+
+<div class="flex flex-wrap items-center gap-3" aria-label="Share this article">
+  <span class="text-sm font-semibold text-slate-600 dark:text-slate-400">Share:</span>
+  {shareLinks.map((link) => (
+    <a
+      href={link.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-sm font-bold text-slate-700 transition motion-safe:hover:-translate-y-0.5 motion-safe:hover:border-brand-300 motion-safe:hover:bg-brand-50 motion-safe:hover:text-brand-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:motion-safe:hover:border-brand-600 dark:motion-safe:hover:bg-brand-950/50 dark:motion-safe:hover:text-brand-300"
+      aria-label={`Share on ${link.name}`}
+    >
+      {link.icon}
+    </a>
+  ))}
+</div>

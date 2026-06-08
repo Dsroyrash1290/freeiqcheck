@@ -1,0 +1,17 @@
+---
+interface Props {
+  title: string;
+  text: string;
+  href?: string;
+  buttonLabel?: string;
+}
+const { title, text, href = '/test', buttonLabel = 'Start Free IQ Test' } = Astro.props;
+---
+
+<aside class="blog-inline-cta my-10 rounded-2xl border border-brand-200/80 bg-gradient-to-br from-brand-50 to-white p-6 sm:p-8 dark:border-brand-800/60 dark:from-brand-950/40 dark:to-slate-900/60">
+  <h3 class="font-display text-xl font-bold text-slate-900 dark:text-white">{title}</h3>
+  <p class="mt-2 text-base leading-relaxed text-slate-600 dark:text-slate-400">{text}</p>
+  <a href={href} class="btn-primary mt-5 !inline-flex !px-6 !py-3 text-sm sm:text-base">
+    {buttonLabel}
+  </a>
+</aside>
