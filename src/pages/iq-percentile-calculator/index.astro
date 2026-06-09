@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Disclaimer from '../../components/Disclaimer.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import SeoBlogLinks from '../../components/seo/SeoBlogLinks.astro';
+import IqPercentileCalculator from '../../components/tools/IqPercentileCalculator.astro';
+import InternalLinks from '../../components/InternalLinks.astro';
+import { faqJsonLd, webPageJsonLd } from '../../lib/seo';
+
+const title = 'IQ Percentile Calculator — Score to Percentile Chart | FreeIQCheck';
+const description =
+  'Free IQ percentile calculator: enter any IQ score (55–160) to see estimated percentile, classification, and educational context. Based on population norms (mean 100).';
+
+const calculatorFaq = [
+  {
+    question: 'What is an IQ percentile?',
+    answer:
+      'A percentile tells you what percentage of the population scored at or below a given IQ on standardized tests. IQ 100 is typically near the 50th percentile.',
+  },
+  {
+    question: 'What is average IQ?',
+    answer:
+      'The population mean on most IQ scales is 100, with about 68% of people between 85 and 115. See our <a href="/average-iq-by-age">average IQ by age</a> guide.',
+  },
+  {
+    question: 'Is this IQ percentile calculator clinical?',
+    answer:
+      'No. This tool provides educational estimates using common norm references—not a psychological evaluation.',
+  },
+  {
+    question: 'What is a good IQ score?',
+    answer:
+      'Context matters. Read <a href="/blog/what-is-a-good-iq-score">what is a good IQ score</a> and our <a href="/iq-score-chart">IQ score chart</a> for ranges.',
+  },
+  {
+    question: 'How does this relate to the FreeIQCheck quiz?',
+    answer:
+      'Our <a href="/test">free IQ test</a> shows an illustrative score and percentile after 25 practice questions. Use this calculator to explore scores independently.',
+  },
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  path="/iq-percentile-calculator"
+  jsonLd={[webPageJsonLd(title, description, '/iq-percentile-calculator'), faqJsonLd(calculatorFaq)]}
+>
+  <article>
+    <header class="hero-glow border-b border-slate-200/80 dark:border-slate-800">
+      <div class="section-pad mx-auto max-w-3xl text-center">
+        <p class="text-sm font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">Educational tool</p>
+        <h1 class="mt-4 font-display text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl dark:text-white">
+          IQ Percentile Calculator
+        </h1>
+        <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">
+          Enter an IQ score to see an estimated percentile and classification. Useful context for understanding
+          <strong class="font-medium text-slate-800 dark:text-slate-200">average IQ</strong> and how scores compare on standardized scales.
+        </p>
+        <a href="/test" class="btn-primary mt-8 !inline-flex">Take the Free IQ Test</a>
+      </div>
+    </header>
+
+    <div class="section-pad mx-auto max-w-3xl">
+      <IqPercentileCalculator />
+
+      <section class="mt-14 space-y-4 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+        <h2 class="font-display text-2xl font-bold text-slate-900 dark:text-white">How to use this calculator</h2>
+        <p>
+          Type any whole-number IQ between 55 and 160. The calculator maps your input to an illustrative percentile band
+          based on common population norms (mean 100, standard deviation 15). This helps you interpret scores from practice
+          quizzes, school reports, or curiosity—not replace professional assessment.
+        </p>
+        <p>
+          After exploring percentiles, try our
+          <a href="/free-iq-test-with-instant-results" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">free IQ test with instant results</a>
+          for a full 25-question reasoning session with explanations.
+        </p>
+      </section>
+
+      <Disclaimer />
+
+      <section class="mt-14" aria-labelledby="calc-faq">
+        <SectionHeading eyebrow="FAQ" title="IQ percentile FAQ" align="center" />
+        <h2 id="calc-faq" class="sr-only">Calculator FAQ</h2>
+        <div class="mt-10">
+          <FaqAccordion items={calculatorFaq} />
+        </div>
+      </section>
+
+      <div class="mt-12 grid gap-6 lg:grid-cols-2">
+        <SeoBlogLinks />
+        <InternalLinks title="IQ guides & tools" limit={6} />
+      </div>
+
+      <div class="mt-12 rounded-3xl bg-gradient-to-br from-brand-600 to-brand-800 p-8 text-center text-white">
+        <h2 class="font-display text-2xl font-bold">Want an illustrative score from practice?</h2>
+        <p class="mx-auto mt-3 max-w-md text-brand-100">Take our online IQ test—instant results, no email, 25 reasoning questions.</p>
+        <a href="/test" class="mt-6 inline-flex rounded-2xl bg-white px-8 py-3.5 font-semibold text-brand-700 shadow-lg hover:bg-brand-50">
+          Start Free IQ Test
+        </a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

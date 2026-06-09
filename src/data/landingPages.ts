@@ -5,6 +5,8 @@ export type LandingSlug =
   | 'free-iq-test-online'
   | 'free-iq-test-with-results'
   | 'free-iq-test-instant-results'
+  | 'free-iq-test-with-instant-results'
+  | 'free-iq-test-no-email'
   | 'best-free-iq-test';
 
 export type LandingSection = {
@@ -109,9 +111,9 @@ export const landingPages: Record<LandingSlug, LandingPageData> = {
     slug: 'free-iq-test-online',
     path: '/free-iq-test-online',
     linkLabel: 'Free IQ test online',
-    title: 'Free IQ Test Online — No Download, Instant Access | FreeIQCheck',
+    title: 'Free IQ Test Online — Online IQ Test, Instant Results | FreeIQCheck',
     description:
-      'Take a free IQ test online in your browser. 25 reasoning questions, scaled difficulty, instant results, and no email signup required.',
+      'Take a free IQ test online in your browser. Fast online IQ test with 25 reasoning questions, scaled difficulty, instant results, and no email signup.',
     h1: 'Free IQ Test Online',
     eyebrow: 'Browser-based · Mobile friendly',
     intro:
@@ -330,9 +332,9 @@ export const landingPages: Record<LandingSlug, LandingPageData> = {
     slug: 'best-free-iq-test',
     path: '/best-free-iq-test',
     linkLabel: 'Best free IQ test',
-    title: 'Best Free IQ Test — How to Choose Honestly | FreeIQCheck',
+    title: 'Best Free IQ Test — Compare Online IQ Tests Honestly | FreeIQCheck',
     description:
-      'What makes the best free IQ test? Compare transparency, question quality, instant results, and disclaimers. See why learners choose FreeIQCheck.',
+      'What makes the best free IQ test? Compare transparency, question quality, instant IQ scores, no-email policies, and disclaimers before you choose.',
     h1: 'Best Free IQ Test',
     eyebrow: 'Honest comparison guide',
     intro:
@@ -400,6 +402,136 @@ export const landingPages: Record<LandingSlug, LandingPageData> = {
         question: 'How often should I retake the best free test I find?',
         answer:
           'Occasional retakes are fine for practice. Daily obsession with scores is unnecessary—focus on explanations and skills.',
+      },
+    ],
+  },
+
+  'free-iq-test-with-instant-results': {
+    slug: 'free-iq-test-with-instant-results',
+    path: '/free-iq-test-with-instant-results',
+    linkLabel: 'Free IQ test with instant results',
+    title: 'Free IQ Test With Instant Results — No Email | FreeIQCheck',
+    description:
+      'Take a free IQ test with instant results online. Get an illustrative score, percentile estimate, and explanations immediately—no email, no paywall.',
+    h1: 'Free IQ Test With Instant Results',
+    eyebrow: 'Instant IQ score · No waiting',
+    intro:
+      'Looking for a free IQ test with instant results? FreeIQCheck scores your 25-question session in the browser the moment you finish—delivering an immediate IQ-style score, accuracy breakdown, and learning-focused explanations without an inbox tollbooth.',
+    ctaLabel: 'Get Instant IQ Results',
+    ctaSubtext: 'Complete the quiz and see your illustrative instant IQ score in seconds.',
+    faqTitle: 'Free IQ test with instant results FAQ',
+    sections: [
+      {
+        heading: 'What you get with instant results',
+        paragraphs: [
+          'A quality free IQ test with instant results should show more than a headline number. On FreeIQCheck you receive an illustrative IQ-style score, estimated percentile, category strengths, time taken, and a question-by-question review with explanations—all rendered immediately after question 25.',
+          'Instant does not mean clinical. It means fast educational feedback while the reasoning paths are still fresh in memory—the best time to learn from mistakes.',
+        ],
+      },
+      {
+        heading: 'Instant results vs. delayed email scores',
+        paragraphs: [
+          'Many sites advertise instant IQ testing but hide the score behind email verification or paid unlocks. That adds friction and often leads to marketing spam. We skip both: your instant IQ score appears on our results page with no account creation.',
+          'If you want to compare services, read <a href="/blog/are-free-iq-tests-accurate">are free IQ tests accurate</a> for an honest validity overview.',
+          sharedDisclaimerNote,
+        ],
+      },
+      {
+        heading: 'Who benefits from instant IQ testing',
+        paragraphs: [
+          'Students warming up before logic-heavy exams, professionals squeezing practice into a break, and curious adults exploring cognitive puzzles all value immediate closure. Pair your instant IQ score with our <a href="/iq-percentile-calculator">IQ percentile calculator</a> to understand where a number sits in population context.',
+          'Retake the quiz after reviewing explanations—many users track accuracy on hard items across weeks rather than obsessing over a single instant score.',
+        ],
+      },
+      {
+        heading: 'From instant score to real skill growth',
+        paragraphs: [
+          'Use instant results as a snapshot, not a label. Read <a href="/blog/can-you-increase-your-iq">can you increase your IQ</a> for science-backed habits that support reasoning performance over time.',
+          'For a broader overview of online formats, see our <a href="/free-iq-test-online">free IQ test online</a> guide or start the <a href="/test">quiz</a> directly.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Is this really a free IQ test with instant results?',
+        answer: 'Yes. Scoring happens in your browser immediately after you submit the final answer.',
+      },
+      {
+        question: 'Do I need email for instant results?',
+        answer: 'No email is required at any step. See our dedicated free IQ test no email page for privacy details.',
+      },
+      {
+        question: 'What is included in the instant IQ score report?',
+        answer: 'Illustrative IQ-style number, percentile estimate, accuracy, strengths, badges, and per-question explanations.',
+      },
+      {
+        question: 'Will my instant IQ score match a clinical test?',
+        answer: 'No. Speed and convenience do not make a practice quiz clinical. Results are educational only.',
+      },
+    ],
+  },
+
+  'free-iq-test-no-email': {
+    slug: 'free-iq-test-no-email',
+    path: '/free-iq-test-no-email',
+    linkLabel: 'Free IQ test no email',
+    title: 'Free IQ Test No Email — Instant Results, No Signup | FreeIQCheck',
+    description:
+      'Take a free IQ test with no email required. Instant illustrative results, 25 reasoning questions, and zero signup—privacy-friendly cognitive practice.',
+    h1: 'Free IQ Test — No Email Required',
+    eyebrow: 'Privacy-first · Zero signup',
+    intro:
+      'Tired of IQ sites that demand your inbox before showing a score? FreeIQCheck is a free IQ test with no email gate—start the quiz, finish 25 questions, and view your full illustrative report without creating an account or subscribing to marketing lists.',
+    ctaLabel: 'Start Quiz — No Email',
+    ctaSubtext: 'No forms, no verification links, no surprise newsletters.',
+    faqTitle: 'Free IQ test no email FAQ',
+    sections: [
+      {
+        heading: 'Why “no email” matters for IQ practice',
+        paragraphs: [
+          'Email gates are common on IQ test sites because contact lists are valuable—not because your score requires verification. For casual cognitive practice, asking for an address adds risk (spam, data resale) without improving the quiz itself.',
+          'A free IQ test no email policy respects your time and privacy: you get instant results because the scoring is automated, not because someone manually emails a PDF hours later.',
+        ],
+      },
+      {
+        heading: 'How FreeIQCheck works without signup',
+        paragraphs: [
+          'Open the quiz in your browser, answer 25 multiple-choice reasoning items, and submit. Your session is scored locally to generate the results page—illustrative IQ-style score, percentile context, and explanations included.',
+          'We do not require names, ages, or addresses. Theme preference may be stored in your browser; see our Privacy Policy for hosting and analytics details.',
+          sharedDisclaimerNote,
+        ],
+      },
+      {
+        heading: 'No email vs. no data collection',
+        paragraphs: [
+          'No email does not mean zero technical logs—hosting providers may record standard server data for security. It does mean we will not force you through marketing funnels to see your score.',
+          'Compare with our <a href="/free-iq-test-with-instant-results">free IQ test with instant results</a> overview if you care most about speed, or <a href="/best-free-iq-test">best free IQ test</a> for selection criteria.',
+        ],
+      },
+      {
+        heading: 'What to do after your no-email test',
+        paragraphs: [
+          'Review missed explanations, note weak categories, and retake when rested. Explore <a href="/blog/what-is-a-good-iq-score">what is a good IQ score</a> to keep perspective, or use the <a href="/iq-percentile-calculator">IQ percentile calculator</a> to interpret numbers responsibly.',
+        ],
+      },
+    ],
+    faq: [
+      {
+        question: 'Is FreeIQCheck really a free IQ test with no email?',
+        answer: 'Yes. You can complete the quiz and view results without entering an email address.',
+      },
+      {
+        question: 'Will you email my results later?',
+        answer: 'No. Results appear on screen immediately. We do not send score emails.',
+      },
+      {
+        question: 'Do I need to create an account?',
+        answer: 'No account or password is required for the quiz or results page.',
+      },
+      {
+        question: 'Is a no-email IQ test less accurate?',
+        answer:
+          'Email collection does not improve test validity. Accuracy depends on question design and norms—not whether you typed an address.',
       },
     ],
   },

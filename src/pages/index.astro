@@ -13,30 +13,34 @@ import GuideHubSection from '../components/GuideHubSection.astro';
 import InternalLinks from '../components/InternalLinks.astro';
 import SeoBottomContent from '../components/SeoBottomContent.astro';
 import SeoGuideSection from '../components/SeoGuideSection.astro';
-import { faqItems, homepageFaqItems } from '../data/faq';
+import StickyQuizCta from '../components/StickyQuizCta.astro';
+import { homepageFaqItems } from '../data/faq';
 import { seoGuideSections } from '../data/seoSections';
 import {
+  averageIqFacts,
   brainTraining,
   cognitiveBenefits,
   improveTips,
   insights,
   quizSteps,
   scoreBands,
+  trustSignals,
   trustStats,
+  whyOnlineTesting,
 } from '../data/homepage';
 import { site } from '../config/site';
 import { faqJsonLd, organizationJsonLd, quizJsonLd, websiteJsonLd } from '../lib/seo';
 
-const title = 'Free IQ Test Online — Instant Results, No Email';
+const title = 'Free IQ Test Online — IQ Test with Instant Results | FreeIQCheck';
 const description =
-  'Take the best free IQ test online with instant results and no email. Free iq test with results, 25 reasoning questions, and clear explanations — educational use only.';
+  'Take a free IQ test online with instant results and no email. Fast 25-question online IQ test with illustrative scores, percentile context, and explanations — educational cognitive assessment.';
 ---
 
 <BaseLayout
   title={title}
   description={description}
   path="/"
-  jsonLd={[organizationJsonLd(), websiteJsonLd(), quizJsonLd(), faqJsonLd(faqItems)]}
+  jsonLd={[organizationJsonLd(), websiteJsonLd(), quizJsonLd(), faqJsonLd(homepageFaqItems)]}
 >
   <!-- Hero -->
   <section class="hero-glow relative overflow-hidden border-b border-slate-200/80 dark:border-slate-800" aria-labelledby="hero-heading">
@@ -45,18 +49,18 @@ const description =
       <div class="order-1 motion-safe:animate-fade-up lg:order-1">
         <p class="inline-flex items-center gap-2 rounded-full border border-brand-200/80 bg-white/60 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-700 backdrop-blur-sm dark:border-brand-800 dark:bg-slate-900/60 dark:text-brand-300">
           <span class="h-2 w-2 animate-pulse-soft rounded-full bg-accent-500" aria-hidden="true"></span>
-          Free iq test online · No email
+          Online IQ test · Instant results · No email
         </p>
         <h1 id="hero-heading" class="mt-6 font-display text-4xl font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-[3.25rem] dark:text-white">
-          <span class="text-gradient">Free IQ Test</span> with Instant Results
+          <span class="text-gradient">Free IQ Test</span> — Online IQ Test with Instant Results
         </h1>
         <p class="mt-6 max-w-xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">
-          Take a trustworthy <strong class="font-medium text-slate-800 dark:text-slate-200">free iq test online</strong> with
-          <strong class="font-medium text-slate-800 dark:text-slate-200">instant results</strong>—no email, no paywall.
-          Get your <strong class="font-medium text-slate-800 dark:text-slate-200">free iq test and results</strong> in one session, built for learning—not clinical claims.
+          Take a fast, trustworthy <strong class="font-medium text-slate-800 dark:text-slate-200">IQ test</strong> in your browser.
+          Our <strong class="font-medium text-slate-800 dark:text-slate-200">free iq test online</strong> delivers
+          <strong class="font-medium text-slate-800 dark:text-slate-200">instant results</strong> with no email—a 25-question cognitive assessment built for learning, not clinical hype.
         </p>
         <div class="mt-9 flex flex-col gap-4 sm:flex-row sm:items-center">
-          <a href="/test" class="btn-primary">Start Free IQ Test</a>
+          <a href="/test" class="btn-primary">Take Free IQ Test Now</a>
           <a
             href="#cognitive-benefits"
             class="text-center text-sm font-semibold text-slate-600 transition hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400"
@@ -103,12 +107,13 @@ const description =
       <div class="p-8 lg:p-12">
         <SectionHeading
           eyebrow="Intelligence & logic"
-          title="A best-in-class free iq test experience"
-          description="Practice logical reasoning with a clean free iq test online—no clutter, no pressure, no misleading clinical claims."
+          title="A best-in-class online IQ test experience"
+          description="Practice logical reasoning with a clean free iq test—no clutter, no pressure, no misleading clinical claims."
         />
         <p class="mt-5 text-slate-600 leading-relaxed dark:text-slate-400">
-          Compare <a href="/faq" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">free iq tests</a> and you will see many rely on hype.
-          FreeIQCheck pairs a <a href="/test" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">free iq test with results</a> and education so you leave sharper—not sold to.
+          Compare <a href="/best-free-iq-test" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">free iq tests</a> and you will see many rely on hype.
+          FreeIQCheck pairs a <a href="/free-iq-test-with-results" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">free iq test with results</a>,
+          <a href="/iq-percentile-calculator" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">percentile tools</a>, and honest guides so you leave sharper—not sold to.
         </p>
         <a href="/test" class="mt-6 inline-flex text-sm font-semibold text-brand-600 hover:underline dark:text-brand-400">
           Take the free iq test online →
@@ -246,6 +251,61 @@ const description =
 
   <SeoGuideSection sections={seoGuideSections} />
 
+  <!-- Why online IQ testing -->
+  <section class="section-pad border-y border-slate-200/80 bg-white dark:border-slate-800 dark:bg-slate-950">
+    <div class="mx-auto max-w-6xl">
+      <SectionHeading
+        eyebrow="Popular choice"
+        title="Why online IQ testing is so popular"
+        description="Millions search for an IQ test each year. Browser-based quizzes offer fast cognitive assessment without appointments, downloads, or email gates."
+        align="center"
+      />
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {whyOnlineTesting.map((item, i) => (
+          <div class="card-surface p-6 motion-safe:animate-fade-up" style={`animation-delay: ${i * 60}ms`}>
+            <h3 class="font-display text-lg font-bold text-slate-900 dark:text-white">{item.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{item.text}</p>
+          </div>
+        ))}
+      </div>
+      <p class="mt-10 text-center text-sm text-slate-600 dark:text-slate-400">
+        Explore <a href="/free-iq-test-online" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">free IQ test online</a>,
+        <a href="/free-iq-test-no-email" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">no email</a>, and
+        <a href="/free-iq-test-with-instant-results" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">instant results</a> guides.
+      </p>
+    </div>
+  </section>
+
+  <!-- Average IQ -->
+  <section class="section-pad mx-auto max-w-6xl">
+    <div class="grid gap-10 lg:grid-cols-2 lg:items-center">
+      <div>
+        <SectionHeading
+          eyebrow="Score context"
+          title="What is average IQ?"
+          description="Understanding average IQ helps you interpret any online IQ test score responsibly."
+        />
+        <p class="mt-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+          Standardized IQ tests use a mean of 100. Scores near <strong class="font-medium text-slate-800 dark:text-slate-200">average IQ</strong> (roughly 85–115)
+          are common and healthy. Use our <a href="/iq-percentile-calculator" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">IQ percentile calculator</a>
+          or read <a href="/blog/what-is-a-good-iq-score" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">what is a good IQ score</a> for deeper context.
+        </p>
+        <a href="/average-iq-by-age" class="mt-5 inline-flex text-sm font-semibold text-brand-600 hover:underline dark:text-brand-400">
+          Average IQ by age guide →
+        </a>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-3">
+        {averageIqFacts.map((fact) => (
+          <div class="stat-card card-surface p-5 text-center">
+            <p class="font-display text-3xl font-extrabold text-brand-600 dark:text-brand-400">{fact.value}</p>
+            <p class="mt-1 text-sm font-semibold text-slate-900 dark:text-white">{fact.label}</p>
+            <p class="mt-1 text-xs text-slate-500">{fact.detail}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <SectionDivider />
 
   <!-- Score meaning -->
@@ -276,6 +336,31 @@ const description =
     </div>
   </section>
 
+  <!-- Trust -->
+  <section class="section-pad border-t border-slate-200/80 bg-slate-50/80 dark:border-slate-800 dark:bg-slate-900/30">
+    <div class="mx-auto max-w-3xl text-center">
+      <SectionHeading
+        eyebrow="Trust & transparency"
+        title="Why learners trust FreeIQCheck"
+        description="We prioritize honest cognitive practice over sensational claims."
+        align="center"
+      />
+      <ul class="mt-10 space-y-3 text-left">
+        {trustSignals.map((signal) => (
+          <li class="flex items-start gap-3 rounded-2xl border border-slate-200/80 bg-white/80 px-5 py-4 text-sm text-slate-700 dark:border-slate-800 dark:bg-slate-900/50 dark:text-slate-300">
+            <span class="text-accent-500" aria-hidden="true">✓</span>
+            {signal}
+          </li>
+        ))}
+      </ul>
+      <p class="mt-8 text-sm text-slate-600 dark:text-slate-400">
+        Questions about accuracy? Read
+        <a href="/blog/are-free-iq-tests-accurate" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">are free IQ tests accurate</a>
+        and <a href="/are-online-iq-tests-accurate" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">our accuracy guide</a>.
+      </p>
+    </div>
+  </section>
+
   <!-- Insights / blog -->
   <section id="insights" class="section-pad relative overflow-hidden">
     <div class="pointer-events-none absolute inset-0 bg-gradient-to-b from-brand-50/50 via-transparent to-transparent dark:from-brand-950/20" aria-hidden="true"></div>
@@ -293,15 +378,18 @@ const description =
             style={`animation-delay: ${i * 80}ms`}
           >
             <p class="text-xs font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-400">{post.readTime}</p>
-            <h3 class="mt-3 font-display text-xl font-bold leading-snug text-slate-900 dark:text-white">{post.title}</h3>
+            <h3 class="mt-3 font-display text-xl font-bold leading-snug text-slate-900 dark:text-white">
+              <a href={post.href} class="hover:text-brand-600 dark:hover:text-brand-400">{post.title}</a>
+            </h3>
             <p class="mt-3 flex-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{post.excerpt}</p>
-            <p class="mt-5 text-xs text-slate-500 dark:text-slate-500">Educational overview · Not medical advice</p>
+            <a href={post.href} class="mt-5 text-sm font-semibold text-brand-600 hover:underline dark:text-brand-400">Read article →</a>
           </article>
         ))}
       </div>
       <p class="mt-10 text-center text-sm text-slate-600 dark:text-slate-400">
-        Want more detail? Browse our <a href="/faq" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">FAQ</a> or
-        <a href="/about" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">about page</a>.
+        Browse the <a href="/blog" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">blog</a>,
+        <a href="/blog/can-you-increase-your-iq" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">can you increase your IQ</a>, or
+        <a href="/faq" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">full FAQ</a>.
       </p>
     </div>
   </section>
@@ -311,8 +399,8 @@ const description =
     <div class="mx-auto max-w-3xl">
       <SectionHeading
         eyebrow="FAQ"
-        title="Free IQ test FAQ"
-        description="Common questions about our free iq test online, instant results, and how scores work."
+        title="IQ test FAQ"
+        description="Answers on average IQ, online test accuracy, instant results, no email, and whether IQ can improve."
         align="center"
       />
       <h2 id="faq-heading" class="sr-only">Frequently asked questions about free IQ tests</h2>
@@ -335,13 +423,15 @@ const description =
       <NeuralNetwork class="h-full w-full opacity-40" id="cta-neural" />
     </div>
     <div class="section-pad relative mx-auto max-w-3xl text-center">
-      <h2 id="cta-heading" class="font-display text-3xl font-bold sm:text-4xl lg:text-5xl">Ready for your free iq test?</h2>
+      <h2 id="cta-heading" class="font-display text-3xl font-bold sm:text-4xl lg:text-5xl">Ready for your free IQ test?</h2>
       <p class="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-brand-100">
-        Start a {site.primaryKeyword} on {site.domain}—free iq test with instant results no email, and no spammy upsells.
+        Start a fast online IQ test on {site.domain}—instant IQ score, no email, and no spammy upsells.
       </p>
       <a href="/test" class="mt-10 inline-flex rounded-2xl bg-white px-10 py-4 text-base font-semibold text-brand-700 shadow-xl transition motion-safe:hover:scale-[1.02] motion-safe:hover:bg-brand-50">
-        Start Free IQ Test Now
+        Take Free IQ Test Now
       </a>
     </div>
   </section>
+
+  <StickyQuizCta />
 </BaseLayout>

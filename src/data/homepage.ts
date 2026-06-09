@@ -116,29 +116,65 @@ export const trustStats = [
 
 export const insights = [
   {
-    title: 'What affects IQ scores?',
+    title: 'Can you increase your IQ?',
     excerpt:
-      'Genetics, education, health, and environment all play roles. Short online quizzes measure a narrow slice of reasoning—not your full potential.',
-    readTime: '4 min read',
+      'What neuroscience says about neuroplasticity, education, sleep, and whether cognitive ability can improve in 2026.',
+    readTime: '12 min read',
+    href: '/blog/can-you-increase-your-iq',
   },
   {
-    title: 'Can IQ improve over time?',
+    title: 'Are free IQ tests accurate?',
     excerpt:
-      'Fluid skills can be practiced; crystallized knowledge grows with learning. Habits like reading and puzzles support growth within your personal range.',
-    readTime: '5 min read',
+      'Honest look at what browser quizzes measure, common pitfalls, and how FreeIQCheck approaches validity.',
+    readTime: '9 min read',
+    href: '/blog/are-free-iq-tests-accurate',
   },
   {
-    title: 'Intelligence vs knowledge',
+    title: 'What is a good IQ score?',
     excerpt:
-      'Knowing facts is valuable, but reasoning is how you apply them. Strong thinkers combine both—and know when to question what they think they know.',
-    readTime: '3 min read',
+      'Score ranges, percentiles, and how to read results responsibly—without hype or clinical overclaims.',
+    readTime: '8 min read',
+    href: '/blog/what-is-a-good-iq-score',
   },
   {
-    title: 'Habits of strong thinkers',
+    title: 'Can IQ improve with practice?',
     excerpt:
-      'Curiosity, intellectual humility, and deliberate practice separate lasting thinkers from those who only chase quick scores.',
-    readTime: '4 min read',
+      'Fluid skills, crystallized knowledge, and realistic habits that support reasoning performance over time.',
+    readTime: '10 min read',
+    href: '/blog/can-you-improve-iq',
   },
+] as const;
+
+export const averageIqFacts = [
+  { value: '100', label: 'Population mean', detail: 'Standardized IQ scales center here' },
+  { value: '15', label: 'Typical SD', detail: 'Standard deviation on most tests' },
+  { value: '68%', label: 'Score 85–115', detail: 'Most people fall in this band' },
+] as const;
+
+export const whyOnlineTesting = [
+  {
+    title: 'Instant feedback',
+    text: 'See an illustrative score and explanations the moment you finish—no waiting for email results.',
+  },
+  {
+    title: 'Low pressure practice',
+    text: 'Browser-based IQ tests let you explore reasoning puzzles without clinical appointments or fees.',
+  },
+  {
+    title: 'Mobile access',
+    text: 'Take a fast IQ test on phone, tablet, or laptop whenever you have 15–25 minutes.',
+  },
+  {
+    title: 'Privacy-friendly',
+    text: 'No email gate on FreeIQCheck—start the cognitive assessment and view results in one session.',
+  },
+] as const;
+
+export const trustSignals = [
+  'Clear educational disclaimers on every results page',
+  '25 varied reasoning questions with weighted scoring',
+  'Instant illustrative results—no paywall or email required',
+  'Published guides on average IQ, percentiles, and test accuracy',
 ] as const;
 
 export const quizSteps = [

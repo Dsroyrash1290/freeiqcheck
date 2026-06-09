@@ -1,0 +1,115 @@
+---
+import { percentileBands } from '../../lib/iqPercentile';
+---
+
+<div class="card-surface overflow-hidden">
+  <div class="border-b border-slate-200/80 bg-gradient-to-br from-brand-50/80 to-slate-50 px-6 py-8 dark:border-slate-800 dark:from-brand-950/30 dark:to-slate-900/50 sm:px-8">
+    <label for="iq-score-input" class="block text-sm font-semibold text-slate-700 dark:text-slate-200">
+      Enter an IQ score (55–160)
+    </label>
+    <div class="mt-4 flex flex-col gap-4 sm:flex-row sm:items-end">
+      <div class="flex-1">
+        <input
+          type="number"
+          id="iq-score-input"
+          name="iq"
+          min="55"
+          max="160"
+          value="100"
+          inputmode="numeric"
+          class="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-2xl font-bold text-slate-900 shadow-sm transition focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
+          aria-describedby="iq-calculator-hint"
+        />
+        <p id="iq-calculator-hint" class="mt-2 text-xs text-slate-500 dark:text-slate-400">
+          Educational estimate based on common population norms (mean 100, SD 15).
+        </p>
+      </div>
+      <button
+        type="button"
+        id="iq-calc-btn"
+        class="btn-primary !w-full !py-3.5 sm:!w-auto"
+      >
+        Calculate percentile
+      </button>
+    </div>
+  </div>
+
+  <div id="iq-calc-result" class="p-6 sm:p-8" aria-live="polite" aria-atomic="true">
+    <div class="grid gap-6 sm:grid-cols-3">
+      <div class="rounded-2xl border border-brand-200/60 bg-brand-50/50 p-5 text-center dark:border-brand-800/50 dark:bg-brand-950/30">
+        <p class="text-xs font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">IQ score</p>
+        <p id="result-iq" class="mt-2 font-display text-4xl font-extrabold text-slate-900 dark:text-white">100</p>
+      </div>
+      <div class="rounded-2xl border border-emerald-200/60 bg-emerald-50/50 p-5 text-center dark:border-emerald-900/40 dark:bg-emerald-950/25">
+        <p class="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">Est. percentile</p>
+        <p id="result-percentile" class="mt-2 font-display text-4xl font-extrabold text-slate-900 dark:text-white">52th</p>
+      </div>
+      <div class="rounded-2xl border border-violet-200/60 bg-violet-50/50 p-5 text-center dark:border-violet-900/40 dark:bg-violet-950/25">
+        <p class="text-xs font-bold uppercase tracking-wider text-violet-700 dark:text-violet-400">Classification</p>
+        <p id="result-label" class="mt-2 font-display text-xl font-bold text-slate-900 dark:text-white">Average</p>
+      </div>
+    </div>
+    <p id="result-summary" class="mt-6 text-base leading-relaxed text-slate-600 dark:text-slate-400">
+      Within the most common IQ range on normed tests (mean 100).
+    </p>
+    <p class="mt-4 text-sm text-slate-500 dark:text-slate-500">
+      This is an educational population estimate—not a clinical diagnosis. Take our
+      <a href="/test" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">free IQ test</a>
+      for illustrative practice results.
+    </p>
+  </div>
+</div>
+
+<details class="mt-8 card-surface p-5 sm:p-6">
+  <summary class="cursor-pointer font-display text-lg font-bold text-slate-900 dark:text-white">
+    IQ score reference bands
+  </summary>
+  <div class="mt-4 overflow-x-auto">
+    <table class="w-full min-w-[32rem] text-left text-sm">
+      <thead>
+        <tr class="border-b border-slate-200 dark:border-slate-700">
+          <th class="py-2 pr-4 font-semibold text-slate-700 dark:text-slate-300">IQ range</th>
+          <th class="py-2 pr-4 font-semibold text-slate-700 dark:text-slate-300">Label</th>
+          <th class="py-2 font-semibold text-slate-700 dark:text-slate-300">Percentile context</th>
+        </tr>
+      </thead>
+      <tbody class="text-slate-600 dark:text-slate-400">
+        {percentileBands.map((band) => (
+          <tr class="border-b border-slate-100 dark:border-slate-800">
+            <td class="py-2.5 pr-4 font-mono text-brand-600 dark:text-brand-400">{band.min}–{band.max}</td>
+            <td class="py-2.5 pr-4">{band.label}</td>
+            <td class="py-2.5">{band.range}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</details>
+
+<script>
+  import { getPercentileResult } from '../../lib/iqPercentile';
+
+  const input = document.getElementById('iq-score-input') as HTMLInputElement | null;
+  const btn = document.getElementById('iq-calc-btn');
+  const resultIq = document.getElementById('result-iq');
+  const resultPct = document.getElementById('result-percentile');
+  const resultLabel = document.getElementById('result-label');
+  const resultSummary = document.getElementById('result-summary');
+
+  function render() {
+    if (!input || !resultIq || !resultPct || !resultLabel || !resultSummary) return;
+    const result = getPercentileResult(Number(input.value) || 100);
+    input.value = String(result.iq);
+    resultIq.textContent = String(result.iq);
+    resultPct.textContent = `${result.percentile}th`;
+    resultLabel.textContent = result.label;
+    resultSummary.textContent = `${result.summary} (${result.range}).`;
+  }
+
+  btn?.addEventListener('click', render);
+  input?.addEventListener('change', render);
+  input?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') render();
+  });
+  render();
+</script>

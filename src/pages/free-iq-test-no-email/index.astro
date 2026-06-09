@@ -1,0 +1,8 @@
+---
+import SeoLandingPage from '../../components/landing/SeoLandingPage.astro';
+import { getLandingPage } from '../../data/landingPages';
+
+const page = getLandingPage('free-iq-test-no-email');
+---
+
+<SeoLandingPage page={page} />

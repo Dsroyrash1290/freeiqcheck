@@ -30,10 +30,14 @@ export default defineConfig({
         if (url.pathname.startsWith('/free-iq-test') || url.pathname.startsWith('/best-free-iq-test')) {
           return { ...item, priority: 0.8, changefreq: 'monthly' };
         }
+        if (url.pathname === '/iq-percentile-calculator' || url.pathname === '/iq-percentile-calculator/') {
+          return { ...item, priority: 0.85, changefreq: 'monthly' };
+        }
         const learnPaths = [
           '/what-is-iq',
           '/average-iq-by-age',
           '/iq-score-chart',
+          '/iq-percentile-calculator',
           '/how-iq-tests-work',
           '/are-online-iq-tests-accurate',
           '/can-you-improve-your-iq',

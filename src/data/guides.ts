@@ -23,6 +23,11 @@ export const guidePages: GuidePage[] = [
     description: 'Ranges, percentiles, and how to read score bands responsibly.',
   },
   {
+    path: '/iq-percentile-calculator',
+    label: 'IQ percentile calculator',
+    description: 'Convert any IQ score to an estimated percentile band.',
+  },
+  {
     path: '/are-online-iq-tests-accurate',
     label: 'Are online IQ tests accurate?',
     description: 'Validity signals, common pitfalls, and realistic expectations.',

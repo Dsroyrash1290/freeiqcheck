@@ -1,14 +1,16 @@
 ---
 import { allLandingPages, type LandingSlug } from '../../data/landingPages';
+import { blogSeoLinks } from '../../data/seoLinks';
 
 interface Props {
   current: LandingSlug;
+  class?: string;
 }
-const { current } = Astro.props;
+const { current, class: className = '' } = Astro.props;
 const others = allLandingPages.filter((p) => p.slug !== current);
 ---
 
-<aside class="card-surface p-6" aria-label="Related IQ test guides">
+<aside class:list={['card-surface p-6', className]} aria-label="Related IQ test guides">
   <h2 class="font-display text-lg font-bold text-slate-900 dark:text-white">Related guides</h2>
   <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
     Explore other topics, or return to the <a href="/" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">homepage</a>
@@ -28,7 +30,18 @@ const others = allLandingPages.filter((p) => p.slug !== current);
       </a>
     </li>
     <li>
+      <a href="/iq-percentile-calculator" class="text-sm font-medium text-brand-600 hover:underline dark:text-brand-400">IQ percentile calculator</a>
+    </li>
+    <li>
       <a href="/about" class="text-sm font-medium text-brand-600 hover:underline dark:text-brand-400">About FreeIQCheck</a>
     </li>
+  </ul>
+  <p class="mt-5 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">From the blog</p>
+  <ul class="mt-2 space-y-2">
+    {blogSeoLinks.slice(0, 3).map((link) => (
+      <li>
+        <a href={link.href} class="text-sm font-medium text-brand-600 hover:underline dark:text-brand-400">{link.label}</a>
+      </li>
+    ))}
   </ul>
 </aside>

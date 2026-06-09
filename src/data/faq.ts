@@ -66,5 +66,56 @@ export const faqItems: FaqItem[] = [
   },
 ];
 
-/** Shorter set for homepage accordion (avoids overwhelming UI) */
-export const homepageFaqItems = faqItems.slice(0, 8);
+/** SEO-focused FAQ for homepage — targets high-volume and long-tail queries */
+export const homepageFaqItems: FaqItem[] = [
+  {
+    question: 'What is average IQ?',
+    answer:
+      'On most standardized IQ tests, the population average is set at 100 with a standard deviation of about 15. Roughly 68% of people score between 85 and 115. See our <a href="/average-iq-by-age">average IQ by age</a> guide and <a href="/iq-percentile-calculator">IQ percentile calculator</a> for context.',
+  },
+  {
+    question: 'Are online IQ tests accurate?',
+    answer:
+      'Online IQ tests can be useful for practice but are not as rigorous as clinical assessments. They measure a narrow slice of reasoning under casual conditions. Read our guide on <a href="/are-online-iq-tests-accurate">are online IQ tests accurate</a> and blog post <a href="/blog/are-free-iq-tests-accurate">are free IQ tests accurate</a>.',
+  },
+  {
+    question: 'Can IQ improve over time?',
+    answer:
+      'Certain cognitive skills can improve with education, sleep, exercise, and deliberate practice—especially in childhood. Full-scale IQ shifts in adults are usually modest. Learn more in <a href="/blog/can-you-increase-your-iq">can you increase your IQ</a> and <a href="/can-you-improve-your-iq">our IQ improvement guide</a>.',
+  },
+  {
+    question: 'What is a good IQ score?',
+    answer:
+      'On standardized scales, 85–115 is average, 116–129 is above average, and 130+ is very high. Context matters more than labels. Read <a href="/blog/what-is-a-good-iq-score">what is a good IQ score</a> and our <a href="/iq-score-chart">IQ score chart</a>.',
+  },
+  {
+    question: 'Are free IQ tests reliable?',
+    answer:
+      'Reliable free IQ tests are transparent about limitations, show instant results without paywalls, and explain scoring honestly. FreeIQCheck is designed for educational practice—not clinical diagnosis or hiring decisions.',
+  },
+  {
+    question: 'Does sleep affect intelligence?',
+    answer:
+      'Sleep strongly affects day-to-day cognitive performance. Poor sleep impairs memory, focus, and learning. Improving sleep often helps you perform closer to your personal best on reasoning tasks.',
+  },
+  {
+    question: 'Is this a free IQ test with instant results and no email?',
+    answer:
+      'Yes. Complete 25 questions at <a href="/test">freeiqcheck.com/test</a> and see your illustrative score immediately—no email signup or account required.',
+  },
+  {
+    question: 'What makes the best free IQ test?',
+    answer:
+      'Look for varied questions, clear disclaimers, instant results, and no email gate. Compare options on our <a href="/best-free-iq-test">best free IQ test</a> guide.',
+  },
+  {
+    question: 'How long does the IQ test take?',
+    answer:
+      'Most people finish our 25-question online IQ test in about 15 to 25 minutes. You can work at your own pace; the timer is for reference only.',
+  },
+  {
+    question: 'How is my instant IQ score calculated?',
+    answer:
+      'Weighted performance across 25 questions maps to an illustrative IQ-style number and estimated percentile. Harder items count more. This is not an official clinical IQ score.',
+  },
+];

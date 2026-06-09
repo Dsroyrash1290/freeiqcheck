@@ -1,12 +1,14 @@
 ---
 import { guidePages } from '../data/guides';
+import { blogSeoLinks, landingSeoLinks } from '../data/seoLinks';
 
 interface Props {
   title?: string;
   class?: string;
   limit?: number;
+  showBlog?: boolean;
 }
-const { title = 'IQ guides & resources', class: className = '', limit = 8 } = Astro.props;
+const { title = 'IQ guides & resources', class: className = '', limit = 8, showBlog = true } = Astro.props;
 const links = guidePages.slice(0, limit);
 ---
 
@@ -23,6 +25,27 @@ const links = guidePages.slice(0, limit);
         </a>
       </li>
     ))}
+    {landingSeoLinks.slice(0, 4).map((link) => (
+      <li>
+        <a
+          href={link.href}
+          class="inline-flex rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-brand-300 hover:text-brand-700 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-300 dark:hover:border-brand-600 dark:hover:text-brand-400"
+        >
+          {link.label}
+        </a>
+      </li>
+    ))}
+    {showBlog &&
+      blogSeoLinks.slice(0, 2).map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="inline-flex rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-brand-300 hover:text-brand-700 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-300 dark:hover:border-brand-600 dark:hover:text-brand-400"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
     <li>
       <a
         href="/test"
