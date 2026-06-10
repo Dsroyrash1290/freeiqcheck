@@ -1,0 +1,72 @@
+---
+const ages = [
+  { age: 5, label: 'Early childhood', height: 28 },
+  { age: 10, label: 'Middle childhood', height: 42 },
+  { age: 15, label: 'Adolescence', height: 58 },
+  { age: 20, label: 'Early adulthood', height: 72 },
+  { age: 25, label: 'Mature adulthood', height: 80 },
+];
+---
+
+<svg
+  viewBox="0 0 720 280"
+  role="img"
+  aria-labelledby="brain-timeline-title brain-timeline-desc"
+  class="mx-auto h-auto w-full max-w-3xl text-slate-700 dark:text-slate-200"
+>
+  <title id="brain-timeline-title">Brain Development Timeline</title>
+  <desc id="brain-timeline-desc">
+    Illustrative timeline showing continued cognitive development from age 5 through age 25.
+  </desc>
+
+  <defs>
+    <linearGradient id="timelineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2550ea" />
+      <stop offset="100%" stop-color="#10b981" />
+    </linearGradient>
+    <linearGradient id="brainGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#1d3fd6" />
+      <stop offset="100%" stop-color="#5a92ff" />
+    </linearGradient>
+  </defs>
+
+  <text x="360" y="28" text-anchor="middle" class="fill-slate-900 text-[15px] font-bold dark:fill-white" font-family="Plus Jakarta Sans, sans-serif">
+    Brain Development Timeline
+  </text>
+  <text x="360" y="48" text-anchor="middle" class="fill-slate-500 text-[11px] dark:fill-slate-400" font-family="Inter, sans-serif">
+    Cognitive maturation continues through adolescence and early adulthood
+  </text>
+
+  <line x1="60" y1="210" x2="660" y2="210" stroke="url(#timelineGrad)" stroke-width="4" stroke-linecap="round" />
+
+  {
+    ages.map((item, i) => {
+      const x = 60 + i * 150;
+      const brainY = 210 - item.height;
+      return (
+        <g>
+          <circle cx={x} cy="210" r="6" fill="#2550ea" />
+          <text x={x} y="232" text-anchor="middle" class="fill-brand-600 text-[13px] font-bold dark:fill-brand-400" font-family="Plus Jakarta Sans, sans-serif">
+            {item.age}
+          </text>
+          <text x={x} y="248" text-anchor="middle" class="fill-slate-500 text-[9px] dark:fill-slate-400" font-family="Inter, sans-serif">
+            {item.label}
+          </text>
+          <ellipse cx={x} cy={brainY + 20} rx="22" ry="18" fill="url(#brainGrad)" opacity="0.9" />
+          <path
+            d={`M${x - 14} ${brainY + 14} Q${x} ${brainY - 4} ${x + 14} ${brainY + 14}`}
+            fill="none"
+            stroke="#bcd4ff"
+            stroke-width="2"
+          />
+          <rect x={x - 18} y={brainY - item.height + 30} width="36" height={item.height} rx="4" fill="#2550ea" opacity="0.12" />
+          <rect x={x - 18} y={brainY + 30 - item.height * 0.6} width="36" height={item.height * 0.6} rx="4" fill="#10b981" opacity="0.35" />
+        </g>
+      );
+    })
+  }
+
+  <text x="360" y="272" text-anchor="middle" class="fill-slate-400 text-[9px] italic dark:fill-slate-500" font-family="Inter, sans-serif">
+    Illustrative educational graphic. Not actual research data.
+  </text>
+</svg>

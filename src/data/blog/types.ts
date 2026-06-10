@@ -1,10 +1,24 @@
 import type { FaqItem } from '../faq';
 
+export type BlogGraphicId =
+  | 'brain-development-timeline'
+  | 'cognitive-factors'
+  | 'myth-vs-fact'
+  | 'development-flow'
+  | 'cognitive-change-chart';
+
+export type BlogAuthor = {
+  name: string;
+  role: string;
+  bio: string;
+};
+
 export type BlogSection = {
   heading: string;
   paragraphs?: string[];
   subsections?: { heading: string; paragraphs: string[] }[];
   list?: { title: string; text: string }[];
+  graphic?: BlogGraphicId;
 };
 
 export type BlogReference = {
@@ -44,6 +58,7 @@ export type BlogPost = {
   updatedAt?: string;
   readTime: string;
   author?: string;
+  authorProfile?: BlogAuthor;
   format?: 'classic' | 'rich';
   featuredImage?: string;
   sections: BlogSection[];
@@ -52,4 +67,5 @@ export type BlogPost = {
   relatedSlugs: string[];
   relatedLinks?: BlogRelatedLink[];
   references?: BlogReference[];
+  showToc?: boolean;
 };

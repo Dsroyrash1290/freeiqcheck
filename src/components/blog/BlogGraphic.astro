@@ -1,0 +1,21 @@
+---
+import type { BlogGraphicId } from '../../data/blog/types';
+import BrainDevelopmentTimeline from './graphics/BrainDevelopmentTimeline.astro';
+import CognitiveFactors from './graphics/CognitiveFactors.astro';
+import MythVsFact from './graphics/MythVsFact.astro';
+import DevelopmentFlow from './graphics/DevelopmentFlow.astro';
+import CognitiveChangeChart from './graphics/CognitiveChangeChart.astro';
+
+interface Props {
+  id: BlogGraphicId;
+}
+const { id } = Astro.props;
+---
+
+<figure class="blog-graphic my-8 overflow-hidden rounded-2xl border border-slate-200/80 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900/60 sm:p-6">
+  {id === 'brain-development-timeline' && <BrainDevelopmentTimeline />}
+  {id === 'cognitive-factors' && <CognitiveFactors />}
+  {id === 'myth-vs-fact' && <MythVsFact />}
+  {id === 'development-flow' && <DevelopmentFlow />}
+  {id === 'cognitive-change-chart' && <CognitiveChangeChart />}
+</figure>

@@ -1,0 +1,57 @@
+---
+const points = [
+  { x: 80, y: 200, age: 5 },
+  { x: 180, y: 175, age: 8 },
+  { x: 280, y: 155, age: 11 },
+  { x: 380, y: 130, age: 14 },
+  { x: 480, y: 115, age: 17 },
+  { x: 580, y: 105, age: 20 },
+  { x: 640, y: 100, age: 22 },
+];
+const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'}${p.x},${p.y}`).join(' ');
+---
+
+<svg
+  viewBox="0 0 720 280"
+  role="img"
+  aria-labelledby="chart-title chart-desc"
+  class="mx-auto h-auto w-full max-w-3xl text-slate-700 dark:text-slate-200"
+>
+  <title id="chart-title">Illustrative Cognitive Development During Childhood</title>
+  <desc id="chart-desc">
+    Illustrative chart showing how cognitive development may change during childhood and adolescence. Not actual research data.
+  </desc>
+
+  <text x="360" y="28" text-anchor="middle" class="fill-slate-900 text-[15px] font-bold dark:fill-white" font-family="Plus Jakarta Sans, sans-serif">
+    Cognitive Development During Childhood &amp; Adolescence
+  </text>
+
+  <line x1="60" y1="220" x2="680" y2="220" stroke="#cbd5e1" stroke-width="1.5" class="dark:stroke-slate-600" />
+  <line x1="60" y1="220" x2="60" y2="70" stroke="#cbd5e1" stroke-width="1.5" class="dark:stroke-slate-600" />
+
+  <text x="360" y="255" text-anchor="middle" class="fill-slate-500 text-[11px] dark:fill-slate-400" font-family="Inter, sans-serif">
+    Age (years)
+  </text>
+  <text x="24" y="145" text-anchor="middle" transform="rotate(-90 24 145)" class="fill-slate-500 text-[11px] dark:fill-slate-400" font-family="Inter, sans-serif">
+    Cognitive ability (illustrative)
+  </text>
+
+  <path d={pathD} fill="none" stroke="#2550ea" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  <path d={`${pathD} L640,220 L80,220 Z`} fill="#2550ea" opacity="0.08" />
+
+  {
+    points.map((p) => (
+      <g>
+        <circle cx={p.x} cy={p.y} r="5" fill="#2550ea" stroke="white" stroke-width="2" />
+        <text x={p.x} y="238" text-anchor="middle" class="fill-slate-500 text-[9px] dark:fill-slate-400" font-family="Inter, sans-serif">
+          {p.age}
+        </text>
+      </g>
+    ))
+  }
+
+  <rect x="180" y="78" width="360" height="36" rx="8" fill="#fef9c3" stroke="#facc15" stroke-width="1" class="dark:fill-yellow-950/40 dark:stroke-yellow-700" />
+  <text x="360" y="100" text-anchor="middle" class="fill-yellow-800 text-[10px] font-medium dark:fill-yellow-200" font-family="Inter, sans-serif">
+    Illustrative educational graphic. Not actual research data.
+  </text>
+</svg>

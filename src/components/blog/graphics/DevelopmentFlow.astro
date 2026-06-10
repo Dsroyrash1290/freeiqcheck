@@ -1,0 +1,49 @@
+---
+const steps = ['Learning', 'Brain Development', 'Cognitive Skills', 'Academic Performance', 'Future Opportunities'];
+---
+
+<svg
+  viewBox="0 0 720 160"
+  role="img"
+  aria-labelledby="flow-title flow-desc"
+  class="mx-auto h-auto w-full max-w-3xl text-slate-700 dark:text-slate-200"
+>
+  <title id="flow-title">Child Development Flow Diagram</title>
+  <desc id="flow-desc">Flow from learning through brain development to future opportunities.</desc>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#2550ea" />
+    </marker>
+  </defs>
+
+  <text x="360" y="24" text-anchor="middle" class="fill-slate-900 text-[15px] font-bold dark:fill-white" font-family="Plus Jakarta Sans, sans-serif">
+    Child Development Flow
+  </text>
+
+  {
+    steps.map((step, i) => {
+      const x = 20 + i * 140;
+      const boxW = 120;
+      return (
+        <g>
+          {i < steps.length - 1 && (
+            <path
+              d={`M${x + boxW + 4} 95 L${x + boxW + 16} 95`}
+              stroke="#2550ea"
+              stroke-width="2"
+              marker-end="url(#arrowhead)"
+            />
+          )}
+          <rect x={x} y="65" width={boxW} height="60" rx="12" fill="#eef4ff" stroke="#2550ea" stroke-width="1.5" class="dark:fill-brand-950/40" />
+          <foreignObject x={x + 4} y="72" width={boxW - 8} height="46">
+            <p xmlns="http://www.w3.org/1999/xhtml" class="m-0 text-center text-[9px] font-semibold leading-tight text-brand-800 dark:text-brand-200" style="font-family: Inter, sans-serif">
+              {step}
+            </p>
+          </foreignObject>
+        </g>
+      );
+    })
+  }
+
+</svg>

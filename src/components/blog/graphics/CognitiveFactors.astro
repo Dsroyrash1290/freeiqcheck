@@ -1,0 +1,54 @@
+---
+const factors = [
+  { label: 'Education', icon: 'M6 18h12M8 14V8l4-3 4 3v6', color: '#2550ea' },
+  { label: 'Sleep', icon: 'M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z', color: '#3b6ff5' },
+  { label: 'Nutrition', icon: 'M12 2c0 4-4 6-4 10a4 4 0 0 0 8 0c0-4-4-6-4-10z', color: '#10b981' },
+  { label: 'Physical Activity', icon: 'M13 5l3 3-5 5-3-3 5-5zM6 12l3 3', color: '#34d399' },
+  { label: 'Family Environment', icon: 'M3 12l9-9 9 9M5 10v10h14V10', color: '#1d3fd6' },
+  { label: 'Mental Health', icon: 'M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z M9 10h.01M15 10h.01M9.5 15a3 3 0 0 0 5 0', color: '#5a92ff' },
+  { label: 'Learning Opportunities', icon: 'M4 19.5A2.5 2.5 0 0 1 6.5 17H20M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z', color: '#1e35ad' },
+];
+---
+
+<svg
+  viewBox="0 0 720 360"
+  role="img"
+  aria-labelledby="factors-title factors-desc"
+  class="mx-auto h-auto w-full max-w-3xl text-slate-700 dark:text-slate-200"
+>
+  <title id="factors-title">Factors Affecting Cognitive Development</title>
+  <desc id="factors-desc">Seven environmental and lifestyle factors that influence cognitive development in children.</desc>
+
+  <text x="360" y="32" text-anchor="middle" class="fill-slate-900 text-[15px] font-bold dark:fill-white" font-family="Plus Jakarta Sans, sans-serif">
+    Factors Affecting Cognitive Development
+  </text>
+
+  <circle cx="360" cy="185" r="52" fill="#eef4ff" stroke="#2550ea" stroke-width="2" class="dark:fill-brand-950/40" />
+  <text x="360" y="180" text-anchor="middle" class="fill-brand-700 text-[11px] font-bold dark:fill-brand-300" font-family="Plus Jakarta Sans, sans-serif">
+    Cognitive
+  </text>
+  <text x="360" y="196" text-anchor="middle" class="fill-brand-700 text-[11px] font-bold dark:fill-brand-300" font-family="Plus Jakarta Sans, sans-serif">
+    Development
+  </text>
+
+  {
+    factors.map((f, i) => {
+      const angle = (i / factors.length) * Math.PI * 2 - Math.PI / 2;
+      const cx = 360 + Math.cos(angle) * 145;
+      const cy = 185 + Math.sin(angle) * 115;
+      const lx = 360 + Math.cos(angle) * 58;
+      const ly = 185 + Math.sin(angle) * 58;
+      return (
+        <g>
+          <line x1={lx} y1={ly} x2={cx} y2={cy} stroke={f.color} stroke-width="1.5" opacity="0.4" />
+          <rect x={cx - 62} y={cy - 28} width="124" height="56" rx="12" fill="white" stroke={f.color} stroke-width="1.5" class="dark:fill-slate-900" />
+          <circle cx={cx - 40} cy={cy} r="14" fill={f.color} opacity="0.15" />
+          <path d={f.icon} transform={`translate(${cx - 46}, ${cy - 8}) scale(0.55)`} fill="none" stroke={f.color} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <text x={cx + 4} y={cy + 4} text-anchor="middle" class="fill-slate-700 text-[9px] font-semibold dark:fill-slate-200" font-family="Inter, sans-serif">
+            {f.label}
+          </text>
+        </g>
+      );
+    })
+  }
+</svg>

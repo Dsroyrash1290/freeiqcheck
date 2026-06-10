@@ -1,0 +1,57 @@
+---
+const pairs = [
+  {
+    myth: 'One IQ test determines your entire future.',
+    fact: 'IQ is one measure of cognitive ability and can change throughout development.',
+  },
+  {
+    myth: 'Success depends only on IQ.',
+    fact: 'Motivation, education, persistence, and opportunity also matter.',
+  },
+];
+---
+
+<svg
+  viewBox="0 0 720 300"
+  role="img"
+  aria-labelledby="myth-fact-title myth-fact-desc"
+  class="mx-auto h-auto w-full max-w-3xl text-slate-700 dark:text-slate-200"
+>
+  <title id="myth-fact-title">Myth vs Fact: Childhood IQ</title>
+  <desc id="myth-fact-desc">Common myths about IQ compared with evidence-based facts.</desc>
+
+  <text x="360" y="30" text-anchor="middle" class="fill-slate-900 text-[15px] font-bold dark:fill-white" font-family="Plus Jakarta Sans, sans-serif">
+    Myth vs Fact
+  </text>
+
+  {
+    pairs.map((pair, i) => {
+      const y = 70 + i * 115;
+      return (
+        <g>
+          <rect x="30" y={y} width="310" height="90" rx="14" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5" class="dark:fill-red-950/30 dark:stroke-red-800" />
+          <text x="50" y={y + 24} class="fill-red-600 text-[10px] font-bold uppercase dark:fill-red-400" font-family="Plus Jakarta Sans, sans-serif">
+            Myth
+          </text>
+          <foreignObject x="50" y={y + 30} width="270" height="50">
+            <p xmlns="http://www.w3.org/1999/xhtml" class="m-0 text-[11px] leading-snug text-red-900 dark:text-red-200" style="font-family: Inter, sans-serif">
+              {pair.myth}
+            </p>
+          </foreignObject>
+
+          <text x="380" y={y + 45} text-anchor="middle" class="fill-slate-400 text-[18px]" font-family="Plus Jakarta Sans, sans-serif">→</text>
+
+          <rect x="410" y={y} width="280" height="90" rx="14" fill="#ecfdf5" stroke="#6ee7b7" stroke-width="1.5" class="dark:fill-emerald-950/30 dark:stroke-emerald-700" />
+          <text x="430" y={y + 24} class="fill-emerald-600 text-[10px] font-bold uppercase dark:fill-emerald-400" font-family="Plus Jakarta Sans, sans-serif">
+            Fact
+          </text>
+          <foreignObject x="430" y={y + 30} width="240" height="50">
+            <p xmlns="http://www.w3.org/1999/xhtml" class="m-0 text-[11px] leading-snug text-emerald-900 dark:text-emerald-200" style="font-family: Inter, sans-serif">
+              {pair.fact}
+            </p>
+          </foreignObject>
+        </g>
+      );
+    })
+  }
+</svg>
