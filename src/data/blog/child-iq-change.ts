@@ -9,7 +9,7 @@ export const childIqChange: BlogPost = {
     'Research suggests childhood IQ can fluctuate during development. Learn what IQ scores mean, how they change, and whether they predict future success.',
   excerpt:
     'A childhood IQ score captures reasoning ability at one moment in a developing brain—not a permanent label. Here is what developmental science says about change, stability, and what scores can and cannot tell you.',
-  publishedAt: '2026-06-08',
+  publishedAt: '2026-06-10',
   readTime: '12 min read',
   showToc: true,
   authorProfile: {

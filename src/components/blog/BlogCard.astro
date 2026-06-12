@@ -1,15 +1,12 @@
 ---
 import type { BlogPost } from '../../data/blog';
+import { formatBlogDate } from '../../lib/blogContent';
 
 interface Props {
   post: BlogPost;
 }
 const { post } = Astro.props;
-const date = new Date(post.publishedAt).toLocaleDateString('en-US', {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-});
+const date = formatBlogDate(post.publishedAt);
 ---
 
 <article class="article-card card-surface flex h-full flex-col overflow-hidden">

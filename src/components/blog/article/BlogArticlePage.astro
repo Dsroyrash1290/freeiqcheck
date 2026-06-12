@@ -6,7 +6,7 @@ import SectionHeading from '../../SectionHeading.astro';
 import BlogCard from '../BlogCard.astro';
 import type { BlogPost } from '../../../data/blog';
 import { getRelatedPosts } from '../../../data/blog';
-import { getTocHeadings } from '../../../lib/blogContent';
+import { formatBlogDate, getTocHeadings } from '../../../lib/blogContent';
 import { articleJsonLd, breadcrumbJsonLd, faqJsonLd } from '../../../lib/seo';
 import BlogArticleHero from './BlogArticleHero.astro';
 import BlogBreadcrumbs from './BlogBreadcrumbs.astro';
@@ -25,9 +25,10 @@ const blocks = post.blocks ?? [];
 const toc = getTocHeadings(blocks);
 const related = getRelatedPosts(post);
 const author = post.author ?? 'FreeIQCheck Research Team';
-const updatedLabel = post.updatedAt
-  ? new Date(post.updatedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })
-  : new Date(post.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long' });
+const updatedLabel = formatBlogDate(post.updatedAt ?? post.publishedAt, {
+  year: 'numeric',
+  month: 'long',
+});
 const ogImage = post.featuredImage ?? '/images/blog/brain-neurons.svg';
 ---
 

@@ -9,8 +9,8 @@ export const habitsHighIntelligence: BlogPost = {
     'Some everyday habits may be linked to creativity, problem-solving, and cognitive flexibility. Explore 9 unexpected habits connected with intelligent thinking.',
   excerpt:
     'Intelligence often shows up in small everyday behaviors—not just test scores. Here are nine surprising habits psychology research has linked to creative, flexible thinking.',
-  publishedAt: '2026-06-08',
-  updatedAt: '2026-06-08',
+  publishedAt: '2026-06-11',
+  updatedAt: '2026-06-11',
   readTime: '9 min read',
   author: 'FreeIQCheck Research Team',
   format: 'rich',

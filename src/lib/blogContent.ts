@@ -1,5 +1,18 @@
 import type { BlogContentBlock } from '../data/blog/types';
 
+/** Parse YYYY-MM-DD as a local calendar date (avoids UTC off-by-one in US timezones). */
+export function parseBlogDate(isoDate: string): Date {
+  const [year, month, day] = isoDate.split('-').map(Number);
+  return new Date(year, month - 1, day);
+}
+
+export function formatBlogDate(
+  isoDate: string,
+  options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' },
+): string {
+  return parseBlogDate(isoDate).toLocaleDateString('en-US', options);
+}
+
 export function slugifyHeading(text: string): string {
   return text
     .toLowerCase()
