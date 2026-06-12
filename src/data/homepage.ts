@@ -116,6 +116,13 @@ export const trustStats = [
 
 export const insights = [
   {
+    title: '9 habits linked to high intelligence',
+    excerpt:
+      'Everyday behaviors—from night-owl schedules to doodling—that psychology research associates with creative, flexible thinking.',
+    readTime: '9 min read',
+    href: '/blog/habits-linked-to-high-intelligence',
+  },
+  {
     title: 'Can you increase your IQ?',
     excerpt:
       'What neuroscience says about neuroplasticity, education, sleep, and whether cognitive ability can improve in 2026.',
