@@ -1,6 +1,7 @@
 import type { BlogPost } from './types';
 import { canYouIncreaseYourIq } from './can-you-increase-your-iq';
 import { childIqChange } from './child-iq-change';
+import { habitsHighIntelligence } from './habits-high-intelligence';
 import { freeIqTestsAccurate } from './free-iq-tests-accurate';
 import { goodIqScore } from './good-iq-score';
 import { improveIq } from './improve-iq';
@@ -19,6 +20,7 @@ export type {
 
 export const blogPosts: BlogPost[] = [
   canYouIncreaseYourIq,
+  habitsHighIntelligence,
   childIqChange,
   goodIqScore,
   freeIqTestsAccurate,

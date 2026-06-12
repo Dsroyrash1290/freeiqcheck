@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" role="img" aria-labelledby="title desc">
+  <title id="title">Habits linked to intelligent thinking</title>
+  <desc id="desc">Illustration of a brain surrounded by everyday habit icons representing curiosity and creativity.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eef4ff"/>
+      <stop offset="100%" stop-color="#ecfdf5"/>
+    </linearGradient>
+    <linearGradient id="brain" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#1d3fd6"/>
+      <stop offset="100%" stop-color="#5a92ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="480" rx="24" fill="url(#bg)"/>
+  <ellipse cx="400" cy="240" rx="90" ry="72" fill="url(#brain)" opacity="0.92"/>
+  <path d="M360 250 Q400 210 440 250" fill="none" stroke="#bcd4ff" stroke-width="4"/>
+  <circle cx="280" cy="140" r="36" fill="#2550ea" opacity="0.12" stroke="#2550ea" stroke-width="2"/>
+  <text x="280" y="148" text-anchor="middle" font-family="Inter,sans-serif" font-size="22" fill="#2550ea">?</text>
+  <circle cx="560" cy="160" r="36" fill="#10b981" opacity="0.12" stroke="#10b981" stroke-width="2"/>
+  <path d="M548 168 L560 152 L572 168 M556 168 L556 176 L564 176" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="620" cy="300" r="36" fill="#2550ea" opacity="0.12" stroke="#2550ea" stroke-width="2"/>
+  <path d="M608 308 L632 308 M612 300 L628 316 M612 316 L628 300" fill="none" stroke="#2550ea" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="180" cy="300" r="36" fill="#10b981" opacity="0.12" stroke="#10b981" stroke-width="2"/>
+  <path d="M180 292 A8 8 0 1 1 180 308 A6 6 0 1 0 180 292" fill="none" stroke="#10b981" stroke-width="2"/>
+  <text x="400" y="420" text-anchor="middle" font-family="Plus Jakarta Sans,sans-serif" font-size="20" font-weight="700" fill="#1e35ad">Everyday Habits and Cognitive Style</text>
+</svg>

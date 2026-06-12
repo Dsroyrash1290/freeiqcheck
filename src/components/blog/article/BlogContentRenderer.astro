@@ -98,7 +98,14 @@ const { blocks } = Astro.props;
       case 'separator':
         return <hr class="my-10 border-0 border-t border-dashed border-slate-200 dark:border-slate-800" aria-hidden="true" />;
       case 'inlineCta':
-        return <BlogInlineCta title={block.title} text={block.text} />;
+        return (
+          <BlogInlineCta
+            title={block.title}
+            text={block.text}
+            href={block.href}
+            buttonLabel={block.buttonLabel}
+          />
+        );
       default:
         return null;
     }

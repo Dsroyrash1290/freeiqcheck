@@ -45,7 +45,7 @@ export type BlogContentBlock =
   | { type: 'highlight'; title: string; text: string }
   | { type: 'image'; src: string; alt: string; caption?: string; width: number; height: number }
   | { type: 'separator' }
-  | { type: 'inlineCta'; title: string; text: string };
+  | { type: 'inlineCta'; title: string; text: string; href?: string; buttonLabel?: string };
 
 export type BlogPost = {
   slug: string;
