@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" role="img" aria-labelledby="iq-timeline-title iq-timeline-desc">
+  <title id="iq-timeline-title">Timeline of IQ testing milestones</title>
+  <desc id="iq-timeline-desc">Key dates from the 1905 Binet-Simon scale through modern online IQ tests in 2026.</desc>
+  <rect width="800" height="320" fill="#f8fafc" rx="20"/>
+  <text x="400" y="36" text-anchor="middle" font-family="Plus Jakarta Sans,system-ui,sans-serif" font-size="18" font-weight="700" fill="#1e293b">Milestones in IQ Testing History</text>
+  <line x1="70" y1="170" x2="730" y2="170" stroke="url(#lineGrad)" stroke-width="4" stroke-linecap="round"/>
+  <defs>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2550ea"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
+  <g font-family="Inter,system-ui,sans-serif" text-anchor="middle">
+    <circle cx="100" cy="170" r="8" fill="#2550ea"/>
+    <text x="100" y="148" font-size="13" font-weight="700" fill="#2550ea">1905</text>
+    <text x="100" y="200" font-size="11" fill="#475569">Binet-Simon</text>
+    <text x="100" y="216" font-size="10" fill="#64748b">First practical scale</text>
+    <circle cx="220" cy="170" r="8" fill="#3b6ff5"/>
+    <text x="220" y="148" font-size="13" font-weight="700" fill="#3b6ff5">1912</text>
+    <text x="220" y="200" font-size="11" fill="#475569">IQ term coined</text>
+    <text x="220" y="216" font-size="10" fill="#64748b">William Stern</text>
+    <circle cx="340" cy="170" r="8" fill="#5a92ff"/>
+    <text x="340" y="148" font-size="13" font-weight="700" fill="#5a92ff">1916</text>
+    <text x="340" y="200" font-size="11" fill="#475569">Stanford-Binet</text>
+    <text x="340" y="216" font-size="10" fill="#64748b">U.S. standardization</text>
+    <circle cx="460" cy="170" r="8" fill="#2550ea"/>
+    <text x="460" y="148" font-size="13" font-weight="700" fill="#2550ea">1917</text>
+    <text x="460" y="200" font-size="11" fill="#475569">Army Alpha/Beta</text>
+    <text x="460" y="216" font-size="10" fill="#64748b">Mass group testing</text>
+    <circle cx="580" cy="170" r="8" fill="#10b981"/>
+    <text x="580" y="148" font-size="13" font-weight="700" fill="#10b981">1955</text>
+    <text x="580" y="200" font-size="11" fill="#475569">WAIS</text>
+    <text x="580" y="216" font-size="10" fill="#64748b">Wechsler adult scale</text>
+    <circle cx="700" cy="170" r="8" fill="#10b981"/>
+    <text x="700" y="148" font-size="13" font-weight="700" fill="#10b981">2026</text>
+    <text x="700" y="200" font-size="11" fill="#475569">Online IQ tests</text>
+    <text x="700" y="216" font-size="10" fill="#64748b">Instant web access</text>
+  </g>
+  <text x="400" y="290" text-anchor="middle" font-size="10" font-style="italic" fill="#94a3b8">Illustrative educational timeline. Dates are approximate milestones.</text>
+</svg>
