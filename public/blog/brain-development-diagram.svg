@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img">
+  <defs>
+    <linearGradient id="brainGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#1d3fd6"/>
+      <stop offset="100%" stop-color="#5a92ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" rx="24" fill="#f8fafc"/>
+  <text x="600" y="60" text-anchor="middle" font-family="Arial,sans-serif" font-size="28" font-weight="700" fill="#0f172a">How Genes, Brain, and Environment Interact</text>
+  <polygon points="600,120 980,500 220,500" fill="none" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="8 6"/>
+  <line x1="600" y1="120" x2="600" y2="310" stroke="#2550ea" stroke-width="2" opacity="0.35"/>
+  <line x1="220" y1="500" x2="600" y2="310" stroke="#10b981" stroke-width="2" opacity="0.35"/>
+  <line x1="980" y1="500" x2="600" y2="310" stroke="#10b981" stroke-width="2" opacity="0.35"/>
+  <circle cx="600" cy="120" r="70" fill="#7c3aed" opacity="0.12" stroke="#7c3aed" stroke-width="2"/>
+  <text x="600" y="115" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#6d28d9">Genes</text>
+  <text x="600" y="140" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#7c3aed">DNA and inheritance</text>
+  <ellipse cx="600" cy="310" rx="100" ry="78" fill="url(#brainGrad)"/>
+  <text x="600" y="305" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#ffffff">Brain</text>
+  <text x="600" y="330" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#dbeafe">Development</text>
+  <rect x="120" y="460" width="160" height="52" rx="14" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+  <text x="200" y="493" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="600" fill="#047857">Education</text>
+  <rect x="320" y="520" width="160" height="52" rx="14" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+  <text x="400" y="553" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="600" fill="#047857">Nutrition</text>
+  <rect x="720" y="520" width="160" height="52" rx="14" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+  <text x="800" y="553" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="600" fill="#047857">Sleep</text>
+  <rect x="920" y="460" width="160" height="52" rx="14" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+  <text x="1000" y="493" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="600" fill="#047857">Stress</text>
+  <text x="600" y="610" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#64748b">Intelligence emerges from the interaction of all factors.</text>
+</svg>

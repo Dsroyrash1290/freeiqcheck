@@ -114,6 +114,14 @@
     @apply font-semibold text-slate-800 dark:text-slate-100;
   }
 
+  .blog-article-prose img,
+  .blog-article-image__img {
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+    object-fit: cover;
+  }
+
   .btn-primary {
     @apply inline-flex items-center justify-center rounded-2xl bg-brand-600 px-8 py-4 text-base font-semibold text-white shadow-lg shadow-brand-600/30 transition motion-safe:hover:bg-brand-700 motion-safe:hover:shadow-xl motion-safe:hover:shadow-brand-600/25 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-500;
   }

@@ -3,6 +3,7 @@ import { canYouIncreaseYourIq } from './can-you-increase-your-iq';
 import { childIqChange } from './child-iq-change';
 import { evolutionOfIqTesting } from './evolution-of-iq-testing';
 import { habitsHighIntelligence } from './habits-high-intelligence';
+import { isIntelligenceGenetic } from './is-intelligence-genetic';
 import { freeIqTestsAccurate } from './free-iq-tests-accurate';
 import { goodIqScore } from './good-iq-score';
 import { improveIq } from './improve-iq';
@@ -20,6 +21,7 @@ export type {
 } from './types';
 
 export const blogPosts: BlogPost[] = [
+  isIntelligenceGenetic,
   evolutionOfIqTesting,
   canYouIncreaseYourIq,
   habitsHighIntelligence,
