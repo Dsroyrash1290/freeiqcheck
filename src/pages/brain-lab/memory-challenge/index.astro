@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BrainLabShell from '../../../components/brainLab/BrainLabShell.astro';
+import Disclaimer from '../../../components/Disclaimer.astro';
+import { webPageJsonLd } from '../../../lib/seo';
+
+const title = 'Memory Challenge — Brain Lab';
+const description =
+  'Test your short-term memory with number sequences. 10 levels, increasing difficulty, timer, score, and streak tracking.';
+---
+
+<BaseLayout title={title} description={description} path="/brain-lab/memory-challenge" jsonLd={[webPageJsonLd(title, description, '/brain-lab/memory-challenge')]}>
+  <BrainLabShell
+    title="Memory Challenge"
+    subtitle="Memorize each number sequence before it disappears. 10 levels — difficulty increases every round."
+    testId="memory"
+  >
+    <div id="memory-app">
+      <div id="memory-intro" class="brain-phase text-center">
+        <div class="brain-stat-row" id="memory-best-stats"></div>
+        <p class="text-slate-600 dark:text-slate-400">
+          Sequences appear for a few seconds, then vanish. Type the digits exactly as shown — no spaces.
+        </p>
+        <button type="button" id="memory-start" class="btn-primary mt-8">Start Challenge</button>
+      </div>
+
+      <div id="memory-active" class="brain-phase hidden">
+        <div class="mb-4 flex flex-wrap items-center justify-between gap-3 text-sm font-medium text-slate-600 dark:text-slate-400">
+          <span id="memory-level-label">Level 1 / 10</span>
+          <span id="memory-timer" class="rounded-lg bg-slate-100 px-3 py-1 font-mono tabular-nums dark:bg-slate-800">0:00</span>
+        </div>
+        <div class="brain-progress-track" role="progressbar" aria-valuemin="1" aria-valuemax="10" aria-valuenow="1" id="memory-progress-wrap">
+          <div id="memory-progress" class="brain-progress-fill" style="width: 10%"></div>
+        </div>
+        <div class="mt-6 grid grid-cols-3 gap-2 text-center sm:grid-cols-3">
+          <div class="brain-stat"><p class="brain-stat-label">Score</p><p class="brain-stat-value" id="memory-score">0</p></div>
+          <div class="brain-stat"><p class="brain-stat-label">Streak</p><p class="brain-stat-value" id="memory-streak">0</p></div>
+          <div class="brain-stat"><p class="brain-stat-label">Best Streak</p><p class="brain-stat-value" id="memory-best-streak">0</p></div>
+        </div>
+
+        <div id="memory-show" class="mt-8">
+          <p class="text-center text-sm font-semibold text-brand-600 dark:text-brand-400" id="memory-phase-label">Memorize this sequence</p>
+          <div class="brain-sequence-display mt-4" id="memory-sequence"></div>
+          <p class="mt-4 text-center text-xs text-slate-500" id="memory-countdown"></p>
+        </div>
+
+        <div id="memory-input-phase" class="mt-8 hidden">
+          <label for="memory-answer" class="block text-sm font-semibold text-slate-700 dark:text-slate-200">Enter the sequence</label>
+          <input
+            type="text"
+            id="memory-answer"
+            inputmode="numeric"
+            autocomplete="off"
+            class="mt-3 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3.5 text-center font-mono text-2xl font-bold tracking-widest text-slate-900 shadow-sm focus:border-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-500/30 dark:border-slate-700 dark:bg-slate-900 dark:text-white"
+            placeholder="Type digits…"
+          />
+          <button type="button" id="memory-submit" class="btn-primary mt-4 w-full">Submit Answer</button>
+        </div>
+
+        <div id="memory-feedback" class="brain-feedback hidden" role="status"></div>
+      </div>
+
+      <div id="memory-results" class="brain-phase hidden text-center">
+        <p class="text-sm font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Challenge Complete</p>
+        <p class="mt-2 font-display text-5xl font-extrabold text-slate-900 dark:text-white" id="memory-final-score">0</p>
+        <p class="mt-2 text-slate-600 dark:text-slate-400" id="memory-final-summary"></p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+          <button type="button" id="memory-retry" class="btn-primary">Play Again</button>
+          <a href="/brain-lab" class="inline-flex items-center justify-center rounded-2xl border border-slate-200 px-8 py-4 text-base font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">Brain Lab</a>
+        </div>
+      </div>
+    </div>
+  </BrainLabShell>
+
+  <section class="mx-auto max-w-3xl px-4 pb-16 sm:px-6">
+    <Disclaimer compact />
+  </section>
+
+  <script>
+    import { generateSequence, memoryLevels } from '../../../data/brainLab/memoryLevels';
+    import { formatBrainLabDate, loadBrainLabScores, saveBrainLabResult } from '../../../lib/brainLab/scores';
+
+    const intro = document.getElementById('memory-intro')!;
+    const active = document.getElementById('memory-active')!;
+    const results = document.getElementById('memory-results')!;
+    const bestStats = document.getElementById('memory-best-stats')!;
+    const startBtn = document.getElementById('memory-start')!;
+    const levelLabel = document.getElementById('memory-level-label')!;
+    const timerEl = document.getElementById('memory-timer')!;
+    const progress = document.getElementById('memory-progress')!;
+    const progressWrap = document.getElementById('memory-progress-wrap')!;
+    const scoreEl = document.getElementById('memory-score')!;
+    const streakEl = document.getElementById('memory-streak')!;
+    const bestStreakEl = document.getElementById('memory-best-streak')!;
+    const sequenceEl = document.getElementById('memory-sequence')!;
+    const countdownEl = document.getElementById('memory-countdown')!;
+    const showPhase = document.getElementById('memory-show')!;
+    const inputPhase = document.getElementById('memory-input-phase')!;
+    const answerInput = document.getElementById('memory-answer') as HTMLInputElement;
+    const submitBtn = document.getElementById('memory-submit')!;
+    const feedbackEl = document.getElementById('memory-feedback')!;
+    const finalScore = document.getElementById('memory-final-score')!;
+    const finalSummary = document.getElementById('memory-final-summary')!;
+    const retryBtn = document.getElementById('memory-retry')!;
+
+    let levelIndex = 0;
+    let score = 0;
+    let streak = 0;
+    let bestStreakRun = 0;
+    let seconds = 0;
+    let timerId = 0;
+    let currentSequence = '';
+    let showTimeout = 0;
+    let countdownInterval = 0;
+
+    function formatTime(s: number) {
+      const m = Math.floor(s / 60);
+      const sec = s % 60;
+      return `${m}:${sec.toString().padStart(2, '0')}`;
+    }
+
+    function renderBestStats() {
+      const stats = loadBrainLabScores().memory;
+      bestStats.innerHTML = `
+        <div class="brain-stat"><p class="brain-stat-label">Best Score</p><p class="brain-stat-value">${stats.bestScore}</p></div>
+        <div class="brain-stat"><p class="brain-stat-label">Last Score</p><p class="brain-stat-value">${stats.lastScore}</p></div>
+        <div class="brain-stat"><p class="brain-stat-label">Best Streak</p><p class="brain-stat-value">${stats.bestStreak}</p></div>
+        <div class="brain-stat"><p class="brain-stat-label">Last Played</p><p class="brain-stat-value text-base">${formatBrainLabDate(stats.lastPlayed)}</p></div>
+      `;
+    }
+
+    function showPhaseOnly(el: HTMLElement) {
+      [intro, active, results].forEach((node) => node.classList.add('hidden'));
+      el.classList.remove('hidden');
+    }
+
+    function renderDigits(seq: string) {
+      sequenceEl.innerHTML = seq.split('').map((d) => `<span class="brain-digit">${d}</span>`).join('');
+    }
+
+    function startTimer() {
+      clearInterval(timerId);
+      timerId = window.setInterval(() => {
+        seconds++;
+        timerEl.textContent = formatTime(seconds);
+      }, 1000);
+    }
+
+    function runLevel() {
+      const level = memoryLevels[levelIndex];
+      levelLabel.textContent = `Level ${level.level} / 10`;
+      progress.style.width = `${((levelIndex + 1) / 10) * 100}%`;
+      progressWrap.setAttribute('aria-valuenow', String(levelIndex + 1));
+      scoreEl.textContent = String(score);
+      streakEl.textContent = String(streak);
+      bestStreakEl.textContent = String(bestStreakRun);
+
+      currentSequence = generateSequence(level.digitCount);
+      renderDigits(currentSequence);
+      showPhase.classList.remove('hidden');
+      inputPhase.classList.add('hidden');
+      feedbackEl.classList.add('hidden');
+      answerInput.value = '';
+
+      let remaining = Math.ceil(level.showMs / 1000);
+      countdownEl.textContent = `Hiding in ${remaining}s…`;
+      clearInterval(countdownInterval);
+      countdownInterval = window.setInterval(() => {
+        remaining--;
+        if (remaining > 0) countdownEl.textContent = `Hiding in ${remaining}s…`;
+      }, 1000);
+
+      clearTimeout(showTimeout);
+      showTimeout = window.setTimeout(() => {
+        clearInterval(countdownInterval);
+        showPhase.classList.add('hidden');
+        inputPhase.classList.remove('hidden');
+        answerInput.focus();
+      }, level.showMs);
+    }
+
+    function finishGame() {
+      clearInterval(timerId);
+      clearTimeout(showTimeout);
+      clearInterval(countdownInterval);
+      saveBrainLabResult('memory', score, bestStreakRun);
+      finalScore.textContent = String(score);
+      finalSummary.textContent = `Best streak: ${bestStreakRun} · Time: ${formatTime(seconds)} · ${streak} correct in a row at the end`;
+      showPhaseOnly(results);
+      renderBestStats();
+    }
+
+    function submitAnswer() {
+      const level = memoryLevels[levelIndex];
+      const answer = answerInput.value.replace(/\s/g, '');
+      const correct = answer === currentSequence;
+
+      feedbackEl.classList.remove('hidden', 'brain-feedback--success', 'brain-feedback--error');
+      if (correct) {
+        streak++;
+        bestStreakRun = Math.max(bestStreakRun, streak);
+        const streakBonus = Math.min(streak - 1, 5) * 20;
+        const speedBonus = Math.max(0, 30 - Math.floor(seconds / (levelIndex + 1)));
+        score += level.basePoints + streakBonus + speedBonus;
+        feedbackEl.classList.add('brain-feedback--success');
+        feedbackEl.textContent = `Correct! +${level.basePoints + streakBonus + speedBonus} pts (streak ×${streak})`;
+      } else {
+        streak = 0;
+        feedbackEl.classList.add('brain-feedback--error');
+        feedbackEl.textContent = `Not quite — the sequence was ${currentSequence}`;
+      }
+
+      scoreEl.textContent = String(score);
+      streakEl.textContent = String(streak);
+      bestStreakEl.textContent = String(bestStreakRun);
+
+      window.setTimeout(() => {
+        levelIndex++;
+        if (levelIndex >= memoryLevels.length) finishGame();
+        else runLevel();
+      }, 1400);
+    }
+
+    function startGame() {
+      levelIndex = 0;
+      score = 0;
+      streak = 0;
+      bestStreakRun = 0;
+      seconds = 0;
+      timerEl.textContent = '0:00';
+      showPhaseOnly(active);
+      startTimer();
+      runLevel();
+    }
+
+    startBtn.addEventListener('click', startGame);
+    retryBtn.addEventListener('click', startGame);
+    submitBtn.addEventListener('click', submitAnswer);
+    answerInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') submitAnswer();
+    });
+
+    renderBestStats();
+  </script>
+</BaseLayout>

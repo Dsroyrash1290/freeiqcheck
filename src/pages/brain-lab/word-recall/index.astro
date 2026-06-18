@@ -1,0 +1,282 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BrainLabShell from '../../../components/brainLab/BrainLabShell.astro';
+import Disclaimer from '../../../components/Disclaimer.astro';
+import { webPageJsonLd } from '../../../lib/seo';
+
+const title = 'Word Recall Test — Brain Lab';
+const description =
+  'Memorize word lists under time pressure, then identify which words appeared. 10 levels with increasing difficulty and scoring.';
+---
+
+<BaseLayout title={title} description={description} path="/brain-lab/word-recall" jsonLd={[webPageJsonLd(title, description, '/brain-lab/word-recall')]}>
+  <BrainLabShell
+    title="Word Recall Test"
+    subtitle="Study the word list, then select every word you remember from mixed options."
+    testId="wordRecall"
+  >
+    <div id="word-app">
+      <div id="word-intro" class="brain-phase text-center">
+        <div class="brain-stat-row" id="word-best-stats"></div>
+        <p class="text-slate-600 dark:text-slate-400">
+          10 rounds · more words each level · pick all words that appeared (distractors included).
+        </p>
+        <button type="button" id="word-start" class="btn-primary mt-8">Start Test</button>
+      </div>
+
+      <div id="word-active" class="brain-phase hidden">
+        <div class="mb-4 flex flex-wrap items-center justify-between gap-3 text-sm font-medium text-slate-600 dark:text-slate-400">
+          <span id="word-level-label">Round 1 / 10</span>
+          <span id="word-timer" class="rounded-lg bg-slate-100 px-3 py-1 font-mono tabular-nums dark:bg-slate-800">0:00</span>
+        </div>
+        <div class="brain-progress-track" role="progressbar" id="word-progress-wrap">
+          <div id="word-progress" class="brain-progress-fill" style="width: 10%"></div>
+        </div>
+        <div class="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <div class="brain-stat"><p class="brain-stat-label">Score</p><p class="brain-stat-value" id="word-score">0</p></div>
+          <div class="brain-stat"><p class="brain-stat-label">Streak</p><p class="brain-stat-value" id="word-streak">0</p></div>
+          <div class="brain-stat col-span-2 sm:col-span-1"><p class="brain-stat-label">Accuracy</p><p class="brain-stat-value" id="word-accuracy">—</p></div>
+        </div>
+
+        <div id="word-study" class="mt-8">
+          <p class="text-center text-sm font-semibold text-brand-600 dark:text-brand-400">Memorize these words</p>
+          <div class="brain-word-grid mt-4" id="word-list"></div>
+          <p class="mt-4 text-center text-xs text-slate-500" id="word-countdown"></p>
+        </div>
+
+        <div id="word-select" class="mt-8 hidden">
+          <p class="text-sm font-semibold text-slate-700 dark:text-slate-200">Select every word that appeared</p>
+          <div class="brain-word-grid mt-4" id="word-options"></div>
+          <button type="button" id="word-submit" class="btn-primary mt-6 w-full">Check Answers</button>
+        </div>
+
+        <div id="word-feedback" class="brain-feedback hidden" role="status"></div>
+      </div>
+
+      <div id="word-results" class="brain-phase hidden text-center">
+        <p class="text-sm font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Test Complete</p>
+        <p class="mt-2 font-display text-5xl font-extrabold text-slate-900 dark:text-white" id="word-final-score">0</p>
+        <p class="mt-2 text-slate-600 dark:text-slate-400" id="word-final-summary"></p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+          <button type="button" id="word-retry" class="btn-primary">Play Again</button>
+          <a href="/brain-lab" class="inline-flex items-center justify-center rounded-2xl border border-slate-200 px-8 py-4 text-base font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">Brain Lab</a>
+        </div>
+      </div>
+    </div>
+  </BrainLabShell>
+
+  <section class="mx-auto max-w-3xl px-4 pb-16 sm:px-6">
+    <Disclaimer compact />
+  </section>
+
+  <script>
+    import { generateWordRound, wordLevels } from '../../../data/brainLab/wordLevels';
+    import type { WordLevel } from '../../../data/brainLab/wordLevels';
+    import { formatBrainLabDate, loadBrainLabScores, saveBrainLabResult } from '../../../lib/brainLab/scores';
+
+    const intro = document.getElementById('word-intro')!;
+    const active = document.getElementById('word-active')!;
+    const results = document.getElementById('word-results')!;
+    const bestStats = document.getElementById('word-best-stats')!;
+    const startBtn = document.getElementById('word-start')!;
+    const levelLabel = document.getElementById('word-level-label')!;
+    const timerEl = document.getElementById('word-timer')!;
+    const progress = document.getElementById('word-progress')!;
+    const progressWrap = document.getElementById('word-progress-wrap')!;
+    const scoreEl = document.getElementById('word-score')!;
+    const streakEl = document.getElementById('word-streak')!;
+    const accuracyEl = document.getElementById('word-accuracy')!;
+    const studyPhase = document.getElementById('word-study')!;
+    const selectPhase = document.getElementById('word-select')!;
+    const wordListEl = document.getElementById('word-list')!;
+    const wordOptionsEl = document.getElementById('word-options')!;
+    const countdownEl = document.getElementById('word-countdown')!;
+    const submitBtn = document.getElementById('word-submit')!;
+    const feedbackEl = document.getElementById('word-feedback')!;
+    const finalScore = document.getElementById('word-final-score')!;
+    const finalSummary = document.getElementById('word-final-summary')!;
+    const retryBtn = document.getElementById('word-retry')!;
+
+    let levelIndex = 0;
+    let score = 0;
+    let streak = 0;
+    let bestStreakRun = 0;
+    let totalHits = 0;
+    let totalTargets = 0;
+    let seconds = 0;
+    let timerId = 0;
+    let showTimeout = 0;
+    let countdownInterval = 0;
+    let targetWords: string[] = [];
+    let selected = new Set<string>();
+
+    function formatTime(s: number) {
+      const m = Math.floor(s / 60);
+      const sec = s % 60;
+      return `${m}:${sec.toString().padStart(2, '0')}`;
+    }
+
+    function renderBestStats() {
+      const stats = loadBrainLabScores().wordRecall;
+      bestStats.innerHTML = `
+        <div class="brain-stat"><p class="brain-stat-label">Best Score</p><p class="brain-stat-value">${stats.bestScore}</p></div>
+        <div class="brain-stat"><p class="brain-stat-label">Last Score</p><p class="brain-stat-value">${stats.lastScore}</p></div>
+        <div class="brain-stat"><p class="brain-stat-label">Best Streak</p><p class="brain-stat-value">${stats.bestStreak}</p></div>
+        <div class="brain-stat"><p class="brain-stat-label">Last Played</p><p class="brain-stat-value text-base">${formatBrainLabDate(stats.lastPlayed)}</p></div>
+      `;
+    }
+
+    function showPhaseOnly(el: HTMLElement) {
+      [intro, active, results].forEach((node) => node.classList.add('hidden'));
+      el.classList.remove('hidden');
+    }
+
+    function startTimer() {
+      clearInterval(timerId);
+      timerId = window.setInterval(() => {
+        seconds++;
+        timerEl.textContent = formatTime(seconds);
+      }, 1000);
+    }
+
+    function renderWordChips(container: HTMLElement, words: string[], selectable: boolean) {
+      container.innerHTML = '';
+      words.forEach((word) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'brain-word-chip';
+        btn.textContent = word;
+        if (selectable) {
+          btn.addEventListener('click', () => {
+            if (selected.has(word)) {
+              selected.delete(word);
+              btn.classList.remove('selected');
+            } else {
+              selected.add(word);
+              btn.classList.add('selected');
+            }
+          });
+        }
+        container.appendChild(btn);
+      });
+    }
+
+    function runRound() {
+      const level = wordLevels[levelIndex];
+      levelLabel.textContent = `Round ${level.level} / 10`;
+      progress.style.width = `${((levelIndex + 1) / 10) * 100}%`;
+      progressWrap.setAttribute('aria-valuenow', String(levelIndex + 1));
+      feedbackEl.classList.add('hidden');
+      selected = new Set();
+
+      const round = generateWordRound(level);
+      targetWords = round.targetWords;
+      renderWordChips(wordListEl, targetWords, false);
+
+      studyPhase.classList.remove('hidden');
+      selectPhase.classList.add('hidden');
+
+      let remaining = Math.ceil(level.showMs / 1000);
+      countdownEl.textContent = `Recall phase in ${remaining}s…`;
+      clearInterval(countdownInterval);
+      countdownInterval = window.setInterval(() => {
+        remaining--;
+        if (remaining > 0) countdownEl.textContent = `Recall phase in ${remaining}s…`;
+      }, 1000);
+
+      clearTimeout(showTimeout);
+      showTimeout = window.setTimeout(() => {
+        clearInterval(countdownInterval);
+        studyPhase.classList.add('hidden');
+        selectPhase.classList.remove('hidden');
+        renderWordChips(wordOptionsEl, round.options, true);
+      }, level.showMs);
+    }
+
+    function scoreRound(level: WordLevel) {
+      const hits = targetWords.filter((w) => selected.has(w)).length;
+      const falsePicks = [...selected].filter((w) => !targetWords.includes(w)).length;
+      const missed = targetWords.length - hits;
+      const perfect = hits === targetWords.length && falsePicks === 0;
+
+      totalHits += hits;
+      totalTargets += targetWords.length;
+
+      let roundScore = hits * 15 - falsePicks * 20 - missed * 5;
+      roundScore = Math.max(0, roundScore + level.basePoints);
+      if (perfect) {
+        streak++;
+        bestStreakRun = Math.max(bestStreakRun, streak);
+        roundScore += 50 + streak * 10;
+      } else {
+        streak = 0;
+      }
+      score += roundScore;
+
+      const acc = totalTargets ? Math.round((totalHits / totalTargets) * 100) : 0;
+      scoreEl.textContent = String(score);
+      streakEl.textContent = String(streak);
+      accuracyEl.textContent = `${acc}%`;
+
+      feedbackEl.classList.remove('hidden', 'brain-feedback--success', 'brain-feedback--error');
+      if (perfect) {
+        feedbackEl.classList.add('brain-feedback--success');
+        feedbackEl.textContent = `Perfect recall! +${roundScore} pts · streak ×${streak}`;
+      } else {
+        feedbackEl.classList.add('brain-feedback--error');
+        feedbackEl.textContent = `+${roundScore} pts · ${hits}/${targetWords.length} words · ${falsePicks} false picks`;
+      }
+
+      wordOptionsEl.querySelectorAll('button').forEach((btn) => {
+        const w = btn.textContent ?? '';
+        btn.disabled = true;
+        if (targetWords.includes(w)) btn.classList.add('correct');
+        else if (selected.has(w)) btn.classList.add('incorrect');
+      });
+    }
+
+    function finishGame() {
+      clearInterval(timerId);
+      clearTimeout(showTimeout);
+      clearInterval(countdownInterval);
+      saveBrainLabResult('wordRecall', score, bestStreakRun);
+      finalScore.textContent = String(score);
+      const acc = totalTargets ? Math.round((totalHits / totalTargets) * 100) : 0;
+      finalSummary.textContent = `${acc}% word accuracy · best streak ${bestStreakRun} · ${formatTime(seconds)}`;
+      showPhaseOnly(results);
+      renderBestStats();
+    }
+
+    function submitRound() {
+      const level = wordLevels[levelIndex];
+      scoreRound(level);
+      window.setTimeout(() => {
+        levelIndex++;
+        if (levelIndex >= wordLevels.length) finishGame();
+        else runRound();
+      }, 1600);
+    }
+
+    function startGame() {
+      levelIndex = 0;
+      score = 0;
+      streak = 0;
+      bestStreakRun = 0;
+      totalHits = 0;
+      totalTargets = 0;
+      seconds = 0;
+      timerEl.textContent = '0:00';
+      scoreEl.textContent = '0';
+      streakEl.textContent = '0';
+      accuracyEl.textContent = '—';
+      showPhaseOnly(active);
+      startTimer();
+      runRound();
+    }
+
+    startBtn.addEventListener('click', startGame);
+    retryBtn.addEventListener('click', startGame);
+    submitBtn.addEventListener('click', submitRound);
+    renderBestStats();
+  </script>
+</BaseLayout>

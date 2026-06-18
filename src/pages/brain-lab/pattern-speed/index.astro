@@ -1,0 +1,253 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BrainLabShell from '../../../components/brainLab/BrainLabShell.astro';
+import Disclaimer from '../../../components/Disclaimer.astro';
+import { webPageJsonLd } from '../../../lib/seo';
+
+const title = 'Pattern Speed Test — Brain Lab';
+const description =
+  'IQ-style pattern recognition under time pressure. Number sequences and visual matrix puzzles with instant feedback.';
+---
+
+<BaseLayout title={title} description={description} path="/brain-lab/pattern-speed" jsonLd={[webPageJsonLd(title, description, '/brain-lab/pattern-speed')]}>
+  <BrainLabShell
+    title="Pattern Speed Test"
+    subtitle="Real IQ-style number and matrix patterns. Answer fast — difficulty ramps up every question."
+    testId="pattern"
+  >
+    <div id="pattern-app">
+      <div id="pattern-intro" class="brain-phase text-center">
+        <div class="brain-stat-row" id="pattern-best-stats"></div>
+        <p class="text-slate-600 dark:text-slate-400">
+          10 questions · 20 seconds each · instant feedback after every answer.
+        </p>
+        <button type="button" id="pattern-start" class="btn-primary mt-8">Start Test</button>
+      </div>
+
+      <div id="pattern-active" class="brain-phase hidden">
+        <div class="mb-4 flex flex-wrap items-center justify-between gap-3 text-sm font-medium text-slate-600 dark:text-slate-400">
+          <span id="pattern-q-label">Question 1 / 10</span>
+          <span id="pattern-timer" class="rounded-lg bg-slate-100 px-3 py-1 font-mono tabular-nums dark:bg-slate-800">0:20</span>
+        </div>
+        <div class="brain-progress-track" role="progressbar" id="pattern-progress-wrap">
+          <div id="pattern-progress" class="brain-progress-fill" style="width: 10%"></div>
+        </div>
+        <div class="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <div class="brain-stat"><p class="brain-stat-label">Score</p><p class="brain-stat-value" id="pattern-score">0</p></div>
+          <div class="brain-stat"><p class="brain-stat-label">Streak</p><p class="brain-stat-value" id="pattern-streak">0</p></div>
+          <div class="brain-stat col-span-2 sm:col-span-1"><p class="brain-stat-label">Correct</p><p class="brain-stat-value" id="pattern-correct">0</p></div>
+        </div>
+
+        <article id="pattern-card" class="mt-8 rounded-2xl border border-slate-200/80 bg-white/50 p-5 backdrop-blur-sm sm:p-6 dark:border-slate-700/80 dark:bg-slate-800/40">
+          <p class="text-sm font-semibold text-brand-600 dark:text-brand-400" id="pattern-type"></p>
+          <h2 class="mt-2 font-display text-xl font-bold text-slate-900 dark:text-white" id="pattern-prompt"></h2>
+          <div id="pattern-visual" class="mt-5"></div>
+          <div id="pattern-options" class="mt-6 space-y-2"></div>
+        </article>
+
+        <div id="pattern-feedback" class="brain-feedback hidden" role="status"></div>
+      </div>
+
+      <div id="pattern-results" class="brain-phase hidden text-center">
+        <p class="text-sm font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">Test Complete</p>
+        <p class="mt-2 font-display text-5xl font-extrabold text-slate-900 dark:text-white" id="pattern-final-score">0</p>
+        <p class="mt-2 text-slate-600 dark:text-slate-400" id="pattern-final-summary"></p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+          <button type="button" id="pattern-retry" class="btn-primary">Play Again</button>
+          <a href="/brain-lab" class="inline-flex items-center justify-center rounded-2xl border border-slate-200 px-8 py-4 text-base font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">Brain Lab</a>
+        </div>
+      </div>
+    </div>
+  </BrainLabShell>
+
+  <section class="mx-auto max-w-3xl px-4 pb-16 sm:px-6">
+    <Disclaimer compact />
+  </section>
+
+  <script>
+    import { patternQuestions } from '../../../data/brainLab/patternQuestions';
+    import type { PatternQuestion } from '../../../data/brainLab/patternQuestions';
+    import { renderMatrixHtml } from '../../../lib/brainLab/matrix';
+    import { formatBrainLabDate, loadBrainLabScores, saveBrainLabResult } from '../../../lib/brainLab/scores';
+
+    const PER_QUESTION_SEC = 20;
+
+    const intro = document.getElementById('pattern-intro')!;
+    const active = document.getElementById('pattern-active')!;
+    const results = document.getElementById('pattern-results')!;
+    const bestStats = document.getElementById('pattern-best-stats')!;
+    const startBtn = document.getElementById('pattern-start')!;
+    const qLabel = document.getElementById('pattern-q-label')!;
+    const timerEl = document.getElementById('pattern-timer')!;
+    const progress = document.getElementById('pattern-progress')!;
+    const progressWrap = document.getElementById('pattern-progress-wrap')!;
+    const scoreEl = document.getElementById('pattern-score')!;
+    const streakEl = document.getElementById('pattern-streak')!;
+    const correctEl = document.getElementById('pattern-correct')!;
+    const typeEl = document.getElementById('pattern-type')!;
+    const promptEl = document.getElementById('pattern-prompt')!;
+    const visualEl = document.getElementById('pattern-visual')!;
+    const optionsEl = document.getElementById('pattern-options')!;
+    const feedbackEl = document.getElementById('pattern-feedback')!;
+    const card = document.getElementById('pattern-card')!;
+    const finalScore = document.getElementById('pattern-final-score')!;
+    const finalSummary = document.getElementById('pattern-final-summary')!;
+    const retryBtn = document.getElementById('pattern-retry')!;
+
+    let questions: PatternQuestion[] = [];
+    let qIndex = 0;
+    let score = 0;
+    let streak = 0;
+    let bestStreakRun = 0;
+    let correctCount = 0;
+    let timeLeft = PER_QUESTION_SEC;
+    let timerId = 0;
+    let answered = false;
+
+    function renderBestStats() {
+      const stats = loadBrainLabScores().pattern;
+      bestStats.innerHTML = `
+        <div class="brain-stat"><p class="brain-stat-label">Best Score</p><p class="brain-stat-value">${stats.bestScore}</p></div>
+        <div class="brain-stat"><p class="brain-stat-label">Last Score</p><p class="brain-stat-value">${stats.lastScore}</p></div>
+        <div class="brain-stat"><p class="brain-stat-label">Best Streak</p><p class="brain-stat-value">${stats.bestStreak}</p></div>
+        <div class="brain-stat"><p class="brain-stat-label">Last Played</p><p class="brain-stat-value text-base">${formatBrainLabDate(stats.lastPlayed)}</p></div>
+      `;
+    }
+
+    function showPhaseOnly(el: HTMLElement) {
+      [intro, active, results].forEach((node) => node.classList.add('hidden'));
+      el.classList.remove('hidden');
+    }
+
+    function animateCard() {
+      card.classList.remove('quiz-card-enter');
+      void card.offsetWidth;
+      card.classList.add('quiz-card-enter');
+    }
+
+    function renderQuestion() {
+      const q = questions[qIndex];
+      qLabel.textContent = `Question ${qIndex + 1} / 10`;
+      progress.style.width = `${((qIndex + 1) / 10) * 100}%`;
+      progressWrap.setAttribute('aria-valuenow', String(qIndex + 1));
+      typeEl.textContent = q.type === 'number' ? 'Number pattern' : 'Visual matrix';
+      promptEl.textContent = q.prompt;
+
+      if (q.type === 'number' && q.sequence) {
+        visualEl.innerHTML = `<p class="text-center font-display text-2xl font-bold tracking-wide text-slate-800 sm:text-3xl dark:text-slate-100">${q.sequence}</p>`;
+      } else if (q.matrix) {
+        visualEl.innerHTML = renderMatrixHtml(q.matrix);
+      } else {
+        visualEl.innerHTML = '';
+      }
+
+      optionsEl.innerHTML = '';
+      q.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'brain-option-btn';
+        btn.textContent = opt;
+        btn.addEventListener('click', () => pickAnswer(i));
+        optionsEl.appendChild(btn);
+      });
+
+      animateCard();
+    }
+
+    function clearQuestionTimer() {
+      clearInterval(timerId);
+    }
+
+    function startQuestionTimer() {
+      timeLeft = PER_QUESTION_SEC;
+      timerEl.textContent = `0:${timeLeft.toString().padStart(2, '0')}`;
+      clearQuestionTimer();
+      timerId = window.setInterval(() => {
+        timeLeft--;
+        timerEl.textContent = `0:${Math.max(0, timeLeft).toString().padStart(2, '0')}`;
+        if (timeLeft <= 0 && !answered) pickAnswer(-1);
+      }, 1000);
+    }
+
+    function pickAnswer(index: number) {
+      if (answered) return;
+      answered = true;
+      clearQuestionTimer();
+
+      const q = questions[qIndex];
+      const buttons = optionsEl.querySelectorAll('button');
+      const isCorrect = index === q.correctIndex;
+      const timedOut = index < 0;
+
+      buttons.forEach((btn, i) => {
+        btn.disabled = true;
+        if (i === q.correctIndex) btn.classList.add('correct');
+        else if (i === index && !isCorrect) btn.classList.add('incorrect');
+      });
+
+      feedbackEl.classList.remove('hidden', 'brain-feedback--success', 'brain-feedback--error', 'brain-feedback--info');
+      if (isCorrect) {
+        streak++;
+        bestStreakRun = Math.max(bestStreakRun, streak);
+        correctCount++;
+        const speedBonus = timeLeft * 5;
+        const diffBonus = q.difficulty * 15;
+        const streakBonus = Math.min(streak - 1, 4) * 25;
+        const gained = 100 + diffBonus + speedBonus + streakBonus;
+        score += gained;
+        feedbackEl.classList.add('brain-feedback--success');
+        feedbackEl.textContent = `Correct! +${gained} pts · ${q.explanation}`;
+      } else {
+        streak = 0;
+        feedbackEl.classList.add('brain-feedback--error');
+        feedbackEl.textContent = timedOut
+          ? `Time's up! Answer: ${q.options[q.correctIndex]}. ${q.explanation}`
+          : `Wrong — correct: ${q.options[q.correctIndex]}. ${q.explanation}`;
+      }
+
+      scoreEl.textContent = String(score);
+      streakEl.textContent = String(streak);
+      correctEl.textContent = String(correctCount);
+
+      window.setTimeout(() => {
+        qIndex++;
+        if (qIndex >= questions.length) finishGame();
+        else {
+          answered = false;
+          renderQuestion();
+          startQuestionTimer();
+        }
+      }, 1800);
+    }
+
+    function finishGame() {
+      clearQuestionTimer();
+      saveBrainLabResult('pattern', score, bestStreakRun);
+      finalScore.textContent = String(score);
+      finalSummary.textContent = `${correctCount}/10 correct · best streak ${bestStreakRun}`;
+      showPhaseOnly(results);
+      renderBestStats();
+    }
+
+    function startGame() {
+      questions = [...patternQuestions].sort((a, b) => a.difficulty - b.difficulty).slice(0, 10);
+      qIndex = 0;
+      score = 0;
+      streak = 0;
+      bestStreakRun = 0;
+      correctCount = 0;
+      answered = false;
+      scoreEl.textContent = '0';
+      streakEl.textContent = '0';
+      correctEl.textContent = '0';
+      feedbackEl.classList.add('hidden');
+      showPhaseOnly(active);
+      renderQuestion();
+      startQuestionTimer();
+    }
+
+    startBtn.addEventListener('click', startGame);
+    retryBtn.addEventListener('click', startGame);
+    renderBestStats();
+  </script>
+</BaseLayout>
