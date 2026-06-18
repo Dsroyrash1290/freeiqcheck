@@ -1,16 +1,16 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import BrainLabShell from '../../../components/brainLab/BrainLabShell.astro';
+import BrainGamesShell from '../../../components/brainGames/BrainGamesShell.astro';
 import Disclaimer from '../../../components/Disclaimer.astro';
 import { webPageJsonLd } from '../../../lib/seo';
 
-const title = 'Memory Challenge — Brain Lab';
+const title = 'Memory Challenge — Brain Games';
 const description =
   'Test your short-term memory with number sequences. 10 levels, increasing difficulty, timer, score, and streak tracking.';
 ---
 
-<BaseLayout title={title} description={description} path="/brain-lab/memory-challenge" jsonLd={[webPageJsonLd(title, description, '/brain-lab/memory-challenge')]}>
-  <BrainLabShell
+<BaseLayout title={title} description={description} path="/brain-games/memory-challenge" jsonLd={[webPageJsonLd(title, description, '/brain-games/memory-challenge')]}>
+  <BrainGamesShell
     title="Memory Challenge"
     subtitle="Memorize each number sequence before it disappears. 10 levels — difficulty increases every round."
     testId="memory"
@@ -66,19 +66,19 @@ const description =
         <p class="mt-2 text-slate-600 dark:text-slate-400" id="memory-final-summary"></p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
           <button type="button" id="memory-retry" class="btn-primary">Play Again</button>
-          <a href="/brain-lab" class="inline-flex items-center justify-center rounded-2xl border border-slate-200 px-8 py-4 text-base font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">Brain Lab</a>
+          <a href="/brain-games" class="inline-flex items-center justify-center rounded-2xl border border-slate-200 px-8 py-4 text-base font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">Brain Games</a>
         </div>
       </div>
     </div>
-  </BrainLabShell>
+  </BrainGamesShell>
 
   <section class="mx-auto max-w-3xl px-4 pb-16 sm:px-6">
     <Disclaimer compact />
   </section>
 
   <script>
-    import { generateSequence, memoryLevels } from '../../../data/brainLab/memoryLevels';
-    import { formatBrainLabDate, loadBrainLabScores, saveBrainLabResult } from '../../../lib/brainLab/scores';
+    import { generateSequence, memoryLevels } from '../../../data/brainGames/memoryLevels';
+    import { formatBrainGamesDate, loadBrainGamesScores, saveBrainGamesResult } from '../../../lib/brainGames/scores';
 
     const intro = document.getElementById('memory-intro')!;
     const active = document.getElementById('memory-active')!;
@@ -120,12 +120,12 @@ const description =
     }
 
     function renderBestStats() {
-      const stats = loadBrainLabScores().memory;
+      const stats = loadBrainGamesScores().memory;
       bestStats.innerHTML = `
         <div class="brain-stat"><p class="brain-stat-label">Best Score</p><p class="brain-stat-value">${stats.bestScore}</p></div>
         <div class="brain-stat"><p class="brain-stat-label">Last Score</p><p class="brain-stat-value">${stats.lastScore}</p></div>
         <div class="brain-stat"><p class="brain-stat-label">Best Streak</p><p class="brain-stat-value">${stats.bestStreak}</p></div>
-        <div class="brain-stat"><p class="brain-stat-label">Last Played</p><p class="brain-stat-value text-base">${formatBrainLabDate(stats.lastPlayed)}</p></div>
+        <div class="brain-stat"><p class="brain-stat-label">Last Played</p><p class="brain-stat-value text-base">${formatBrainGamesDate(stats.lastPlayed)}</p></div>
       `;
     }
 
@@ -183,7 +183,7 @@ const description =
       clearInterval(timerId);
       clearTimeout(showTimeout);
       clearInterval(countdownInterval);
-      saveBrainLabResult('memory', score, bestStreakRun);
+      saveBrainGamesResult('memory', score, bestStreakRun);
       finalScore.textContent = String(score);
       finalSummary.textContent = `Best streak: ${bestStreakRun} · Time: ${formatTime(seconds)} · ${streak} correct in a row at the end`;
       showPhaseOnly(results);

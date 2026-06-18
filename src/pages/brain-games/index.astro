@@ -3,76 +3,76 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Disclaimer from '../../components/Disclaimer.astro';
 import { webPageJsonLd } from '../../lib/seo';
 
-const title = 'Brain Lab — Cognitive Mini-Tests';
+const title = 'Brain Games — Free Cognitive Mini-Tests';
 const description =
-  'FreeIQCheck Brain Lab: three interactive cognitive mini-tests — Memory Challenge, Pattern Speed Test, and Word Recall. Track scores locally.';
+  'FreeIQCheck Brain Games: three interactive cognitive mini-tests — Memory Challenge, Pattern Speed Test, and Word Recall. Track scores locally in your browser.';
 ---
 
-<BaseLayout title={title} description={description} path="/brain-lab" jsonLd={[webPageJsonLd(title, description, '/brain-lab')]}>
-  <section class="brain-lab relative overflow-hidden">
-    <div class="brain-lab-bg" aria-hidden="true">
-      <div class="brain-lab-orb brain-lab-orb--1"></div>
-      <div class="brain-lab-orb brain-lab-orb--2"></div>
-      <div class="brain-lab-orb brain-lab-orb--3"></div>
-      <div class="brain-lab-grid"></div>
+<BaseLayout title={title} description={description} path="/brain-games" jsonLd={[webPageJsonLd(title, description, '/brain-games')]}>
+  <section class="brain-games relative overflow-hidden">
+    <div class="brain-games-bg" aria-hidden="true">
+      <div class="brain-games-orb brain-games-orb--1"></div>
+      <div class="brain-games-orb brain-games-orb--2"></div>
+      <div class="brain-games-orb brain-games-orb--3"></div>
+      <div class="brain-games-grid"></div>
     </div>
 
     <div class="section-pad relative mx-auto max-w-6xl">
       <header class="text-center motion-safe:animate-fade-up">
-        <p class="text-sm font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">FreeIQCheck Brain Lab</p>
+        <p class="text-sm font-bold uppercase tracking-wider text-brand-600 dark:text-brand-400">FreeIQCheck Brain Games</p>
         <h1 class="mt-4 font-display text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl dark:text-white">
           Train Your <span class="text-gradient">Cognitive Edge</span>
         </h1>
         <p class="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-600 dark:text-slate-400">
-          Three premium mini-tests — memory, pattern speed, and word recall. Scores save locally on your device. Educational practice only, not clinical assessment.
+          Three premium mini-games — memory, pattern speed, and word recall. Scores save locally on your device. Educational practice only, not clinical assessment.
         </p>
       </header>
 
-      <div class="mt-12 grid gap-6 lg:grid-cols-3" id="brain-lab-cards">
-        <article class="brain-lab-card group" data-test="memory">
-          <div class="brain-lab-card-icon brain-lab-card-icon--memory" aria-hidden="true">🧠</div>
+      <div class="mt-12 grid gap-6 lg:grid-cols-3" id="brain-games-cards">
+        <article class="brain-games-card group" data-test="memory">
+          <div class="brain-games-card-icon brain-games-card-icon--memory" aria-hidden="true">🧠</div>
           <h2 class="font-display text-xl font-bold text-slate-900 dark:text-white">Memory Challenge</h2>
           <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
             Number sequences flash for seconds — type them back. 10 levels, timer, streak bonuses.
           </p>
           <dl class="mt-4 grid grid-cols-2 gap-2 text-xs">
-            <div class="brain-lab-mini-stat"><dt>Best</dt><dd id="hub-memory-best">0</dd></div>
-            <div class="brain-lab-mini-stat"><dt>Streak</dt><dd id="hub-memory-streak">0</dd></div>
+            <div class="brain-games-mini-stat"><dt>Best</dt><dd id="hub-memory-best">0</dd></div>
+            <div class="brain-games-mini-stat"><dt>Streak</dt><dd id="hub-memory-streak">0</dd></div>
           </dl>
-          <a href="/brain-lab/memory-challenge" class="brain-lab-card-cta">Play Memory Challenge →</a>
+          <a href="/brain-games/memory-challenge" class="brain-games-card-cta">Play Memory Challenge →</a>
         </article>
 
-        <article class="brain-lab-card group" data-test="pattern">
-          <div class="brain-lab-card-icon brain-lab-card-icon--pattern" aria-hidden="true">⚡</div>
+        <article class="brain-games-card group" data-test="pattern">
+          <div class="brain-games-card-icon brain-games-card-icon--pattern" aria-hidden="true">⚡</div>
           <h2 class="font-display text-xl font-bold text-slate-900 dark:text-white">Pattern Speed Test</h2>
           <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
             IQ-style number & matrix patterns under a 20-second clock. Instant feedback every round.
           </p>
           <dl class="mt-4 grid grid-cols-2 gap-2 text-xs">
-            <div class="brain-lab-mini-stat"><dt>Best</dt><dd id="hub-pattern-best">0</dd></div>
-            <div class="brain-lab-mini-stat"><dt>Streak</dt><dd id="hub-pattern-streak">0</dd></div>
+            <div class="brain-games-mini-stat"><dt>Best</dt><dd id="hub-pattern-best">0</dd></div>
+            <div class="brain-games-mini-stat"><dt>Streak</dt><dd id="hub-pattern-streak">0</dd></div>
           </dl>
-          <a href="/brain-lab/pattern-speed" class="brain-lab-card-cta">Play Pattern Speed →</a>
+          <a href="/brain-games/pattern-speed" class="brain-games-card-cta">Play Pattern Speed →</a>
         </article>
 
-        <article class="brain-lab-card group" data-test="wordRecall">
-          <div class="brain-lab-card-icon brain-lab-card-icon--word" aria-hidden="true">📝</div>
+        <article class="brain-games-card group" data-test="wordRecall">
+          <div class="brain-games-card-icon brain-games-card-icon--word" aria-hidden="true">📝</div>
           <h2 class="font-display text-xl font-bold text-slate-900 dark:text-white">Word Recall Test</h2>
           <p class="mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
             Memorize 8–15 words, then pick which ones appeared from mixed distractors. 10 rounds.
           </p>
           <dl class="mt-4 grid grid-cols-2 gap-2 text-xs">
-            <div class="brain-lab-mini-stat"><dt>Best</dt><dd id="hub-word-best">0</dd></div>
-            <div class="brain-lab-mini-stat"><dt>Streak</dt><dd id="hub-word-streak">0</dd></div>
+            <div class="brain-games-mini-stat"><dt>Best</dt><dd id="hub-word-best">0</dd></div>
+            <div class="brain-games-mini-stat"><dt>Streak</dt><dd id="hub-word-streak">0</dd></div>
           </dl>
-          <a href="/brain-lab/word-recall" class="brain-lab-card-cta">Play Word Recall →</a>
+          <a href="/brain-games/word-recall" class="brain-games-card-cta">Play Word Recall →</a>
         </article>
       </div>
 
       <div class="mt-12 text-center">
         <a href="/test" class="btn-primary !inline-flex">Take the Full Free IQ Test</a>
         <p class="mt-4 text-sm text-slate-500 dark:text-slate-400">
-          Brain Lab mini-tests are quick practice — our <a href="/test" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">25-question IQ quiz</a> gives a broader reasoning snapshot.
+          Brain Games are quick practice — our <a href="/test" class="font-semibold text-brand-600 hover:underline dark:text-brand-400">25-question IQ quiz</a> gives a broader reasoning snapshot.
         </p>
       </div>
     </div>
@@ -83,9 +83,9 @@ const description =
   </section>
 
   <script>
-    import { loadBrainLabScores } from '../../lib/brainLab/scores';
+    import { loadBrainGamesScores } from '../../lib/brainGames/scores';
 
-    const scores = loadBrainLabScores();
+    const scores = loadBrainGamesScores();
     (document.getElementById('hub-memory-best') as HTMLElement).textContent = String(scores.memory.bestScore);
     (document.getElementById('hub-memory-streak') as HTMLElement).textContent = String(scores.memory.bestStreak);
     (document.getElementById('hub-pattern-best') as HTMLElement).textContent = String(scores.pattern.bestScore);

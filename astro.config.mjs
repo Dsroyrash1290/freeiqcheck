@@ -55,6 +55,9 @@ export default defineConfig({
         if (url.pathname.startsWith('/blog/')) {
           return { ...item, priority: 0.7, changefreq: 'monthly' };
         }
+        if (url.pathname.startsWith('/brain-games')) {
+          return { ...item, priority: 0.85, changefreq: 'weekly' };
+        }
         const legalPaths = ['/privacy-policy', '/terms', '/disclaimer'];
         if (legalPaths.some((p) => url.pathname === p || url.pathname === `${p}/`)) {
           return { ...item, priority: 0.5, changefreq: 'yearly' };

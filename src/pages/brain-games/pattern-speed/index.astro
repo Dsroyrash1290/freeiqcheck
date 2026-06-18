@@ -1,16 +1,16 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import BrainLabShell from '../../../components/brainLab/BrainLabShell.astro';
+import BrainGamesShell from '../../../components/brainGames/BrainGamesShell.astro';
 import Disclaimer from '../../../components/Disclaimer.astro';
 import { webPageJsonLd } from '../../../lib/seo';
 
-const title = 'Pattern Speed Test — Brain Lab';
+const title = 'Pattern Speed Test — Brain Games';
 const description =
   'IQ-style pattern recognition under time pressure. Number sequences and visual matrix puzzles with instant feedback.';
 ---
 
-<BaseLayout title={title} description={description} path="/brain-lab/pattern-speed" jsonLd={[webPageJsonLd(title, description, '/brain-lab/pattern-speed')]}>
-  <BrainLabShell
+<BaseLayout title={title} description={description} path="/brain-games/pattern-speed" jsonLd={[webPageJsonLd(title, description, '/brain-games/pattern-speed')]}>
+  <BrainGamesShell
     title="Pattern Speed Test"
     subtitle="Real IQ-style number and matrix patterns. Answer fast — difficulty ramps up every question."
     testId="pattern"
@@ -54,21 +54,21 @@ const description =
         <p class="mt-2 text-slate-600 dark:text-slate-400" id="pattern-final-summary"></p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
           <button type="button" id="pattern-retry" class="btn-primary">Play Again</button>
-          <a href="/brain-lab" class="inline-flex items-center justify-center rounded-2xl border border-slate-200 px-8 py-4 text-base font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">Brain Lab</a>
+          <a href="/brain-games" class="inline-flex items-center justify-center rounded-2xl border border-slate-200 px-8 py-4 text-base font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">Brain Games</a>
         </div>
       </div>
     </div>
-  </BrainLabShell>
+  </BrainGamesShell>
 
   <section class="mx-auto max-w-3xl px-4 pb-16 sm:px-6">
     <Disclaimer compact />
   </section>
 
   <script>
-    import { patternQuestions } from '../../../data/brainLab/patternQuestions';
-    import type { PatternQuestion } from '../../../data/brainLab/patternQuestions';
-    import { renderMatrixHtml } from '../../../lib/brainLab/matrix';
-    import { formatBrainLabDate, loadBrainLabScores, saveBrainLabResult } from '../../../lib/brainLab/scores';
+    import { patternQuestions } from '../../../data/brainGames/patternQuestions';
+    import type { PatternQuestion } from '../../../data/brainGames/patternQuestions';
+    import { renderMatrixHtml } from '../../../lib/brainGames/matrix';
+    import { formatBrainGamesDate, loadBrainGamesScores, saveBrainGamesResult } from '../../../lib/brainGames/scores';
 
     const PER_QUESTION_SEC = 20;
 
@@ -105,12 +105,12 @@ const description =
     let answered = false;
 
     function renderBestStats() {
-      const stats = loadBrainLabScores().pattern;
+      const stats = loadBrainGamesScores().pattern;
       bestStats.innerHTML = `
         <div class="brain-stat"><p class="brain-stat-label">Best Score</p><p class="brain-stat-value">${stats.bestScore}</p></div>
         <div class="brain-stat"><p class="brain-stat-label">Last Score</p><p class="brain-stat-value">${stats.lastScore}</p></div>
         <div class="brain-stat"><p class="brain-stat-label">Best Streak</p><p class="brain-stat-value">${stats.bestStreak}</p></div>
-        <div class="brain-stat"><p class="brain-stat-label">Last Played</p><p class="brain-stat-value text-base">${formatBrainLabDate(stats.lastPlayed)}</p></div>
+        <div class="brain-stat"><p class="brain-stat-label">Last Played</p><p class="brain-stat-value text-base">${formatBrainGamesDate(stats.lastPlayed)}</p></div>
       `;
     }
 
@@ -222,7 +222,7 @@ const description =
 
     function finishGame() {
       clearQuestionTimer();
-      saveBrainLabResult('pattern', score, bestStreakRun);
+      saveBrainGamesResult('pattern', score, bestStreakRun);
       finalScore.textContent = String(score);
       finalSummary.textContent = `${correctCount}/10 correct · best streak ${bestStreakRun}`;
       showPhaseOnly(results);

@@ -37,7 +37,7 @@ export const site = {
 export const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/test', label: 'Take Quiz' },
-  { href: '/brain-lab', label: 'Brain Lab' },
+  { href: '/brain-games', label: 'Brain Games' },
   { href: '/blog', label: 'Blog' },
   { href: '/about', label: 'About' },
   { href: '/faq', label: 'FAQ' },

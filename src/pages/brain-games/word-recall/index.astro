@@ -1,16 +1,16 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import BrainLabShell from '../../../components/brainLab/BrainLabShell.astro';
+import BrainGamesShell from '../../../components/brainGames/BrainGamesShell.astro';
 import Disclaimer from '../../../components/Disclaimer.astro';
 import { webPageJsonLd } from '../../../lib/seo';
 
-const title = 'Word Recall Test — Brain Lab';
+const title = 'Word Recall Test — Brain Games';
 const description =
   'Memorize word lists under time pressure, then identify which words appeared. 10 levels with increasing difficulty and scoring.';
 ---
 
-<BaseLayout title={title} description={description} path="/brain-lab/word-recall" jsonLd={[webPageJsonLd(title, description, '/brain-lab/word-recall')]}>
-  <BrainLabShell
+<BaseLayout title={title} description={description} path="/brain-games/word-recall" jsonLd={[webPageJsonLd(title, description, '/brain-games/word-recall')]}>
+  <BrainGamesShell
     title="Word Recall Test"
     subtitle="Study the word list, then select every word you remember from mixed options."
     testId="wordRecall"
@@ -59,20 +59,20 @@ const description =
         <p class="mt-2 text-slate-600 dark:text-slate-400" id="word-final-summary"></p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
           <button type="button" id="word-retry" class="btn-primary">Play Again</button>
-          <a href="/brain-lab" class="inline-flex items-center justify-center rounded-2xl border border-slate-200 px-8 py-4 text-base font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">Brain Lab</a>
+          <a href="/brain-games" class="inline-flex items-center justify-center rounded-2xl border border-slate-200 px-8 py-4 text-base font-semibold text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200 dark:hover:bg-slate-800">Brain Games</a>
         </div>
       </div>
     </div>
-  </BrainLabShell>
+  </BrainGamesShell>
 
   <section class="mx-auto max-w-3xl px-4 pb-16 sm:px-6">
     <Disclaimer compact />
   </section>
 
   <script>
-    import { generateWordRound, wordLevels } from '../../../data/brainLab/wordLevels';
-    import type { WordLevel } from '../../../data/brainLab/wordLevels';
-    import { formatBrainLabDate, loadBrainLabScores, saveBrainLabResult } from '../../../lib/brainLab/scores';
+    import { generateWordRound, wordLevels } from '../../../data/brainGames/wordLevels';
+    import type { WordLevel } from '../../../data/brainGames/wordLevels';
+    import { formatBrainGamesDate, loadBrainGamesScores, saveBrainGamesResult } from '../../../lib/brainGames/scores';
 
     const intro = document.getElementById('word-intro')!;
     const active = document.getElementById('word-active')!;
@@ -117,12 +117,12 @@ const description =
     }
 
     function renderBestStats() {
-      const stats = loadBrainLabScores().wordRecall;
+      const stats = loadBrainGamesScores().wordRecall;
       bestStats.innerHTML = `
         <div class="brain-stat"><p class="brain-stat-label">Best Score</p><p class="brain-stat-value">${stats.bestScore}</p></div>
         <div class="brain-stat"><p class="brain-stat-label">Last Score</p><p class="brain-stat-value">${stats.lastScore}</p></div>
         <div class="brain-stat"><p class="brain-stat-label">Best Streak</p><p class="brain-stat-value">${stats.bestStreak}</p></div>
-        <div class="brain-stat"><p class="brain-stat-label">Last Played</p><p class="brain-stat-value text-base">${formatBrainLabDate(stats.lastPlayed)}</p></div>
+        <div class="brain-stat"><p class="brain-stat-label">Last Played</p><p class="brain-stat-value text-base">${formatBrainGamesDate(stats.lastPlayed)}</p></div>
       `;
     }
 
@@ -239,7 +239,7 @@ const description =
       clearInterval(timerId);
       clearTimeout(showTimeout);
       clearInterval(countdownInterval);
-      saveBrainLabResult('wordRecall', score, bestStreakRun);
+      saveBrainGamesResult('wordRecall', score, bestStreakRun);
       finalScore.textContent = String(score);
       const acc = totalTargets ? Math.round((totalHits / totalTargets) * 100) : 0;
       finalSummary.textContent = `${acc}% word accuracy · best streak ${bestStreakRun} · ${formatTime(seconds)}`;

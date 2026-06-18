@@ -192,8 +192,8 @@
   }
 }
 
-  /* Brain Lab */
-  .brain-lab-bg {
+  /* Brain Games */
+  .brain-games-bg {
     pointer-events: none;
     position: absolute;
     inset: 0;
@@ -203,21 +203,21 @@
       radial-gradient(at 50% 80%, rgb(16 185 129 / 0.1) 0px, transparent 50%);
   }
 
-  :is(.dark, .dark *) .brain-lab-bg {
+  :is(.dark, .dark *) .brain-games-bg {
     background:
       radial-gradient(at 20% 30%, rgb(59 111 245 / 0.22) 0px, transparent 50%),
       radial-gradient(at 80% 20%, rgb(139 92 246 / 0.15) 0px, transparent 50%),
       radial-gradient(at 50% 80%, rgb(16 185 129 / 0.08) 0px, transparent 50%);
   }
 
-  .brain-lab-orb {
+  .brain-games-orb {
     position: absolute;
     border-radius: 9999px;
     filter: blur(64px);
     animation: pulse-soft 3s ease-in-out infinite;
   }
 
-  .brain-lab-orb--1 {
+  .brain-games-orb--1 {
     top: 2.5rem;
     left: -5rem;
     height: 16rem;
@@ -225,7 +225,7 @@
     background: rgb(96 165 250 / 0.25);
   }
 
-  .brain-lab-orb--2 {
+  .brain-games-orb--2 {
     top: 33%;
     right: 0;
     height: 18rem;
@@ -234,7 +234,7 @@
     animation-delay: 1s;
   }
 
-  .brain-lab-orb--3 {
+  .brain-games-orb--3 {
     bottom: 0;
     left: 33%;
     height: 14rem;
@@ -243,7 +243,7 @@
     animation-delay: 2s;
   }
 
-  .brain-lab-grid {
+  .brain-games-grid {
     position: absolute;
     inset: 0;
     opacity: 0.04;
@@ -253,11 +253,11 @@
     background-size: 48px 48px;
   }
 
-  :is(.dark, .dark *) .brain-lab-grid {
+  :is(.dark, .dark *) .brain-games-grid {
     opacity: 0.06;
   }
 
-  .brain-lab-glass {
+  .brain-games-glass {
     position: relative;
     border-radius: 1.5rem;
     border: 1px solid rgb(255 255 255 / 0.4);
@@ -267,14 +267,14 @@
     backdrop-filter: blur(24px);
   }
 
-  :is(.dark, .dark *) .brain-lab-glass {
+  :is(.dark, .dark *) .brain-games-glass {
     border-color: rgb(51 65 85 / 0.6);
     background: rgb(15 23 42 / 0.7);
     box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.2);
   }
 
   @media (min-width: 640px) {
-    .brain-lab-glass {
+    .brain-games-glass {
       padding: 2rem;
     }
   }
@@ -508,7 +508,7 @@
     color: rgb(30 64 175);
   }
 
-  .brain-lab-card {
+  .brain-games-card {
     display: flex;
     height: 100%;
     flex-direction: column;
@@ -521,12 +521,12 @@
     transition: transform 0.3s, box-shadow 0.3s;
   }
 
-  .brain-lab-card:hover {
+  .brain-games-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 25px 50px -12px rgb(37 80 234 / 0.12);
   }
 
-  .brain-lab-card-icon {
+  .brain-games-card-icon {
     margin-bottom: 1rem;
     display: flex;
     height: 3.5rem;
@@ -537,18 +537,18 @@
     font-size: 1.5rem;
   }
 
-  .brain-lab-card-icon--memory { background: rgb(219 234 254); }
-  .brain-lab-card-icon--pattern { background: rgb(237 233 254); }
-  .brain-lab-card-icon--word { background: rgb(209 250 229); }
+  .brain-games-card-icon--memory { background: rgb(219 234 254); }
+  .brain-games-card-icon--pattern { background: rgb(237 233 254); }
+  .brain-games-card-icon--word { background: rgb(209 250 229); }
 
-  .brain-lab-mini-stat {
+  .brain-games-mini-stat {
     border-radius: 0.75rem;
     border: 1px solid rgb(226 232 240 / 0.8);
     background: rgb(255 255 255 / 0.6);
     padding: 0.5rem 0.75rem;
   }
 
-  .brain-lab-mini-stat dt {
+  .brain-games-mini-stat dt {
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.05em;
@@ -556,7 +556,7 @@
     color: rgb(100 116 139);
   }
 
-  .brain-lab-mini-stat dd {
+  .brain-games-mini-stat dd {
     margin-top: 0.125rem;
     font-family: var(--font-display);
     font-size: 1.125rem;
@@ -564,7 +564,7 @@
     color: rgb(15 23 42);
   }
 
-  .brain-lab-card-cta {
+  .brain-games-card-cta {
     margin-top: auto;
     padding-top: 1.5rem;
     font-size: 0.875rem;

@@ -1,4 +1,4 @@
-import type { MatrixCell } from '../../data/brainLab/patternQuestions';
+import type { MatrixCell } from '../../data/brainGames/patternQuestions';
 
 const colorMap: Record<MatrixCell['color'], string> = {
   brand: '#2550ea',
